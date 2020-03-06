@@ -1,6 +1,6 @@
 class Hvit extends Resept {
-	public Hvit(Legemiddel legemiddel, Lege utskrivendeLege, int pasientId, int reit) {
-		super(legemiddel, utskrivendeLege, pasientId, reit);
+	public Hvit(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
+		super(legemiddel, utskrivendeLege, pasient, reit);
 	}
 	@Override
 	public String farge() {
@@ -9,20 +9,20 @@ class Hvit extends Resept {
 	@Override
 	public double prisAaBetale() {
 		return legemiddel.hentPris();
-		
+
 	}
 	@Override
 	public String toString() {
 		String string = "";
-		
+
 		string += "Dette er en hvit resept\n\n"
 				+ "Info om legemiddelet:\n" + legemiddel
 				+ "\n\nInfo om legen: \n" + utskrivendeLege
-				+ "\n\nPasient-ID: " + Integer.toString(pasientId)
+				+ "\n\nPasient-ID: " + pasient.toString()
 				+ "\nReit: " + Integer.toString(reit)
 				+ "\nID: " + Integer.toString(id)
 				+ "\n";
-		
+
 		return string;
 	}
 }
