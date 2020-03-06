@@ -6,14 +6,14 @@ public class TestResept {
 		Vanlig van0 = new Vanlig("flourtabletter", 312, 312);//id2
 		Narkotisk nark1 = new Narkotisk("memes", 1000, 12,3);//id3
 		Vanlig van1 = new Vanlig("oppladede krystaller", 107, 0);//id4
-		
+
 		//Leger
 		Lege lege0 = new Lege("Dr. Skronkus");
 		Spesialist spes0 = new Spesialist("Dr. Lonkus", 100110);
 		Lege lege1 = new Lege("Dr. Rupert Sr.");
 		Spesialist spes1 = new Spesialist("Dr. Rupert Jr.", 123);
-		
-		
+
+
 		//Resepter
 		Resept[] reseptArray = new Resept[5];
 		
@@ -22,12 +22,12 @@ public class TestResept {
 		reseptArray[2] = new PResept(vane0, spes0, 32);
 		reseptArray[3] = new Militaer(van0, spes1, 321, 3);
 		reseptArray[4] = new PResept(van1, lege0, 3213);
-		
+
 		for (Resept resept : reseptArray) {
 			System.out.println(resept.farge());
 			resept.bruk();
 			System.out.println(resept);
 		}
 	}
-	
+
 }
