@@ -1,5 +1,7 @@
 public class TestResept {
 	public static void main(String[] args) {
+		Pasient p = new Pasient("fdf", "fhu32i");
+
 		//Legemidler
 		Narkotisk nark0 = new Narkotisk("straight up heroin", 100, 12,3);//boer gi id0
 		Vanedannende vane0 = new Vanedannende("viagra", 123.1234, 123,12);//id1
@@ -16,12 +18,12 @@ public class TestResept {
 
 		//Resepter
 		Resept[] reseptArray = new Resept[5];
-		
-		reseptArray[0] = new Hvit(nark0, lege0, 8008135, 3);
-		reseptArray[1] = new Blaa(nark1, lege1, 123, 4);
-		reseptArray[2] = new PResept(vane0, spes0, 32);
-		reseptArray[3] = new Militaer(van0, spes1, 321, 3);
-		reseptArray[4] = new PResept(van1, lege0, 3213);
+
+		reseptArray[0] = new Hvit(nark0, lege0, p, 3);
+		reseptArray[1] = new Blaa(nark1, lege1, p, 4);
+		reseptArray[2] = new PResept(vane0, spes0, p);
+		reseptArray[3] = new Militaer(van0, spes1, p, 3);
+		reseptArray[4] = new PResept(van1, lege0, p);
 
 		for (Resept resept : reseptArray) {
 			System.out.println(resept.farge());
