@@ -19,6 +19,10 @@ class Pasient {
     public Stabel hentResepter(){
         return resepter;
     }
+	
+	public int hentID() {
+		return id;
+	}
 
     public String toString(){
         return "\nPasient: " + navn
