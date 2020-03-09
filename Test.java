@@ -35,6 +35,7 @@ public class Test {
 			p.leggTilResept(resept);
 		}
 		
+		System.out.println(p);
 	}
 
 }
