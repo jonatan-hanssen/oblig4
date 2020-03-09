@@ -16,7 +16,7 @@ class PResept extends Hvit{
 		string += "Dette er en P-resept\n\n"
 				+ "Info om legemiddelet:\n" + legemiddel
 				+ "\n\nInfo om legen: \n" + utskrivendeLege
-				+ "\n\nPasient-ID: " + pasient.toString()
+				+ "\n\nPasient: " + pasient.toString()
 				+ "\nReit: " + Integer.toString(reit)
 				+ "\nID: " + Integer.toString(id)
 				+ "\n";
