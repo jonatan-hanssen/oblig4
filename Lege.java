@@ -1,5 +1,5 @@
 class Lege implements Comparable<Lege>{
-	protected String navn;
+	protected String navn; // i was here
 	
 	protected Lenkeliste<Resept> utskrevedeResepter;
 	
