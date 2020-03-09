@@ -2,7 +2,7 @@ class Pasient {
     private String navn;
     private String fnr;
     private int id;
-    static private int teller;
+    static private int teller = 0;
     private Stabel<Resept> resepter;
 
     public Pasient(String nv, String nr){
