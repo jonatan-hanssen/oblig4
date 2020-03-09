@@ -10,6 +10,8 @@ class Pasient {
         fnr = nr;
         id = teller;
         teller++;
+		
+		resepter = new Stabel<Resept>();
     }
 
     public void leggTilResept(Resept r){
@@ -19,10 +21,14 @@ class Pasient {
     public Stabel hentResepter(){
         return resepter;
     }
+	
+	public int hentID() {
+		return id;
+	}
 
     public String toString(){
         return "\nPasient: " + navn
-            + "\nFødselsnummer: " + fnr
+            + "\nFoedselsnummer: " + fnr
             + "\nID: " + id
             + "\nAntall resepter: " + resepter.stoerrelse();
     }
