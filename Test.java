@@ -30,6 +30,11 @@ public class Test {
 			resept.bruk();
 			System.out.println(resept);
 		}
+		
+		for (Resept resept : reseptArray) {
+			p.leggTilResept(resept);
+		}
+		
 	}
 
 }
