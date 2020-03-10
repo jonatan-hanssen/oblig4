@@ -1,3 +1,4 @@
+/*
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class Legesystem {
 
 						break;
 					case "vanedannende":
-						
+
 						break;
 				break;
 			case 2:
@@ -64,3 +65,4 @@ public class Legesystem {
 		}
 	}
 }
+*/

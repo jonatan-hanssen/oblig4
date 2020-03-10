@@ -126,58 +126,31 @@ class Database {
 		}
 	}
 
-	public void printAntallVane(){
-		for (Resept r: reseptListe) {
-			int ant = 0;
-			if (r.hentLegemiddel() instanceof Vanedannende){
-				ant++;
-			}
-			System.out.println(ant);
-		}
-	}
-
-	public void printAntallNark(){
+	public void printAntallType(Class<?> cls){
 		int ant = 0;
 		for (Resept r: reseptListe) {
-			if (r.hentLegemiddel() instanceof Narkotisk){
+			if (cls.isInstance(r.hentLegemiddel())){
 				ant++;
 			}
 		}
 		System.out.println(ant);
 	}
 
-	public void printNarkLege(){
-		HashMap<String,Integer> leger = new HashMap<String, Integer>();
-
+	public void printLegeType(Class<?> cls){
+		HashMap<String, Integer> leger = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
-			if (r.hentLegemiddel() instanceof Narkotisk) {
+			if (cls.isInstance(r.hentLegemiddel())) {
 				if (leger.get(r.hentLege().hentNavn()) == null) {
-					leger.put(r.hentLege().hentNavn(),0);
+					leger.put(r.hentLege().hentNavn(),1);
 				}
 				else{
-					leger.put(r.hentLege().hentNavn(),0);
+					leger.put(r.hentLege().hentNavn(),leger.get(r.hentLege().hentNavn())+1);
 				}
 			}
 		}
 		for (String lege: leger.keySet()) {
 			System.out.println(lege + ": " + leger.get(lege));
 		}
-	}
-
-	public void printVaneLege(){
-		HashMap<String,Integer> leger = new HashMap<String, Integer>();
-
-		for (Resept r: reseptListe) {
-			System.out.println(r);
-			if (r.hentLegemiddel() instanceof Vanedannende) {
-				leger.put(r.hentLege().hentNavn(),0);
-
-			}
-		}
-		for (String lege: leger.keySet()) {
-			System.out.println(lege + ": " + leger.get(lege));
-		}
-		System.out.println(leger);
 	}
 
 
