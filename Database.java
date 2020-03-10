@@ -29,8 +29,6 @@ class Database {
 				naavaerendeLinje = scanner.nextLine();
 				listeIndeks++;
 			}
-			System.out.println(pasientListe.stoerrelse());
-			System.out.println(naavaerendeLinje);
 			try {
 			leggTilIListe(naavaerendeLinje, listeIndeks);
 			}
@@ -60,7 +58,7 @@ class Database {
 						legemiddelListe.leggTil(new Narkotisk(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
 						break;
 					case "vanedannende":
-						legemiddelListe.leggTil(new Narkotisk(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
+						legemiddelListe.leggTil(new Vanedannende(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
 						break;
 				}
 			break;
@@ -106,6 +104,12 @@ class Database {
 				}
 			break;
 		}
+	}
+	public void printDatabase() {
+		for (Resept resept : reseptListe) System.out.println(resept);
+		for (Lege lege : legeListe) System.out.println(lege);
+		for (Legemiddel legemiddel : legemiddelListe) System.out.println(legemiddel);
+		for (Pasient pasient : pasientListe) System.out.println(pasient);
 	}
 	
 }
