@@ -84,8 +84,10 @@ class Database {
 					if (muligLege.navn.equals(linjeArray[1]))
 					lege = muligLege;
 				}
-				if (lege == null) lege = new Lege("hey");
-
+				if (lege == null) {
+					System.out.println("ADVARSEL: Ingen lege ved navn " + linjeArray[1]);
+				}
+				
 				//finner pasient
 				Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
 
