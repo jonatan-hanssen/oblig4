@@ -54,7 +54,7 @@ abstract class Resept {
 		string += "Dette er en resept\n\n"
 				+ "Info om legemiddelet:\n" + legemiddel
 				+ "\n\nInfo om legen: \n" + utskrivendeLege
-				+ "\n\nPasient-ID: " + pasient.toString()
+				+ "\n\nPasient-ID: " + pasient
 				+ "\nReit: " + Integer.toString(reit)
 				+ "\nID: " + Integer.toString(id)
 				+ "\n";
