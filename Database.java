@@ -34,22 +34,29 @@ class Database {
 			leggTilIListe(naavaerendeLinje, listeIndeks);
 			}
 			catch (UgyldigListeIndeks e) {
+				System.out.println(e.getMessage());
 				System.out.println("feil paa denne linje: " + naavaerendeLinje);
 			}
 		}
+		System.out.println("Antall pasienter: " + pasientListe.stoerrelse());
+		System.out.println("Antall leger: " + legeListe.stoerrelse());
+		System.out.println("Antall legemidler: " + legemiddelListe.stoerrelse());
+		System.out.println("Antall resepter: " + reseptListe.stoerrelse());
 	}
 	private void leggTilIListe(String linje, int nummerPaaListe) throws UgyldigListeIndeks {
 		String[] linjeArray = linje
 			.trim() //fjerner whitespace
 			.replaceAll(",$","") //fjerner komma uten noen string
 			.split(","); //gjoer til array
-
+		
 		switch (nummerPaaListe) {
 			case 0:
 			//Pasient = (navn, fnr)
 				pasientListe.leggTil(new Pasient(linjeArray[0],linjeArray[1]));
+				System.out.println(pasientListe.stoerrelse());
 			break;
 			case 1:
+			
 			//Legemiddel = (navn, type, pris, virkestoff [,styrke])
 				switch (linjeArray[1]) {
 					case "vanlig":
@@ -61,12 +68,13 @@ class Database {
 					case "vanedannende":
 						legemiddelListe.leggTil(new Vanedannende(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
 						break;
+					default:
+						System.out.println("hey");
 				}
 			break;
 			case 2:
 			//Lege = (navn,kontrollid)
 				if (Integer.parseInt(linjeArray[1]) == 0) {
-					System.out.println(linjeArray[0]);
 					legeListe.leggTil(new Lege(linjeArray[0]));
 				}
 				else {
