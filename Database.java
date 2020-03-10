@@ -1,20 +1,21 @@
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
-	
+import java.util.HashMap;
+
 
 class Database {
-	public Lenkeliste<Pasient> pasientListe = new Lenkeliste<Pasient>();//nr 0 
+	public Lenkeliste<Pasient> pasientListe = new Lenkeliste<Pasient>();//nr 0
 	public Lenkeliste<Legemiddel> legemiddelListe = new Lenkeliste<Legemiddel>();//nr 1
 	public SortertLenkeliste<Lege> legeListe = new SortertLenkeliste<Lege>();//nr 2
 	public Lenkeliste<Resept> reseptListe = new Lenkeliste<Resept>();//nr 3
-	
+
 	public Database() {}
-	
+
 	public void lesFraFil(String filnavn) throws FileNotFoundException {
 		File fil = new File(filnavn);
 		Scanner scanner = new Scanner(fil);
-		
+
 		//denne indeksen holder styr paa hvilke objekter og hvilken liste vi skal jobbe med
 		//den oppdateres ved hver # fordi vi da gaar til en ny del av tekstfila
 		int listeIndeks = 0;
@@ -22,7 +23,7 @@ class Database {
 		scanner.nextLine();
 		while (scanner.hasNextLine()) {
 			String naavaerendeLinje = scanner.nextLine();
-			
+
 			//dersom vi kommer til en # vet vi at vi maa hoppe over linjen
 			//og at vi maa bytte til neste liste
 			if (naavaerendeLinje.contains("#")) {
@@ -42,7 +43,7 @@ class Database {
 			.trim() //fjerner whitespace
 			.replaceAll(",$","") //fjerner komma uten noen string
 			.split(","); //gjoer til array
-		
+
 		switch (nummerPaaListe) {
 			case 0:
 			//Pasient = (navn, fnr)
@@ -76,7 +77,7 @@ class Database {
 			//Resept (legemiddelNummer, legeNavn, pasientID, type, [reit])
 				//finner legemiddel
 				Legemiddel legemiddel = legemiddelListe.hent(Integer.parseInt(linjeArray[0]));
-				
+
 				//finner lege
 				Lege lege = null;
 				for (Lege muligLege : legeListe) {
@@ -89,7 +90,7 @@ class Database {
 				
 				//finner pasient
 				Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
-				
+
 				String type = linjeArray[3];
 				switch (type) {
 					case "blaa":
@@ -108,11 +109,58 @@ class Database {
 			break;
 		}
 	}
+
+	public void printA(){
+		for (Legemiddel lm: legemiddelListe) {
+			System.out.println(lm.toString());
+		}
+		System.out.println("---------------------------------------------------------");
+		for (Lege l: legeListe) {
+			System.out.println(l.toString());
+		}
+		System.out.println("---------------------------------------------------------");
+		for (Resept r: reseptListe) {
+			System.out.println(r.toString());
+		}
+		System.out.println("---------------------------------------------------------");
+		for (Pasient p: pasientListe) {
+			System.out.println(p.toString());
+		}
+	}
+
+	public void printAntallType(Class<?> cls){
+		int ant = 0;
+		for (Resept r: reseptListe) {
+			if (cls.isInstance(r.hentLegemiddel())){
+				ant++;
+			}
+		}
+		System.out.println(ant);
+	}
+
+	public void printLegeType(Class<?> cls){
+		HashMap<String, Integer> leger = new HashMap<String, Integer>();
+		for (Resept r: reseptListe) {
+			if (cls.isInstance(r.hentLegemiddel())) {
+				if (leger.get(r.hentLege().hentNavn()) == null) {
+					leger.put(r.hentLege().hentNavn(),1);
+				}
+				else{
+					leger.put(r.hentLege().hentNavn(),leger.get(r.hentLege().hentNavn())+1);
+				}
+			}
+		}
+		for (String lege: leger.keySet()) {
+			System.out.println(lege + ": " + leger.get(lege));
+		}
+	}
+
+
 	public void printDatabase() {
 		for (Resept resept : reseptListe) System.out.println(resept);
 		for (Lege lege : legeListe) System.out.println(lege);
 		for (Legemiddel legemiddel : legemiddelListe) System.out.println(legemiddel);
 		for (Pasient pasient : pasientListe) System.out.println(pasient);
 	}
-	
+
 }
