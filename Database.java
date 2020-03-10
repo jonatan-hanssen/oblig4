@@ -216,7 +216,7 @@ class Database {
 		if (gyldig == true) {
 			try{
 				if (type == "militaer" || type == "militær") {
-						resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
+					resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
 				} else if (type == "hvit") {
 					resept = lege.skrivHvitResept(legemiddel, pasient, reit);
 				} else if (type == "blaa" || type == "blå") {
@@ -231,6 +231,17 @@ class Database {
 		}
 
 	}
+
+	public void lagLege(String navn, int kontrollid){
+		Lege l;
+		if (kontrollid != 0) {
+			l = new Spesialist(navn, kontrollid);
+		} else {
+			l = new Lege(navn);
+		}
+		legeListe.leggTil(l);
+	}
+
 
 
 	public void printDatabase() {
