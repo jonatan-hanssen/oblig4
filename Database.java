@@ -53,20 +53,20 @@ class Database {
 		String objektType;
 			switch (nummerPaaListe) {
 				case 0: objektType = "pasient"; break;
-				case 1: objektType = "legemiddel"; break;	
+				case 1: objektType = "legemiddel"; break;
 				case 2: objektType = "lege"; break;
 				case 3: objektType = "resept"; break;
 				default: objektType = "";
 			}
 		try {
 			switch (nummerPaaListe) {
-			
+
 				case 0:
 				//Pasient = (navn, fnr)
 					pasientListe.leggTil(new Pasient(linjeArray[0],linjeArray[1]));
 				break;
 				case 1:
-				
+
 				//Legemiddel = (navn, type, pris, virkestoff [,styrke])
 					switch (linjeArray[1]) {
 						case "vanlig":
@@ -79,9 +79,9 @@ class Database {
 							legemiddelListe.leggTil(new Vanedannende(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
 							break;
 						default:
-							/*ser at det er mange feil med navn som er kombinasjoner av flere legemidler 
+							/*ser at det er mange feil med navn som er kombinasjoner av flere legemidler
 							* separert med komma. Jeg velger aa ikke haandtere disse ettersom test-filen
-							* spesifiserer at hver parameter skal vaere separert med komma, som gjoer at 
+							* spesifiserer at hver parameter skal vaere separert med komma, som gjoer at
 							* disse filene er feil oppgitt.
 							*/
 							System.out.println("FEIL TYPE\nLinje " + linjePos + ":" + linjeArray[1] + " er ikke et type legemiddel.\n");
@@ -110,7 +110,7 @@ class Database {
 					if (lege == null) {
 						System.out.println("FEIL VED NAVN\nLinje " + linjePos + ": Ingen lege ved navn " + linjeArray[1] + "\n");
 					}
-					
+
 					//finner pasient
 					Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
 
@@ -134,23 +134,23 @@ class Database {
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println(
-			"UGYLDIG ANTALL PARAMETRE\nLinje " 
-			+ linjePos + ": For faa parametre for aa lage et " 
-			+ objektType 
+			"UGYLDIG ANTALL PARAMETRE\nLinje "
+			+ linjePos + ": For faa parametre for aa lage et "
+			+ objektType
 			+ "-objekt.\n");
 		}
 		catch (NumberFormatException e) {
 			System.out.println(
-			"PARAMETERFEIL\nLinje " 
-			+ linjePos 
-			+ ": Feil i parameterverdier for objekttype " 
+			"PARAMETERFEIL\nLinje "
+			+ linjePos
+			+ ": Feil i parameterverdier for objekttype "
 			+ objektType + ".\n");
 		}
 		catch (UgyldigListeIndeks e) {
 			System.out.println(
-			"UEKSISTERENDE OBJEKT\nLinje " 
-			+ linjePos 
-			+ ": Intet " 
+			"UEKSISTERENDE OBJEKT\nLinje "
+			+ linjePos
+			+ ": Intet "
 			+ objektType + "objekt paa denne indeksen:");
 			System.out.println("		" + e.getMessage() + "\n");
 
