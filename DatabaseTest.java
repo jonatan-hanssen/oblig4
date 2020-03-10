@@ -6,5 +6,7 @@ class DatabaseTest {
 		Database db = new Database();
 		db.lesFraFil("fil.txt");
 		//db.printDatabase();
+		//db.printTypeMisbruk(Vanlig.class, "pasient");
+
 	}
 }
