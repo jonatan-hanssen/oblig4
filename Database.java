@@ -87,7 +87,7 @@ class Database {
 				if (lege == null) {
 					System.out.println("ADVARSEL: Ingen lege ved navn " + linjeArray[1]);
 				}
-				
+
 				//finner pasient
 				Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
 
@@ -166,6 +166,71 @@ class Database {
 		}
 	}
 
+	public void skrivResept(String legenavn, int lmId, int pasientId, int reit, String type){
+		Lege lege = null;
+		for (Lege l: legeListe) {
+			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
+				lege = l;
+			}
+		}
+
+		Legemiddel legemiddel = null;
+		for (Legemiddel lm: legemiddelListe) {
+			if (lmId == lm.hentId()) {
+				legemiddel = lm;
+			}
+		}
+
+		Pasient pasient = null;
+		for (Pasient p: pasientListe) {
+			if (p.hentId() == pasientId) {
+				pasient = p;
+			}
+		}
+
+		type = type.toLowerCase();
+
+		Boolean gyldig = true;
+		if (lege == null) {
+			System.out.println("Legenavnet er feil");
+			gyldig = false;
+		}
+		if (legemiddel == null) {
+			System.out.println("Det finnes ikke et legemiddel med id-en som ble oppgitt");
+			gyldig = false;
+		}
+		if (pasient == null) {
+			System.out.println("Det finnes ikke en pasient med id-en som ble oppgitt");
+			gyldig = false;
+		}
+		if (reit <= 0 && type != "p") {
+			System.out.println("Resepten må ha et heltall større enn 0 reit, eller være p-resept");
+			gyldig = false;
+		}
+		if (type != "p" && type != "militær" && type != "militaer" && type != "blaa" && type != "blå" && type != "hvit") {
+			System.out.println("Militær, hvit, blå eller p ble ikke oppgitt som type");
+			gyldig = false;
+		}
+
+		Resept resept = null;
+		if (gyldig == true) {
+			try{
+				if (type == "militaer" || type == "militær") {
+						resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
+				} else if (type == "hvit") {
+					resept = lege.skrivHvitResept(legemiddel, pasient, reit);
+				} else if (type == "blaa" || type == "blå") {
+					resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
+				} else if (type == "p") {
+					resept = lege.skrivPResept(legemiddel, pasient);
+				}
+				reseptListe.leggTil(resept);
+			} catch (UlovligUtskrift e){
+				System.out.println("Vanlig lege kan ikke skrive ut resept på narkotiske midler");
+			}
+		}
+
+	}
 
 
 	public void printDatabase() {
