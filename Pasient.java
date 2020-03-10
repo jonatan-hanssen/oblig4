@@ -2,7 +2,7 @@ class Pasient {
     private String navn;
     private String fnr;
     private int id;
-    static private int teller;
+    static private int teller = 0;
     private Stabel<Resept> resepter;
 
     public Pasient(String nv, String nr){
@@ -10,7 +10,7 @@ class Pasient {
         fnr = nr;
         id = teller;
         teller++;
-		
+
 		resepter = new Stabel<Resept>();
     }
 
@@ -21,10 +21,14 @@ class Pasient {
     public Stabel hentResepter(){
         return resepter;
     }
-	
-	public int hentID() {
+
+	public int hentId() {
 		return id;
 	}
+
+    public String hentNavn(){
+        return navn;
+    }
 
     public String toString(){
         return "\nPasient: " + navn
