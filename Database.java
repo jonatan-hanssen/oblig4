@@ -65,6 +65,7 @@ class Database {
 			case 2:
 			//Lege = (navn,kontrollid)
 				if (Integer.parseInt(linjeArray[1]) == 0) {
+					System.out.println(linjeArray[0]);
 					legeListe.leggTil(new Lege(linjeArray[0]));
 				}
 				else {
@@ -79,7 +80,7 @@ class Database {
 				//finner lege
 				Lege lege = null;
 				for (Lege muligLege : legeListe) {
-					if (muligLege.navn == linjeArray[1])
+					if (muligLege.navn.equals(linjeArray[1]))
 					lege = muligLege;
 				}
 				if (lege == null) lege = new Lege("hey");
