@@ -242,7 +242,23 @@ class Database {
 		legeListe.leggTil(l);
 	}
 
+	public void lagPasient(String navn, String fnr){
+		Pasient p = new Pasient(navn, fnr);
+		pasientListe.leggTil(p);
+	}
 
+	public void lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type){
+		Legemiddel legemiddel;
+		type = type.toLowerCase();
+		if (type == "narkotisk") {
+			legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
+		} else if (type == "vanedannende") {
+			legemiddel = new Vanedannende(navn, pris, virkestoff, styrke);
+		} else {
+			legemiddel = new Vanlig(navn, pris, virkestoff);
+		}
+		legemiddelListe.leggTil(legemiddel);
+	}
 
 	public void printDatabase() {
 		for (Resept resept : reseptListe) System.out.println(resept);
