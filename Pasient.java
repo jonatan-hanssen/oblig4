@@ -22,7 +22,7 @@ class Pasient {
         return resepter;
     }
 
-	public int hentID() {
+	public int hentId() {
 		return id;
 	}
 
