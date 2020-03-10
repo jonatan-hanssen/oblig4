@@ -4,7 +4,6 @@ class DatabaseTest {
 		Database db = new Database();
 		db.lesFraFil("fil.txt");
 
-		db.printAntallType(Narkotisk.class);
-		db.printLegeType(Vanedannende.class);
+		db.printTypeMisbruk(Vanlig.class, "pasient");
 	}
 }

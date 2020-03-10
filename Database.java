@@ -136,22 +136,34 @@ class Database {
 		System.out.println(ant);
 	}
 
-	public void printLegeType(Class<?> cls){
-		HashMap<String, Integer> leger = new HashMap<String, Integer>();
+	public void printTypeMisbruk(Class<?> cls, String type){
+		HashMap<String, Integer> personer = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
 			if (cls.isInstance(r.hentLegemiddel())) {
-				if (leger.get(r.hentLege().hentNavn()) == null) {
-					leger.put(r.hentLege().hentNavn(),1);
+
+				if (type == "pasient" && r.hentReit()>0) {
+					if (personer.get(r.hentPasient().hentNavn()) == null) {
+						personer.put(r.hentPasient().hentNavn(),1);
+					}
+					else{
+						personer.put(r.hentPasient().hentNavn(),personer.get(r.hentPasient().hentNavn())+1);
+					}
 				}
 				else{
-					leger.put(r.hentLege().hentNavn(),leger.get(r.hentLege().hentNavn())+1);
+					if (personer.get(r.hentLege().hentNavn()) == null) {
+						personer.put(r.hentLege().hentNavn(),1);
+					}
+					else{
+						personer.put(r.hentLege().hentNavn(),personer.get(r.hentLege().hentNavn())+1);
+					}
 				}
 			}
 		}
-		for (String lege: leger.keySet()) {
-			System.out.println(lege + ": " + leger.get(lege));
+		for (String person: personer.keySet()) {
+			System.out.println(person + ": " + personer.get(person));
 		}
 	}
+
 
 
 	public void printDatabase() {
