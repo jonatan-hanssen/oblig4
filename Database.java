@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 class Database {
@@ -44,7 +46,7 @@ class Database {
 		System.out.println("	Antall resepter: " + reseptListe.stoerrelse());
 		System.out.println("	Linjer gaatt gjennom: " + scannerPos);
 	}
-	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) throws UgyldigListeIndeks, ArrayIndexOutOfBoundsException, NumberFormatException {
+	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) {
 		String[] linjeArray = linje
 			.trim() //fjerner whitespace
 			.replaceAll(",$","") //fjerner komma uten noen string
@@ -113,23 +115,50 @@ class Database {
 
 					//finner pasient
 					Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
-
+					
+					//skal naa lage resepten
+					Resept resept;
+					//reseptlagd vil vaere true med mindre vi kommer til default, hvor den ikke vil bli lagd
+					boolean reseptLagd = true;
 					String type = linjeArray[3];
 					switch (type) {
 						case "blaa":
-							reseptListe.leggTil(new Blaa(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Blaa(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "hvit":
-							reseptListe.leggTil(new Hvit(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Hvit(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "militaer":
-							reseptListe.leggTil(new Militaer(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Militaer(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "p":
-							reseptListe.leggTil(new PResept(legemiddel, lege, pasient));
-							break;
+							resept = new PResept(legemiddel, lege, pasient);
+						break;
+						default:
+							resept = null;
+							reseptLagd = false;
+						
+							System.out.println(
+							"FEIL TYPE RESEPT\nLinje " 
+							+ linjePos 
+							+ ": Ingen resepttype ved navn "
+							+ linjeArray[3]
+							+ "\n");
 					}
+					if (reseptLagd) {
+						reseptListe.leggTil(resept);
+						pasient.leggTilResept(resept);
+					}
+					
 				break;
+				default:
+					System.out.println(
+					"UEKSISTERENDE KATEGORI\nLinje "
+					+ linjePos
+					+ ": Det er bare fire kategorier. Denne linjen er i kategori "
+					+ (nummerPaaListe + 1)
+					+ ".\n");
+				
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
@@ -147,13 +176,40 @@ class Database {
 			+ objektType + ".\n");
 		}
 		catch (UgyldigListeIndeks e) {
+			//dette skjer bare i case 3, altsaa i den siste kategorien
+			//da maa vi sjekke hva det var som skapte feilen: legemiddel eller
+			//pasient, ettersom de er det eneste som bruker indeksen paa lenkeliste
+			int ID = -1;
+			if (Integer.parseInt(linjeArray[0]) >= reseptListe.stoerrelse()) {
+				ID = Integer.parseInt(linjeArray[0]);
+				objektType = "legemiddel";
+			}
+			//dersom det ikke var feil ved reseptListe vet vi at det maa vaere
+			//feil ved pasientListe ettersom disse er de eneste som kan gi UgyldigListeIndeks
+			else {
+				ID = Integer.parseInt(linjeArray[2]);
+				objektType = "pasient";
+			}
+			
 			System.out.println(
-			"UEKSISTERENDE OBJEKT\nLinje "
+			"FEIL ID\nLinje "
 			+ linjePos
 			+ ": Intet "
-			+ objektType + "objekt paa denne indeksen:");
-			System.out.println("		" + e.getMessage() + "\n");
+			+ objektType + "objekt med ID "
+			+ ID
+			+ ".\n");
 
+		}
+	}
+
+	public void skrivTilFil(String filnavn) throws IOException {
+		File fil = new File(filnavn);
+		FileWriter skriver = new FileWriter(filnavn);
+		
+		if (!fil.createNewFile()) System.out.println("fil fins ikke");
+		
+		for (int i = 0; i < 10; i++) {
+			skriver.write("hey how do you do. ");
 		}
 	}
 
