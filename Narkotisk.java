@@ -5,7 +5,7 @@ class Narkotisk extends Legemiddel {
 		super(navn, pris, virkestoff);
 		this.narkotiskStyrke = narkotiskStyrke;
 	}
-	public double hentNarkotiskStyrke() {
+	public int hentNarkotiskStyrke() {
 		return narkotiskStyrke;
 	}
 	@Override
