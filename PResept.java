@@ -3,10 +3,10 @@ class PResept extends Hvit{
 		super(legemiddel, utskrivendeLege, pasient, 3);
 
 		if (legemiddel.hentPris() <= 108) {
-			legemiddel.settNyPris(0);
+			pris = 0;
 		}
 		else {
-			legemiddel.settNyPris(legemiddel.hentPris() - 108);
+			pris = legemiddel.hentPris() - 108;
 		}
 	}
 	@Override

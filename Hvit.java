@@ -8,7 +8,7 @@ class Hvit extends Resept {
 	}
 	@Override
 	public double prisAaBetale() {
-		return legemiddel.hentPris();
+		return pris;
 
 	}
 	@Override
