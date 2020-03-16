@@ -423,7 +423,10 @@ class Database implements DatabaseInterface {
 		Lege lege = finnLege(legenavn);
 		Legemiddel legemiddel = finnLegemiddel(lmId);
 		Pasient pasient = finnPasient(pasientId);
+		return lagResept(lege, legemiddel, pasient, reit, type);
+	}
 
+	public void lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
 		type = type.toLowerCase();
 
 		Boolean gyldig = true;
