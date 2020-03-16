@@ -409,26 +409,9 @@ class Database implements DatabaseInterface {
 	}
 
 	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type){
-		Lege lege = null;
-		for (Lege l: legeListe) {
-			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
-				lege = l;
-			}
-		}
-
-		Legemiddel legemiddel = null;
-		for (Legemiddel lm: legemiddelListe) {
-			if (lmId == lm.hentId()) {
-				legemiddel = lm;
-			}
-		}
-
-		Pasient pasient = null;
-		for (Pasient p: pasientListe) {
-			if (p.hentId() == pasientId) {
-				pasient = p;
-			}
-		}
+		Lege lege = finnLege(legenavn);
+		Legemiddel legemiddel = finnLegemiddel(lmId);
+		Pasient pasient = finnPasient(pasientId);
 
 		type = type.toLowerCase();
 
@@ -474,6 +457,31 @@ class Database implements DatabaseInterface {
 
 	}
 
+	public Lege finnLege(String legenavn) {
+		for (Lege l: legeListe) {
+			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
+				return l;
+			}
+		}
+	}
+
+	public Legemiddel finnLegemiddel(int id) {
+		Legemiddel legemiddel = null;
+		for (Legemiddel lm : legemiddelListe) {
+			if (lmId == lm.hentId()) {
+				legemiddel = lm;
+			}
+		}
+	}
+
+	public Pasient finnPasient(int id) {
+		for (Pasient p : pasientListe) {
+			if (p.hentId() == pasientId) {
+				return p;
+			}
+		}
+	}
+
 	public void lagLege(String navn, int kontrollid){
 		Lege l;
 		if (kontrollid != 0) {
@@ -500,5 +508,31 @@ class Database implements DatabaseInterface {
 			legemiddel = new Vanlig(navn, pris, virkestoff);
 		}
 		legemiddelListe.leggTil(legemiddel);
+	}
+
+	public void printPasient(int detaljLevel) {
+
+	}
+	public void printResept(int detaljLevel) {
+
+	}
+	public void printLege(int detaljLevel) {
+
+	}
+	public void printLegemiddel(int detaljLevel) {
+
+	}
+
+	public SortertLenkeliste<Lege> hentLeger() {
+		return null;
+	}
+	public Lenkeliste<Legemiddel> hentLegemidler() {
+		return null;
+	}
+	public Lenkeliste<Resept> hentResepter() {
+		return null;
+	}
+	public Lenkeliste<Pasient> hentPasienter() {
+		return null;
 	}
 }

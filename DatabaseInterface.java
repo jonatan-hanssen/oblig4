@@ -19,6 +19,10 @@ interface DatabaseInterface {
 
 	public SortertLenkeliste<Lege> hentLeger();
 	public Lenkeliste<Legemiddel> hentLegemidler();
-	public Lenkeliste<Resepet> hentResepter();
+	public Lenkeliste<Resept> hentResepter();
 	public Lenkeliste<Pasient> hentPasienter();
+
+	public Lege finnLege(String legenavn);
+	public Legemiddel finnLegemiddel(int id);
+	public Pasient finnPasient(int id);
 }
