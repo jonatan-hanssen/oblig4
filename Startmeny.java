@@ -12,7 +12,7 @@ public class Startmeny {
 	static String exitStr = "Ha en fin dag!";
 	static String donaldDuckStr = "Oopsie! Det smakte daarlig.";
 
-	// private Database db;
+	private Database db;
 
 	enum MenyValg {
 		RAGEQUIT, // 0
@@ -26,8 +26,9 @@ public class Startmeny {
 	}
 	private MenyValg brukerValg = MenyValg.INIT;
 
-	//public Startmeny() {
-	public Startmeny() {
+	public Startmeny(Database db) {
+		this.db = db;
+
 		Console.clearScreen();
 
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
@@ -129,16 +130,16 @@ public class Startmeny {
 				return;
 			case 1:
 				System.out.println("En kul pasient er kul men har ikke kur.");
-				// db.printPasient(detaljLevel);
+				db.printPasient(detaljLevel);
 			case 2: 
 				System.out.println("En kul resept er kul.");
-				// db.printResept(detaljLevel);
+				db.printResept(detaljLevel);
 			case 3:
 				System.out.println("En kul lege er gul.");
-				// db.printResept(detaljLevel);
+				db.printLege(detaljLevel);
 			case 4:
 				System.out.println("Et kult legemiddel er gull.");
-				// db.printResept(detaljLevel)
+				db.printLegemiddel(detaljLevel);
 		}
 
 	}
