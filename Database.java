@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 
 
-class Database {
+class Database implements DatabaseInterface {
 	public Lenkeliste<Pasient> pasientListe = new Lenkeliste<Pasient>();//nr 0
 	public Lenkeliste<Legemiddel> legemiddelListe = new Lenkeliste<Legemiddel>();//nr 1
 	public SortertLenkeliste<Lege> legeListe = new SortertLenkeliste<Lege>();//nr 2
@@ -352,7 +352,7 @@ class Database {
 		System.out.println("Ferdig skrevet!");
 	}
 
-	public void printA(){
+	public void printAlt(){
 		for (Legemiddel lm: legemiddelListe) {
 			System.out.println(lm.toString());
 		}
@@ -501,12 +501,4 @@ class Database {
 		}
 		legemiddelListe.leggTil(legemiddel);
 	}
-
-	public void printDatabase() {
-		for (Resept resept : reseptListe) System.out.println(resept);
-		for (Lege lege : legeListe) System.out.println(lege);
-		for (Legemiddel legemiddel : legemiddelListe) System.out.println(legemiddel);
-		for (Pasient pasient : pasientListe) System.out.println(pasient);
-	}
-
 }
