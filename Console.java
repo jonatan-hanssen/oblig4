@@ -56,8 +56,17 @@ public class Console {
 		return scanner.next().charAt(0);
 	}
 
+	public static String getString() {
+		return (new Scanner(System.in)).nextLine();
+	}
+
+	public static String getString(String s) {
+		System.out.println(s);
+		return getString();
+	}
+
 	public static void main(String[] args) throws Exception {
-		System.out.println(getInt());
+		System.out.println(getString("Potet?"));
 	}
 
 	public static void clearScreen() { 
