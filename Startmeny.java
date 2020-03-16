@@ -4,7 +4,7 @@ public class Startmeny {
 	static String velkommenStr = "Velkommen til Legesystemet!\n";
 	static String tutorial = "Velg ett av de mulige menyelementene med tallet.";
 	static String menyEntriesStr = "1. Jeg vil printe.\n" + 
-							"2. Jeg vil opprette.\n" +
+							"2. Jeg vil legge til i databasen.\n" +
 							"3. Jeg vil bruke en resept.\n" +
 							"4. Jeg vil se statistikk.\n" +
 							"5. Jeg vil skrive til fil.\n" +
@@ -144,7 +144,38 @@ public class Startmeny {
 
 	}
 	private void opretteMeny(){
-		System.out.println("Jeg driver med oprette.");
+		Console.clearScreen();
+
+		System.out.print("Hva vil du oprette?\n" + 
+						 "1. Pasient\n" + 
+						 "2. Resept\n" + 
+						 "3. Lege\n" + 
+						 "4. Legemiddel\n" +
+						 "0. Jeg angrer!\n"
+		);
+		int opretteValg = -1;
+		do {
+			opretteValg = Console.getInt(3, -1);
+			if (opretteValg == -1) System.out.println(donaldDuckStr);
+		} while (opretteValg == -1);		
+
+		switch (opretteValg) {
+			case 0:
+				return;
+			case 1:
+				System.out.println("En kul pasient er kul men har ikke kur.");
+				db.lagPasient(detaljLevel);
+			case 2: 
+				System.out.println("En kul resept er kul.");
+				db.skrivResept(detaljLevel);
+			case 3:
+				System.out.println("En kul lege er gul.");
+				db.lagLege(detaljLevel);
+			case 4:
+				System.out.println("Et kult legemiddel er gull.");
+				db.lagLegemiddel(detaljLevel);
+		}
+
 	}
 	private void reseptMeny(){
 		System.out.println("Jeg driver med resept.");

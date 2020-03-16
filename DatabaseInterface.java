@@ -18,7 +18,7 @@ interface DatabaseInterface {
 	public void printLegemiddel(int detaljLevel);
 
 	public SortertLenkeliste<Lege> hentLeger();
-	public SortertLenkeliste<Legemiddel> hentLegemidler();
-	public SortertLenkeliste<Resepet> hentResepter();
-	public SortertLenkeliste<Pasient> hentPasienter();
+	public Lenkeliste<Legemiddel> hentLegemidler();
+	public Lenkeliste<Resepet> hentResepter();
+	public Lenkeliste<Pasient> hentPasienter();
 }
