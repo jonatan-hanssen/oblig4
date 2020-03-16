@@ -9,6 +9,7 @@ class DatabaseTest {
 		db.printAlt();
 		//db.printTypeMisbruk(Vanlig.class, "pasient");
 		db.skrivTilFil(args[0]);
+		System.out.println(System.getProperty("os.name"));
 
 	}
 }
