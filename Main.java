@@ -29,5 +29,8 @@ public class Main {
 			resept.bruk();
 			System.out.println(resept);
 		}
+
+		Database db = new Database();
+		Startmeny hovedmeny = new Startmeny();
 	}
 }
