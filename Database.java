@@ -408,7 +408,7 @@ class Database implements DatabaseInterface {
 		}
 	}
 
-	public void skrivResept(String legenavn, int lmId, int pasientId, int reit, String type){
+	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type){
 		Lege lege = null;
 		for (Lege l: legeListe) {
 			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
