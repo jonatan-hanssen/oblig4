@@ -1,12 +1,13 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 interface DatabaseInterface {
 	public void lesFraFil(String filnavn) throws FileNotFoundException;
 	public void skrivTilFil(String filnavn) throws IOException;
 	public void printAlt();
-	public void printAntallType(Class<?> cls);
-	public void printTypeMisbruk(Class<?> cls, String type);
+	public void printAntallTypeResept(Class<?> cls);
+	public void printTypeMisbruk(HashMap<String, Integer> liste);
 	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type);
 	public void lagLege(String navn, int kontrollid);
 	public void lagPasient(String navn, String fnr);

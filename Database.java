@@ -24,6 +24,9 @@ class Database implements DatabaseInterface {
 	public Lenkeliste<Resept> reseptListe = new Lenkeliste<Resept>();//nr 3
 
 	public Database() {}
+	public Database(String filnavn) {
+		
+	}
 
 	public void lesFraFil(String filnavn) throws FileNotFoundException {
 		File fil = new File(filnavn);
@@ -370,17 +373,21 @@ class Database implements DatabaseInterface {
 		}
 	}
 
-	public void printAntallType(Class<?> cls){
+	public int antallTypeResept(Class<?> cls){
 		int ant = 0;
 		for (Resept r: reseptListe) {
 			if (cls.isInstance(r.hentLegemiddel())){
 				ant++;
 			}
 		}
-		System.out.println(ant);
+		return ant;
+	}
+	
+	public void printAntallTypeResept(Class<?> cls) {
+		System.out.println(antallTypeResept(cls));
 	}
 
-	public void printTypeMisbruk(Class<?> cls, String type){
+	public HashMap<String, Integer> tellAntallTypeMisbruk(Class<?> cls, String type){
 		HashMap<String, Integer> personer = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
 			if (cls.isInstance(r.hentLegemiddel())) {
@@ -403,9 +410,13 @@ class Database implements DatabaseInterface {
 				}
 			}
 		}
-		for (String person: personer.keySet()) {
-			System.out.println(person + ": " + personer.get(person));
+		return personer;
+	}
+	public void printTypeMisbruk(HashMap<String,Integer> liste) {
+		for (String person: liste.keySet()) {
+			System.out.println(person + ": " + liste.get(person));
 		}
+		
 	}
 
 	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type){
@@ -454,7 +465,6 @@ class Database implements DatabaseInterface {
 				System.out.println("Vanlig lege kan ikke skrive ut resept på narkotiske midler");
 			}
 		}
-
 	}
 
 	public Lege finnLege(String legenavn) {
@@ -509,30 +519,22 @@ class Database implements DatabaseInterface {
 		}
 		legemiddelListe.leggTil(legemiddel);
 	}
-
-	public void printPasient(int detaljLevel) {
-
-	}
-	public void printResept(int detaljLevel) {
-
-	}
-	public void printLege(int detaljLevel) {
-
-	}
-	public void printLegemiddel(int detaljLevel) {
-
-	}
-
+	
 	public SortertLenkeliste<Lege> hentLeger() {
-		return null;
+		return legeListe;
 	}
 	public Lenkeliste<Legemiddel> hentLegemidler() {
-		return null;
+		return legemiddelListe;
 	}
 	public Lenkeliste<Resept> hentResepter() {
-		return null;
+		return reseptListe;
 	}
 	public Lenkeliste<Pasient> hentPasienter() {
-		return null;
+		return pasientListe;
 	}
+	public void printPasient(int detaljLevel) {};
+	public void printResept(int detaljLevel) {};
+	public void printLege(int detaljLevel) {};
+	public void printLegemiddel(int detaljLevel) {};
+
 }
