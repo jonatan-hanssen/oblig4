@@ -423,7 +423,7 @@ class Database implements DatabaseInterface {
 		Lege lege = finnLege(legenavn);
 		Legemiddel legemiddel = finnLegemiddel(lmId);
 		Pasient pasient = finnPasient(pasientId);
-		return lagResept(lege, legemiddel, pasient, reit, type);
+		lagResept(lege, legemiddel, pasient, reit, type);
 	}
 
 	public void lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
@@ -476,23 +476,26 @@ class Database implements DatabaseInterface {
 				return l;
 			}
 		}
+		return null;
 	}
 
 	public Legemiddel finnLegemiddel(int id) {
 		Legemiddel legemiddel = null;
 		for (Legemiddel lm : legemiddelListe) {
-			if (lmId == lm.hentId()) {
+			if (id == lm.hentId()) {
 				legemiddel = lm;
 			}
 		}
+		return null;
 	}
 
 	public Pasient finnPasient(int id) {
 		for (Pasient p : pasientListe) {
-			if (p.hentId() == pasientId) {
+			if (p.hentId() == id) {
 				return p;
 			}
 		}
+		return null;
 	}
 
 	public void lagLege(String navn, int kontrollid){
