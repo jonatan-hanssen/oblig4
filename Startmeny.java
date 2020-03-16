@@ -10,7 +10,7 @@ public class Startmeny {
 							"3. Jeg vil bruke en resept.\n" +
 							"4. Jeg vil se statistikk.\n" +
 							"5. Jeg vil skrive til fil.\n" +
-							"6. Jeg vil skrive til databasen fra fil" +
+							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil doe.\n";
 	static String exitStr = "Ha en fin dag!";
 	static String donaldDuckStr = "Oopsie! Det smakte daarlig.";
