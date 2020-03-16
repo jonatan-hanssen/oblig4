@@ -6,7 +6,6 @@ interface DatabaseInterface {
 	public void skrivTilFil(String filnavn) throws IOException;
 
 	public void skrivResept(String legenavn, int lmId, int pasientId, int reit, String type);
-
 	public void lagLege(String navn, int kontrollid);
 	public void lagPasient(String navn, String fnr);
 	public void lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type);
