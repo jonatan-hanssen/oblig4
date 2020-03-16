@@ -164,16 +164,18 @@ public class Startmeny {
 				return;
 			case 1:
 				System.out.println("En kul pasient er kul men har ikke kur.");
-				db.lagPasient(detaljLevel);
+				String navn = Console.getString("Hva skal pasienten hete?");
+				
+				db.lagPasient();
 			case 2: 
 				System.out.println("En kul resept er kul.");
-				db.skrivResept(detaljLevel);
+				db.skrivResept();
 			case 3:
 				System.out.println("En kul lege er gul.");
-				db.lagLege(detaljLevel);
+				db.lagLege();
 			case 4:
 				System.out.println("Et kult legemiddel er gull.");
-				db.lagLegemiddel(detaljLevel);
+				db.lagLegemiddel();
 		}
 
 	}
