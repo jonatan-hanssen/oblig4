@@ -12,11 +12,11 @@ class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
 			
 			
 			int i = 0;
-			//vi stopper å iterere dersom det elementet er mindre eller 
-			//lik det vi sammenligner med, eller dersom vi er kommet til
-			//slutten av lista. 
-			
-			//et element som er stoerst vil dermed havne sist i lista.
+			/* vi stopper å iterere dersom det elementet er mindre eller 
+			* lik det vi sammenligner med, eller dersom vi er kommet til
+			* slutten av lista. 
+			*
+			* et element som er stoerst vil dermed havne sist i lista. */
 			while (x.compareTo(super.nodeVedPos(i).data) > 0) {
 				i++;
 				if (i >= stoerrelse) break;
