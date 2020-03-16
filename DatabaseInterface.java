@@ -18,4 +18,9 @@ interface DatabaseInterface {
 	public void printResept(int detaljLevel);
 	public void printLege(int detaljLevel);
 	public void printLegemiddel(int detaljLevel);
+
+	public SortertLenkeliste<Lege> hentLeger();
+	public SortertLenkeliste<Legemiddel> hentLegemidler();
+	public SortertLenkeliste<Resepet> hentResepter();
+	public SortertLenkeliste<Pasient> hentPasienter();
 }
