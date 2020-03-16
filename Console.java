@@ -60,8 +60,20 @@ public class Console {
 		System.out.println(getInt());
 	}
 
-	public static void clearScreen() {  
-		System.out.print("\033[H\033[2J");  
-		System.out.flush();  
-	}  
+	public static void clearScreen() { 
+		
+		try {
+			String os = System.getProperty("os.name").toLowerCase();
+			if (os.contains("win")) {
+				Runtime.getRuntime().exec("clear");
+			} else {
+				System.out.println();
+				System.out.print("\033[H\033[2J");  
+				System.out.flush();
+			}
+		} catch (Exception e) {
+			String manyLines = new String(new char[20]).replace("\0", "\n");
+			System.out.println(manyLines);
+		}
+	}
 }
