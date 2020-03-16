@@ -25,6 +25,10 @@ class Pasient {
 	public int hentId() {
 		return id;
 	}
+	
+	public String hentFnr() {
+		return fnr;
+	}
 
     public String hentNavn(){
         return navn;

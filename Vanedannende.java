@@ -6,7 +6,7 @@ class Vanedannende extends Legemiddel {
 		super(navn, pris, virkestoff);
 		this.vanedannendeStyrke = vanedannendeStyrke;
 	}
-	public double hentVanedannendeStyrke() {
+	public int hentVanedannendeStyrke() {
 		return vanedannendeStyrke;
 	}
 	

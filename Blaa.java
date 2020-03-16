@@ -1,7 +1,7 @@
 class Blaa extends Resept {
 	public Blaa(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
 		super(legemiddel, utskrivendeLege, pasient, reit);
-		legemiddel.settNyPris(legemiddel.hentPris()*0.25);
+		pris = legemiddel.hentPris()*0.25;
 	}
 	@Override
 	public String farge() {
@@ -9,7 +9,7 @@ class Blaa extends Resept {
 	}
 	@Override
 	public double prisAaBetale() {
-		return legemiddel.hentPris();
+		return pris;
 	}
 	@Override
 	public String toString() {

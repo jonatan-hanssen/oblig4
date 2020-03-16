@@ -1,7 +1,7 @@
 class Militaer extends Hvit {
 	public Militaer(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
 		super(legemiddel, utskrivendeLege, pasient, reit);
-		legemiddel.settNyPris(0);
+		pris = 0;
 	}
 	@Override
 	public String toString() {

@@ -5,6 +5,7 @@ abstract class Resept {
 	protected Lege utskrivendeLege;
 	protected int reit;
 	protected Pasient pasient;
+	protected double pris;
 
 
 	public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
@@ -15,7 +16,8 @@ abstract class Resept {
 		this.utskrivendeLege = utskrivendeLege;
 		this.pasient = pasient;
 		this.reit = reit;
-
+		
+		this.pris  = this.legemiddel.hentPris();
 
 	}
 	public int hentId() {

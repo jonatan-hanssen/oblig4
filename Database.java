@@ -1,7 +1,20 @@
+//exceptions
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.io.File;
+
+//lesing av fil
 import java.util.Scanner;
+
+//skriving til fil
+import java.io.OutputStream;//abstrakt klasse for outputStreamWriter
+import java.io.OutputStreamWriter;//klasse som skriver karakterer til et output fra byte
+import java.io.BufferedWriter;//klasse som lager buffer for aa redusere konvertering av byte
+import java.io.FileOutputStream;//klasse som tar outputStream og skriver til fil
+
 import java.util.HashMap;
+
 
 
 class Database {
@@ -42,9 +55,9 @@ class Database {
 		System.out.println("	Antall leger: " + legeListe.stoerrelse());
 		System.out.println("	Antall legemidler: " + legemiddelListe.stoerrelse());
 		System.out.println("	Antall resepter: " + reseptListe.stoerrelse());
-		System.out.println("	Linjer gaatt gjennom: " + scannerPos);
+		System.out.println("	Linjer gaatt gjennom: " + scannerPos + "\n");
 	}
-	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) throws UgyldigListeIndeks, ArrayIndexOutOfBoundsException, NumberFormatException {
+	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) {
 		String[] linjeArray = linje
 			.trim() //fjerner whitespace
 			.replaceAll(",$","") //fjerner komma uten noen string
@@ -70,13 +83,24 @@ class Database {
 				//Legemiddel = (navn, type, pris, virkestoff [,styrke])
 					switch (linjeArray[1]) {
 						case "vanlig":
-							legemiddelListe.leggTil(new Vanlig(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3])));
+							legemiddelListe.leggTil(new Vanlig(
+														linjeArray[0],
+														Double.valueOf(linjeArray[2]),
+														Double.valueOf(linjeArray[3])));
 							break;
 						case "narkotisk":
-							legemiddelListe.leggTil(new Narkotisk(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
+							legemiddelListe.leggTil(new Narkotisk(
+														linjeArray[0],
+														Double.valueOf(linjeArray[2]),
+														Double.valueOf(linjeArray[3]),
+														Integer.parseInt(linjeArray[4])));
 							break;
 						case "vanedannende":
-							legemiddelListe.leggTil(new Vanedannende(linjeArray[0], Float.valueOf(linjeArray[2]), Float.valueOf(linjeArray[3]),Integer.parseInt(linjeArray[4])));
+							legemiddelListe.leggTil(new Vanedannende(
+														linjeArray[0],
+														Double.valueOf(linjeArray[2]),
+														Double.valueOf(linjeArray[3]),
+														Integer.parseInt(linjeArray[4])));
 							break;
 						default:
 							/*ser at det er mange feil med navn som er kombinasjoner av flere legemidler
@@ -113,23 +137,50 @@ class Database {
 
 					//finner pasient
 					Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
-
+					
+					//skal naa lage resepten
+					Resept resept;
+					//reseptlagd vil vaere true med mindre vi kommer til default, hvor den ikke vil bli lagd
+					boolean reseptLagd = true;
 					String type = linjeArray[3];
 					switch (type) {
 						case "blaa":
-							reseptListe.leggTil(new Blaa(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Blaa(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "hvit":
-							reseptListe.leggTil(new Hvit(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Hvit(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "militaer":
-							reseptListe.leggTil(new Militaer(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4])));
-							break;
+							resept = new Militaer(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
+						break;
 						case "p":
-							reseptListe.leggTil(new PResept(legemiddel, lege, pasient));
-							break;
+							resept = new PResept(legemiddel, lege, pasient);
+						break;
+						default:
+							resept = null;
+							reseptLagd = false;
+						
+							System.out.println(
+							"FEIL TYPE RESEPT\nLinje " 
+							+ linjePos 
+							+ ": Ingen resepttype ved navn "
+							+ linjeArray[3]
+							+ "\n");
 					}
+					if (reseptLagd) {
+						reseptListe.leggTil(resept);
+						pasient.leggTilResept(resept);
+					}
+					
 				break;
+				default:
+					System.out.println(
+					"UEKSISTERENDE KATEGORI\nLinje "
+					+ linjePos
+					+ ": Det er bare fire kategorier. Denne linjen er i kategori "
+					+ (nummerPaaListe + 1)
+					+ ".\n");
+				
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
@@ -147,14 +198,158 @@ class Database {
 			+ objektType + ".\n");
 		}
 		catch (UgyldigListeIndeks e) {
+			//dette skjer bare i case 3, altsaa i den siste kategorien
+			//da maa vi sjekke hva det var som skapte feilen: legemiddel eller
+			//pasient, ettersom de er det eneste som bruker indeksen paa lenkeliste
+			int ID = -1;
+			if (Integer.parseInt(linjeArray[0]) >= reseptListe.stoerrelse()) {
+				ID = Integer.parseInt(linjeArray[0]);
+				objektType = "legemiddel";
+			}
+			//dersom det ikke var feil ved reseptListe vet vi at det maa vaere
+			//feil ved pasientListe ettersom disse er de eneste som kan gi UgyldigListeIndeks
+			else {
+				ID = Integer.parseInt(linjeArray[2]);
+				objektType = "pasient";
+			}
+			
 			System.out.println(
-			"UEKSISTERENDE OBJEKT\nLinje "
+			"FEIL ID\nLinje "
 			+ linjePos
 			+ ": Intet "
-			+ objektType + "objekt paa denne indeksen:");
-			System.out.println("		" + e.getMessage() + "\n");
+			+ objektType + "objekt med ID "
+			+ ID
+			+ ".\n");
 
 		}
+	}
+
+	public void skrivTilFil(String filnavn) throws IOException {
+		//lager fil
+		File fil = new File(filnavn);
+		
+		if (fil.createNewFile()) {
+			System.out.println("Ny fil skapt med navn " + filnavn + "\n");
+		}
+		else {
+			System.out.println("Skriver til fil " + filnavn + "...\n");
+		}
+		
+		//lager skriver til fil
+		OutputStream output = new FileOutputStream(fil, false);
+		OutputStreamWriter outputWriter = new OutputStreamWriter(output, "UTF-8");//vi enkoder i UTF-8
+		BufferedWriter skriver = new BufferedWriter(outputWriter);//vi bruker bufferedWriter fordi vi skal ha mange skriveoperasjoner
+		
+		//her skjer skrivinga
+		//liste 0
+		
+		skriver.write("# Pasienter (navn,fnr)" + "\n");
+		for (Pasient pasient : pasientListe) {
+			skriver.write(
+						pasient.hentNavn()
+						+ ","
+						+ pasient.hentFnr()
+						+ "\n");
+		}
+		
+		//liste 1
+		skriver.write("# Legemidler (navn,type,pris,virkestoff[,styrke])" + "\n");
+		
+		for (Legemiddel legemiddel : legemiddelListe) {
+			if (legemiddel instanceof Vanlig) {
+				skriver.write(
+							legemiddel.hentNavn()
+							+ ",vanlig,"
+							+ legemiddel.hentPris()
+							+ ","
+							+ legemiddel.hentVirkestoff()
+							+ ",\n");
+			}
+			if (legemiddel instanceof Narkotisk) {
+				//vi maa downcaste for aa faa tilgang til hentNarkotiskStyrke
+				Narkotisk narkotiskLegemiddel;
+				narkotiskLegemiddel = (Narkotisk) legemiddel;
+				skriver.write(
+							narkotiskLegemiddel.hentNavn()
+							+ ",narkotisk,"
+							+ narkotiskLegemiddel.hentPris()
+							+ ","
+							+ narkotiskLegemiddel.hentVirkestoff()
+							+ ","
+							+ narkotiskLegemiddel.hentNarkotiskStyrke()
+							+ "\n");
+			}
+			if (legemiddel instanceof Vanedannende) {
+				Vanedannende vanedannendeLegemiddel;
+				vanedannendeLegemiddel = (Vanedannende) legemiddel;
+				skriver.write(
+							legemiddel.hentNavn()
+							+ ",vanedannende,"
+							+ vanedannendeLegemiddel.hentPris()
+							+ ","
+							+ vanedannendeLegemiddel.hentVirkestoff()
+							+ ","
+							+ vanedannendeLegemiddel.hentVanedannendeStyrke()
+							+ "\n");
+			}
+		}
+		
+		//liste 2
+		skriver.write("# Leger (navn, kontrollid / 0 hvis vanlig lege)" + "\n");
+		
+		for (Lege lege : legeListe) {
+			if (lege instanceof Spesialist) {
+				Spesialist spesialist;
+				spesialist = (Spesialist) lege;
+				
+				skriver.write(
+							spesialist.hentNavn()
+							+ ","
+							+ spesialist.hentKontrollID()
+							+ "\n");
+			}
+			else {
+				skriver.write(
+							lege.hentNavn()
+							+ ","
+							+ "0"
+							+ "\n");
+			}
+			
+		}
+		
+		//liste 3
+		skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])" + "\n");
+		
+		for (Resept resept : reseptListe) {
+			String type = "";
+			String reit = Integer.toString(resept.hentReit());
+			if (resept instanceof Hvit) type = "hvit";
+			if (resept instanceof Blaa) type = "blaa";
+			if (resept instanceof Militaer) type = "militaer";
+			if (resept instanceof PResept) {
+				type = "p";
+				reit = "";
+			}
+			
+			skriver.write(
+						resept.hentLegemiddel().hentId()
+						+ ","
+						+ resept.hentLege().hentNavn()
+						+ ","
+						+ resept.hentPasient().hentId()
+						+ ","
+						+ type
+						+ ","
+						+ reit);
+			//jeg bruker denne testen for aa soerge for at siste linje ikke er tom
+			if (resept.hentId() < (reseptListe.stoerrelse() - 1)) skriver.write("\n");
+		}
+		//ferdig
+		skriver.flush();
+		skriver.close();
+		
+		System.out.println("Ferdig skrevet!");
 	}
 
 	public void printA(){
