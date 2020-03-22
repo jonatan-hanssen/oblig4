@@ -18,7 +18,7 @@ class Pasient {
         resepter.leggPaa(r);
     }
 
-    public Stabel hentResepter(){
+    public Stabel<Resept> hentResepter(){
         return resepter;
     }
 
