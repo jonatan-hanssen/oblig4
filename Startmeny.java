@@ -143,29 +143,30 @@ public class Startmeny {
 			if (detaljLevel == -1) System.out.println(donaldDuckStr);
 		} while (detaljLevel == -1);
 		*/
+		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
 
 		switch (printeValg) {
 			case 0:
 				return;
 			case 1:
 				db.printPasient();
-				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				Console.getString(pressEnterString);
 				break;
 			case 2: 
 				db.printResept();
-				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				Console.getString(pressEnterString);
 				break;
 			case 3:
 				db.printLege();
-				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				Console.getString(pressEnterString);
 				break;
 			case 4:
 				db.printLegemiddel();
-				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				Console.getString(pressEnterString);
 				break;
 			case 5:
 				db.printAlt();
-				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				Console.getString(pressEnterString);
 				break;
 		}
 
