@@ -80,7 +80,7 @@ class Database implements DatabaseInterface {
 				case 0:
 				//Pasient = (navn, fnr)
 					pasientListe.leggTil(new Pasient(linjeArray[0],linjeArray[1]));
-				break;
+					break;
 				case 1:
 
 				//Legemiddel = (navn, type, pris, virkestoff [,styrke])
@@ -113,7 +113,7 @@ class Database implements DatabaseInterface {
 							*/
 							System.out.println("FEIL TYPE\nLinje " + linjePos + ":" + linjeArray[1] + " er ikke et type legemiddel.\n");
 					}
-				break;
+					break;
 				case 2:
 				//Lege = (navn,kontrollid)
 					if (Integer.parseInt(linjeArray[1]) == 0) {
@@ -122,7 +122,7 @@ class Database implements DatabaseInterface {
 					else {
 						legeListe.leggTil(new Spesialist(linjeArray[0], Integer.parseInt(linjeArray[1])));
 					}
-				break;
+					break;
 				case 3:
 				//Resept (legemiddelNummer, legeNavn, pasientID, type, [reit])
 					//finner legemiddel
@@ -149,16 +149,16 @@ class Database implements DatabaseInterface {
 					switch (type) {
 						case "blaa":
 							resept = new Blaa(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
-						break;
+							break;
 						case "hvit":
 							resept = new Hvit(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
-						break;
+							break;
 						case "militaer":
 							resept = new Militaer(legemiddel, lege, pasient, Integer.parseInt(linjeArray[4]));
-						break;
+							break;
 						case "p":
 							resept = new PResept(legemiddel, lege, pasient);
-						break;
+							break;
 						default:
 							resept = null;
 							reseptLagd = false;
@@ -169,13 +169,14 @@ class Database implements DatabaseInterface {
 							+ ": Ingen resepttype ved navn "
 							+ linjeArray[3]
 							+ "\n");
+							break;
 					}
 					if (reseptLagd) {
 						reseptListe.leggTil(resept);
 						pasient.leggTilResept(resept);
 					}
 					
-				break;
+					break;
 				default:
 					System.out.println(
 					"UEKSISTERENDE KATEGORI\nLinje "
@@ -183,7 +184,7 @@ class Database implements DatabaseInterface {
 					+ ": Det er bare fire kategorier. Denne linjen er i kategori "
 					+ (nummerPaaListe + 1)
 					+ ".\n");
-				
+					break;
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {

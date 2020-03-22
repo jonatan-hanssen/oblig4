@@ -148,15 +148,19 @@ public class Startmeny {
 				return;
 			case 1:
 				db.printPasient();
+				Console.getString("Trykk Enter for å fortsette.");
 				break;
 			case 2: 
 				db.printResept();
+				Console.getString("Trykk Enter for å fortsette.");
 				break;
 			case 3:
 				db.printLege();
+				Console.getString("Trykk Enter for å fortsette.");
 				break;
 			case 4:
 				db.printLegemiddel();
+				Console.getString("Trykk Enter for å fortsette.");
 				break;
 		}
 
@@ -195,6 +199,7 @@ public class Startmeny {
 				System.out.println("Et kult legemiddel er gull.");
 				db.lagLegemiddel("Potet", 12, 1, 0, "hvit");
 		}
+		Console.getString("Trykk Enter for å fortsette.");
 
 	}
 	private void reseptMeny(){
