@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 public class Startmeny {
 	static boolean consoleLogging = true;
 
@@ -8,6 +10,7 @@ public class Startmeny {
 							"3. Jeg vil bruke en resept.\n" +
 							"4. Jeg vil se statistikk.\n" +
 							"5. Jeg vil skrive til fil.\n" +
+							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil doe.\n";
 	static String exitStr = "Ha en fin dag!";
 	static String donaldDuckStr = "Oopsie! Det smakte daarlig.";
@@ -21,8 +24,9 @@ public class Startmeny {
 		BRUKERESEPT, // 3
 		STATISTIKK, // 4
 		FILSKRIVING, // 5
-		FAIL, // 6
-		INIT, // 7
+		FILLESNING, //6
+		FAIL, // 7
+		INIT, // 8
 	}
 	private MenyValg brukerValg = MenyValg.INIT;
 
@@ -46,7 +50,7 @@ public class Startmeny {
 			*	complain to the user.
 			*/
 			if (this.brukerValg != MenyValg.INIT) {
-				int brukerTall = Console.getInt(5, -1); // 5 as the maxValue, because of MenyValg, -1 as the fallback value
+				int brukerTall = Console.getInt(6, -1); // 5 as the maxValue, because of MenyValg, -1 as the fallback value
 				if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
 				else if (brukerTall == 420) this.brukerValg = MenyValg.INIT; // never reachable atm
 				else this.brukerValg = MenyValg.values()[brukerTall];
@@ -95,7 +99,19 @@ public class Startmeny {
 					System.out.println(tutorial);
 					this.brukerValg = null;
 					break;
-						
+				
+				case FILLESNING:
+					String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
+					try {
+						if (filnavn != "0") db.lesFraFil(filnavn);
+					}
+					catch (FileNotFoundException e) {
+						Console.clearScreen();
+						System.out.println("Denne filen eksisterer ikke");
+						this.brukerValg = MenyValg.FILLESNING;
+					}
+					this.brukerValg = MenyValg.INIT;
+					break;
 			}
 		}
 
