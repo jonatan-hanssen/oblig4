@@ -4,7 +4,6 @@ class Vanedannende extends Legemiddel {
 		//bruker legemiddel sin konstruktoer
 		super(navn, pris, virkestoff);
 		this.vanedannendeStyrke = vanedannendeStyrke;
-		this.type = "vanedannende";
 	}
 	public int hentVanedannendeStyrke() {
 		return vanedannendeStyrke;
