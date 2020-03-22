@@ -460,29 +460,29 @@ class Database implements DatabaseInterface {
 			gyldig = false;
 		}
 		if (reit <= 0 && type != "p") {
-			System.out.println("Resepten må ha et heltall større enn 0 reit, eller være p-resept");
+			System.out.println("Resepten maa ha et heltall stoerre enn 0 reit, eller vaere p-resept");
 			gyldig = false;
 		}
-		if (type != "p" && type != "militær" && type != "militaer" && type != "blaa" && type != "blå" && type != "hvit") {
-			System.out.println("Militær, hvit, blå eller p ble ikke oppgitt som type");
+		if (type != "p" && type != "militaer" && type != "militaer" && type != "blaa" && type != "blaa" && type != "hvit") {
+			System.out.println("Militaer, hvit, blaa eller p ble ikke oppgitt som type");
 			gyldig = false;
 		}
 
 		Resept resept = null;
 		if (gyldig == true) {
 			try{
-				if (type == "militaer" || type == "militær") {
+				if (type == "militaer" || type == "militaer") {
 					resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
 				} else if (type == "hvit") {
 					resept = lege.skrivHvitResept(legemiddel, pasient, reit);
-				} else if (type == "blaa" || type == "blå") {
+				} else if (type == "blaa" || type == "blaa") {
 					resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
 				} else if (type == "p") {
 					resept = lege.skrivPResept(legemiddel, pasient);
 				}
 				reseptListe.leggTil(resept);
 			} catch (UlovligUtskrift e){
-				System.out.println("Vanlig lege kan ikke skrive ut resept på narkotiske midler");
+				System.out.println("Vanlig lege kan ikke skrive ut resept paa narkotiske midler");
 			}
 		}
 		else {
