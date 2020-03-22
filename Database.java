@@ -419,14 +419,41 @@ class Database implements DatabaseInterface {
 		
 	}
 
-	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type){
+	public Lege finnLege(String legenavn) {
+		for (Lege l: legeListe) {
+			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
+				return l;
+			}
+		}
+		return null;
+	}
+
+	public Legemiddel finnLegemiddel(int id) {
+		for (Legemiddel legemiddel : legemiddelListe) {
+			if (id == legemiddel.hentId()) {
+				return legemiddel;
+			}
+		}
+		return null;
+	}
+
+	public Pasient finnPasient(int id) {
+		for (Pasient pasient : pasientListe) {
+			if (pasient.hentId() == id) {
+				return pasient;
+			}
+		}
+		return null;
+	}
+
+	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type){
 		Lege lege = finnLege(legenavn);
-		Legemiddel legemiddel = finnLegemiddel(lmId);
+		Legemiddel legemiddel = finnLegemiddel(legemiddelId);
 		Pasient pasient = finnPasient(pasientId);
 		return lagResept(lege, legemiddel, pasient, reit, type);
 	}
 
-	public void lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
+	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
 		type = type.toLowerCase();
 
 		Boolean gyldig = true;
@@ -468,34 +495,10 @@ class Database implements DatabaseInterface {
 				System.out.println("Vanlig lege kan ikke skrive ut resept på narkotiske midler");
 			}
 		}
+		return resept;
 	}
 
-	public Lege finnLege(String legenavn) {
-		for (Lege l: legeListe) {
-			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
-				return l;
-			}
-		}
-	}
-
-	public Legemiddel finnLegemiddel(int id) {
-		Legemiddel legemiddel = null;
-		for (Legemiddel lm : legemiddelListe) {
-			if (lmId == lm.hentId()) {
-				legemiddel = lm;
-			}
-		}
-	}
-
-	public Pasient finnPasient(int id) {
-		for (Pasient p : pasientListe) {
-			if (p.hentId() == pasientId) {
-				return p;
-			}
-		}
-	}
-
-	public void lagLege(String navn, int kontrollid){
+	public Lege lagLege(String navn, int kontrollid){
 		Lege l;
 		if (kontrollid != 0) {
 			l = new Spesialist(navn, kontrollid);
@@ -503,14 +506,16 @@ class Database implements DatabaseInterface {
 			l = new Lege(navn);
 		}
 		legeListe.leggTil(l);
+		return l;
 	}
 
-	public void lagPasient(String navn, String fnr){
+	public Pasient lagPasient(String navn, String fnr){
 		Pasient p = new Pasient(navn, fnr);
 		pasientListe.leggTil(p);
+		return p;
 	}
 
-	public void lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type){
+	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type){
 		Legemiddel legemiddel;
 		type = type.toLowerCase();
 		if (type == "narkotisk") {
@@ -521,6 +526,7 @@ class Database implements DatabaseInterface {
 			legemiddel = new Vanlig(navn, pris, virkestoff);
 		}
 		legemiddelListe.leggTil(legemiddel);
+		return legemiddel;
 	}
 	
 	public SortertLenkeliste<Lege> hentLeger() {

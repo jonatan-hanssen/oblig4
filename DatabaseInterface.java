@@ -8,10 +8,11 @@ interface DatabaseInterface {
 	public void printAlt();
 	public void printAntallTypeResept(Class<?> cls);
 	public void printTypeMisbruk(HashMap<String, Integer> liste);
-	public void lagResept(String legenavn, int lmId, int pasientId, int reit, String type);
-	public void lagLege(String navn, int kontrollid);
-	public void lagPasient(String navn, String fnr);
-	public void lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type);
+	
+	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type);
+	public Lege lagLege(String navn, int kontrollid);
+	public Pasient lagPasient(String navn, String fnr);
+	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type);
 
 	public void printPasient(int detaljLevel);
 	public void printResept(int detaljLevel);

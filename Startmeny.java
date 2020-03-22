@@ -165,17 +165,17 @@ public class Startmeny {
 			case 1:
 				System.out.println("En kul pasient er kul men har ikke kur.");
 				String navn = Console.getString("Hva skal pasienten hete?");
-				
-				db.lagPasient();
+
+				db.lagPasient("Ola Nordmann", "01017000000");
 			case 2: 
 				System.out.println("En kul resept er kul.");
-				db.skrivResept();
+				db.lagResept("Ola Nordmann", 0, 0, 0, "hvit");
 			case 3:
 				System.out.println("En kul lege er gul.");
-				db.lagLege();
+				db.lagLege("Ola Vestmann", 100001);
 			case 4:
 				System.out.println("Et kult legemiddel er gull.");
-				db.lagLegemiddel();
+				db.lagLegemiddel("Potet", 12, 1, 0, "hvit");
 		}
 
 	}
