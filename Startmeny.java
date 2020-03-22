@@ -125,6 +125,7 @@ public class Startmeny {
 						 "2. Resepter\n" + 
 						 "3. Leger\n" + 
 						 "4. Legemidler\n" +
+						 "5. ALT!!!\n"
 						 "0. Jeg angrer!\n"
 		);
 		int printeValg = -1;
@@ -160,6 +161,10 @@ public class Startmeny {
 				break;
 			case 4:
 				db.printLegemiddel();
+				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
+				break;
+			case 5:
+				db.printAlt();
 				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
 				break;
 		}
