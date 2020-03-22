@@ -548,24 +548,31 @@ class Database implements DatabaseInterface {
 		return pasientListe;
 	}
 	public void printPasient() {
-		System.out.println("Vi printer pasienter");
+		System.out.println("Pasienter: ");
 		for (Pasient p: pasientListe) {
 			System.out.println(p.toString());
 		}
+		System.out.println();
 	}
 	public void printResept() {
+		System.out.println("Resepter: ");
 		for (Resept r: reseptListe) {
 			System.out.println(r.toString());
 		}
+		System.out.println();
 	}
 	public void printLege() {
+		System.out.println("Leger: ");
 		for (Lege l: legeListe) {
 			System.out.println(l.toString());
 		}
+		System.out.println();
 	}
 	public void printLegemiddel() {
+		System.out.println("Legemidler: ");
 		for (Legemiddel lm: legemiddelListe) {
 			System.out.println(lm.toString());
 		}
+		System.out.println();
 	}
 }

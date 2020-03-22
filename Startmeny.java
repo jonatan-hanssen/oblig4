@@ -284,6 +284,9 @@ public class Startmeny {
 						System.out.println("Denne resepten er tom");
 						reseptId = -2;
 					}
+					else {
+						System.out.println("Brukte resept paa " + resept.hentLegemiddel().hentNavn() + ", " + resept.hentReit() + " bruk igjen.");
+					}
 				}
 			}
 		}

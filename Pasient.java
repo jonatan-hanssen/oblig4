@@ -36,7 +36,6 @@ class Pasient {
 
     public String toString(){
         return id + ": Pasient: " + navn + "(" + fnr + ")";
-
     }
 
 }
