@@ -1,5 +1,5 @@
 class PResept extends Hvit {
-	static String type = "hvit";
+	static String type = "p-resept";
 	public PResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient) {
 		super(legemiddel, utskrivendeLege, pasient, 3);
 

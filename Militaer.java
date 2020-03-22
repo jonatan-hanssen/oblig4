@@ -4,5 +4,4 @@ class Militaer extends Hvit {
 		super(legemiddel, utskrivendeLege, pasient, reit);
 		pris = 0;
 	}
-	@Override
 }
