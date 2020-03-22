@@ -445,14 +445,14 @@ class Database implements DatabaseInterface {
 		return null;
 	}
 
-	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type){
+	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type) throws TypeNotFoundException {
 		Lege lege = finnLege(legenavn);
 		Legemiddel legemiddel = finnLegemiddel(legemiddelId);
 		Pasient pasient = finnPasient(pasientId);
 		return lagResept(lege, legemiddel, pasient, reit, type);
 	}
 
-	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type) {
+	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type) throws TypeNotFoundException {
 		type = type.toLowerCase();
 
 		Boolean gyldig = true;
@@ -473,8 +473,8 @@ class Database implements DatabaseInterface {
 			gyldig = false;
 		}
 		if (type != "p" && type != "militær" && type != "militaer" && type != "blå" && type != "blaa" && type != "hvit") {
-			throw new TypeNotFoundException();
 			gyldig = false;
+			throw new TypeNotFoundException();
 		}
 
 		Resept resept = null;
@@ -519,7 +519,7 @@ class Database implements DatabaseInterface {
 		return p;
 	}
 
-	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type){
+	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type) throws TypeNotFoundException {
 		Legemiddel legemiddel;
 		type = type.toLowerCase();
 		if (type == "narkotisk") {
@@ -528,6 +528,8 @@ class Database implements DatabaseInterface {
 			legemiddel = new Vanedannende(navn, pris, virkestoff, styrke);
 		} else if (type == "vanlig") {
 			legemiddel = new Vanlig(navn, pris, virkestoff);
+		} else {
+			throw new TypeNotFoundException();
 		}
 		legemiddelListe.leggTil(legemiddel);
 		return legemiddel;

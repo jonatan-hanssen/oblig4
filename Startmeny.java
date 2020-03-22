@@ -210,12 +210,12 @@ public class Startmeny {
 				}
 
 				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
-				if (type != "p" && type != "militær" && type != "militaer" && type != "blå" && type != "blaa" && type != "hvit") {
+				if (reseptType != "p" && reseptType != "militær" && reseptType != "militaer" && reseptType != "blå" && reseptType != "blaa" && reseptType != "hvit") {
 					System.out.println(donaldDuckStr);
 					//throw new TypeNotFoundException();
 				}
 
-				if (type != "p" && type != "presept"){
+				if (reseptType != "p" && reseptType != "presept"){
 					int reit = Console.getInt("Hva er reiten for resepten?");
 					db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
 				} else {
@@ -241,7 +241,7 @@ public class Startmeny {
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
 
-				if (egemiddelType != "vanlig" && legemiddelType == "narkotisk" && legemiddelType == "vanedannende") {
+				if (legemiddelType != "vanlig" && legemiddelType == "narkotisk" && legemiddelType == "vanedannende") {
 					System.out.println(donaldDuckStr);
 					break;
 				}

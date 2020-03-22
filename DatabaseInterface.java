@@ -9,10 +9,10 @@ interface DatabaseInterface {
 	public void printAntallTypeResept(Class<?> cls);
 	public void printTypeMisbruk(HashMap<String, Integer> liste);
 	
-	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type);
+	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type) throws TypeNotFoundException;
 	public Lege lagLege(String navn, int kontrollid);
 	public Pasient lagPasient(String navn, String fnr);
-	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type);
+	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type) throws TypeNotFoundException;
 
 	public void printPasient();
 	public void printResept();
