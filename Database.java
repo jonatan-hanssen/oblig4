@@ -498,7 +498,7 @@ class Database implements DatabaseInterface {
 		return resept;
 	}
 
-	public void lagLege(String navn, int kontrollid){
+	public Lege lagLege(String navn, int kontrollid){
 		Lege l;
 		if (kontrollid != 0) {
 			l = new Spesialist(navn, kontrollid);
