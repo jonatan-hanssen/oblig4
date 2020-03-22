@@ -536,6 +536,7 @@ class Database implements DatabaseInterface {
 		return pasientListe;
 	}
 	public void printPasient() {
+		System.out.println("Vi printer pasienter");
 		for (Pasient p: pasientListe) {
 			System.out.println(p.toString());
 		}
