@@ -239,12 +239,11 @@ public class Startmeny {
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
 
-				if (legemiddelType != "vanlig" && legemiddelType == "narkotisk" && legemiddelType == "vanedannende") {
+				try {
+					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
+				} catch (TypeNotFoundException e) {
 					System.out.println(donaldDuckStr);
-					break;
 				}
-
-				db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
 
 
 				break;
