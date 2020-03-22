@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Startmeny {
 	static boolean consoleLogging = true;
@@ -101,15 +102,7 @@ public class Startmeny {
 					break;
 				
 				case FILLESNING:
-					String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
-					try {
-						if (filnavn != "0") db.lesFraFil(filnavn);
-					}
-					catch (FileNotFoundException e) {
-						Console.clearScreen();
-						System.out.println("Denne filen eksisterer ikke");
-						this.brukerValg = MenyValg.FILLESNING;
-					}
+					fillesningMeny();
 					this.brukerValg = MenyValg.INIT;
 					break;
 			}
@@ -224,6 +217,25 @@ public class Startmeny {
 		System.out.println("Jeg driver med statistikk.");
 	}
 	private void filskrivingMeny(){
-		System.out.println("Jeg driver med filskriving.");
+		String filnavn = Console.getString("Skriv filnavn du vil skrive til, eller 0 for aa gaa tilbake.");
+		try {
+			if (filnavn != "0") db.skrivTilFil(filnavn);
+		}
+		catch (IOException e) {
+			Console.clearScreen();
+			System.out.println("Det er ikke mulig aa skrive til denne filen");
+			this.brukerValg = MenyValg.FILSKRIVING;
+		}
+	}
+	private void fillesningMeny() {
+		String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
+		try {
+			if (filnavn != "0") db.lesFraFil(filnavn);
+		}
+		catch (FileNotFoundException e) {
+			Console.clearScreen();
+			System.out.println("Denne filen eksisterer ikke");
+			this.brukerValg = MenyValg.FILLESNING;
+		}
 	}
 }
