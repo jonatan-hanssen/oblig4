@@ -356,21 +356,7 @@ class Database implements DatabaseInterface {
 	}
 
 	public void printAlt(){
-		for (Legemiddel lm: legemiddelListe) {
-			System.out.println(lm.toString());
-		}
-		System.out.println("---------------------------------------------------------");
-		for (Lege l: legeListe) {
-			System.out.println(l.toString());
-		}
-		System.out.println("---------------------------------------------------------");
-		for (Resept r: reseptListe) {
-			System.out.println(r.toString());
-		}
-		System.out.println("---------------------------------------------------------");
-		for (Pasient p: pasientListe) {
-			System.out.println(p.toString());
-		}
+
 	}
 
 	public int antallTypeResept(Class<?> cls){
@@ -541,9 +527,24 @@ class Database implements DatabaseInterface {
 	public Lenkeliste<Pasient> hentPasienter() {
 		return pasientListe;
 	}
-	public void printPasient(int detaljLevel) {};
-	public void printResept(int detaljLevel) {};
-	public void printLege(int detaljLevel) {};
-	public void printLegemiddel(int detaljLevel) {};
-
+	public void printPasient(int detaljLevel) {
+		for (Pasient p: pasientListe) {
+			System.out.println(p.toString());
+		}
+	}
+	public void printResept(int detaljLevel) {
+		for (Resept r: reseptListe) {
+			System.out.println(r.toString());
+		}
+	}
+	public void printLege(int detaljLevel) {
+		for (Lege l: legeListe) {
+			System.out.println(l.toString());
+		}
+	}
+	public void printLegemiddel(int detaljLevel) {
+		for (Legemiddel lm: legemiddelListe) {
+			System.out.println(lm.toString());
+		}
+	}
 }
