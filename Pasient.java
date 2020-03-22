@@ -35,7 +35,7 @@ class Pasient {
     }
 
     public String toString(){
-        return "\nPasient: " + navn + "(id: " + id + ")"
+        return "\nPasient: " + navn + " (id: " + id + ")"
             + "\nFoedselsnummer: " + fnr
             + "\nAntall resepter: " + resepter.stoerrelse();
     }
