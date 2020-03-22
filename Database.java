@@ -384,18 +384,18 @@ class Database implements DatabaseInterface {
 
 				if (type == "pasient" && r.hentReit()>0) {
 					if (personer.get(r.hentPasient().hentNavn()) == null) {
-						personer.put(r.hentPasient().hentNavn(),1);
+						personer.put(r.hentPasient().hentNavn(), 1);
 					}
 					else{
-						personer.put(r.hentPasient().hentNavn(),personer.get(r.hentPasient().hentNavn())+1);
+						personer.put(r.hentPasient().hentNavn(), personer.get(r.hentPasient().hentNavn())+1);
 					}
 				}
 				else{
 					if (personer.get(r.hentLege().hentNavn()) == null) {
-						personer.put(r.hentLege().hentNavn(),1);
+						personer.put(r.hentLege().hentNavn(), 1);
 					}
 					else{
-						personer.put(r.hentLege().hentNavn(),personer.get(r.hentLege().hentNavn())+1);
+						personer.put(r.hentLege().hentNavn(), personer.get(r.hentLege().hentNavn())+1);
 					}
 				}
 			}
@@ -548,7 +548,6 @@ class Database implements DatabaseInterface {
 		return pasientListe;
 	}
 	public void printPasient() {
-		System.out.println("Vi printer pasienter");
 		for (Pasient p: pasientListe) {
 			System.out.println(p.toString());
 		}
