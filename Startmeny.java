@@ -222,14 +222,38 @@ public class Startmeny {
 	private void reseptMeny(){
 		db.printPasient();
 		
-		int pasientId = Console.getInt("Bruk tallet til å velge pasienten du vil bruke reseptene til",(db.hentPasienter().stoerrelse()-1),-1);
-		
-		Pasient pasient = db.finnPasient(pasientId);
-		
-		for (Resept resept : pasient.hentResepter()) {
-			System.out.println(resept);
+		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
+									"eller skriv -1 for aa gaa tilbake",(db.hentPasienter().stoerrelse()-1),-2);
+		if (pasientId == -1) {
+			this.brukerValg = MenyValg.INIT;
 		}
+		else if (pasientId == -2) {
+			System.out.println("Denne pasienten finnes ikke");
+			this.brukerValg = MenyValg.BRUKERESEPT;
+		}
+		else {
+			Pasient pasient = db.finnPasient(pasientId);
 		
+			for (Resept resept : pasient.hentResepter()) {
+				System.out.println(resept);
+			}
+			int reseptId = -2;
+			while (reseptId == -2) {
+				reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller -1 for aa gaa tilbake",(pasient.hentResepter().stoerrelse()-1),-2);
+				if (reseptId == -1) {
+					this.brukerValg = MenyValg.BRUKERESEPT;
+				}
+				else if (reseptId == -2) {
+					System.out.println("Dette er ikke en gyldig id");
+				}
+				else {
+					Resept resept = db.finnResept(reseptId);
+					if (!resept.bruk()) {
+						System.out.println("Denne resepten er tom");
+						int reseptId = -2;
+					}
+				}
+		}
 	}
 	private void statistikkMeny(){
 		System.out.println("Jeg driver med statistikk.");

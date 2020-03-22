@@ -39,7 +39,7 @@ abstract class Legemiddel {
 		
 		string += "Legemiddel: " + navn + " (id: " + Integer.toString(id) + ")\n"
 				+ "  Pris: " + Double.toString(pris) + "\n"
-				+ "  Virkestoff: " + Double.toString(virkestoff)
+				+ "  Virkestoff: " + Double.toString(virkestoff);
 		
 		return string;
 	}
