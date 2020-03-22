@@ -148,19 +148,19 @@ public class Startmeny {
 				return;
 			case 1:
 				db.printPasient();
-				Console.getString("Trykk Enter for å fortsette.");
+				Console.getString("\n\nTrykk Enter for å fortsette.");
 				break;
 			case 2: 
 				db.printResept();
-				Console.getString("Trykk Enter for å fortsette.");
+				Console.getString("\n\nTrykk Enter for å fortsette.");
 				break;
 			case 3:
 				db.printLege();
-				Console.getString("Trykk Enter for å fortsette.");
+				Console.getString("\n\nTrykk Enter for å fortsette.");
 				break;
 			case 4:
 				db.printLegemiddel();
-				Console.getString("Trykk Enter for å fortsette.");
+				Console.getString("\n\nTrykk Enter for å fortsette.");
 				break;
 		}
 
