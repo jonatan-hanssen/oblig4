@@ -56,7 +56,7 @@ public class Console {
 		return getInt();
 	}
 
-	public static getInt(String s, int maxvalue, int fallback) {
+	public static int getInt(String s, int maxvalue, int fallback) {
 		System.out.println(s);
 		return getInt(maxvalue, fallback);
 	}
@@ -81,7 +81,7 @@ public class Console {
 		return getDouble();
 	}
 
-	public static getDouble(String s, double maxvalue, double fallback) {
+	public static double getDouble(String s, double maxvalue, double fallback) {
 		System.out.println(s);
 		return getDouble(maxvalue, fallback);
 	}
