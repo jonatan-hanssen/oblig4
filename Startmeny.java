@@ -192,17 +192,45 @@ public class Startmeny {
 				break;
 			case 2: 
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
-				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
-				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
-				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
-				int reit = Console.getInt("Hva er reiten for resepten?");
+				if (db.finnLege(utskrivendeLegenavn) == null){
+					System.out.println(donaldDuckStr);
+					break;
+				}
 
-				db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
+				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
+				if (db.finnLegemiddel(legemiddelId) == null) {
+					System.out.println(donaldDuckStr);
+					break;
+				}
+
+				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
+				if (db.finnPasient(pasientId) == null) {
+					System.out.println(donaldDuckStr);
+					break;
+				}
+
+				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
+				if (type != "p" && type != "militær" && type != "militaer" && type != "blå" && type != "blaa" && type != "hvit") {
+					System.out.println(donaldDuckStr);
+					//throw new TypeNotFoundException();
+				}
+
+				if (type != "p" && type != "presept"){
+					int reit = Console.getInt("Hva er reiten for resepten?");
+					db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
+				} else {
+					db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
+				}
 
 				break;
 			case 3:
 				String legenavn = Console.getString("Hva skal legen hete?");
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
+
+				if (kontrollid  < 0) {
+					System.out.println(donaldDuckStr);
+					break;
+				}
 				db.lagLege(legenavn, kontrollid);
 
 				break;
@@ -212,7 +240,14 @@ public class Startmeny {
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+
+				if (egemiddelType != "vanlig" && legemiddelType == "narkotisk" && legemiddelType == "vanedannende") {
+					System.out.println(donaldDuckStr);
+					break;
+				}
+
 				db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
+
 
 				break;
 		}
