@@ -130,7 +130,7 @@ public class Startmeny {
 		);
 		int printeValg = -1;
 		do {
-			printeValg = Console.getInt(3, -1);
+			printeValg = Console.getInt(5, -1);
 			if (printeValg == -1) System.out.println(donaldDuckStr);
 		} while (printeValg == -1);		
 
