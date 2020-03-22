@@ -220,7 +220,8 @@ public class Startmeny {
 
 	}
 	private void reseptMeny(){
-		System.out.println("Jeg driver med resept.");
+		db.printPasient();
+		System.out.println("Skriv id-en paa pasienten du vil bruke reseptene til");
 	}
 	private void statistikkMeny(){
 		System.out.println("Jeg driver med statistikk.");
