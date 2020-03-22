@@ -47,7 +47,7 @@ class Database implements DatabaseInterface {
 
 			//dersom vi kommer til en # vet vi at vi maa hoppe over linjen
 			//og at vi maa bytte til neste liste
-			if (naavaerendeLinje.contains("#")) {
+			if (naavaerendeLinje.contains("#") && scanner.hasNextLine()) {
 				naavaerendeLinje = scanner.nextLine(); scannerPos++;
 				listeIndeks++;
 			}
