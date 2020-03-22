@@ -148,19 +148,19 @@ public class Startmeny {
 				return;
 			case 1:
 				db.printPasient();
-				Console.getString("\n\nFerdig med å printe, trykk på enter \nfor å gå tilbake til startmenyen");
+				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
 				break;
 			case 2: 
 				db.printResept();
-				Console.getString("\n\nFerdig med å printe, trykk på enter \nfor å gå tilbake til startmenyen");
+				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
 				break;
 			case 3:
 				db.printLege();
-				Console.getString("\n\nFerdig med å printe, trykk på enter \nfor å gå tilbake til startmenyen");
+				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
 				break;
 			case 4:
 				db.printLegemiddel();
-				Console.getString("\n\nFerdig med å printe, trykk på enter \nfor å gå tilbake til startmenyen");
+				Console.getString("\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen");
 				break;
 		}
 
