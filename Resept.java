@@ -59,7 +59,7 @@ abstract class Resept {
 				+ "  Info om legemiddelet:\n" + legemiddel.hentNavn() + "\n"
 				+ "    Utskrivende lege: \n" + utskrivendeLege.hentNavn() + "\n"
 				+ "    Pasient: " + pasient.hentNavn() + "\n"
-				+ "    Reit: " + Integer.toString(reit) 
+				+ "    Reit: " + Integer.toString(reit);
 
 		return string;
 	}
