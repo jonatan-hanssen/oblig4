@@ -210,18 +210,16 @@ public class Startmeny {
 				}
 
 				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
-				if (reseptType != "p" && reseptType != "militær" && reseptType != "militaer" && reseptType != "blå" && reseptType != "blaa" && reseptType != "hvit") {
-					System.out.println(donaldDuckStr);
-					//throw new TypeNotFoundException();
+				try {
+					if (reseptType != "p" && reseptType != "presept"){
+						int reit = Console.getInt("Hva er reiten for resepten?");
+						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
+					} else {
+						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
+					}
+				} catch (TypeNotFoundException e) {
+					System.out.println(donaldDuckStr)
 				}
-
-				if (reseptType != "p" && reseptType != "presept"){
-					int reit = Console.getInt("Hva er reiten for resepten?");
-					db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
-				} else {
-					db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
-				}
-
 				break;
 			case 3:
 				String legenavn = Console.getString("Hva skal legen hete?");
