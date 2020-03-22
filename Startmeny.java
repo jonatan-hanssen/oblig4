@@ -148,12 +148,16 @@ public class Startmeny {
 				return;
 			case 1:
 				db.printPasient();
+				break;
 			case 2: 
 				db.printResept();
+				break;
 			case 3:
 				db.printLege();
+				break;
 			case 4:
 				db.printLegemiddel();
+				break;
 		}
 
 	}
