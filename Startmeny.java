@@ -125,7 +125,7 @@ public class Startmeny {
 						 "2. Resepter\n" + 
 						 "3. Leger\n" + 
 						 "4. Legemidler\n" +
-						 "5. ALT!!!\n"
+						 "5. ALT!!!\n" +
 						 "0. Jeg angrer!\n"
 		);
 		int printeValg = -1;
