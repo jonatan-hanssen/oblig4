@@ -133,13 +133,15 @@ public class Startmeny {
 			if (printeValg == -1) System.out.println(donaldDuckStr);
 		} while (printeValg == -1);		
 
-		System.out.println("Hvor detaljert vil du printe? (0-2)");
+		
+		/*System.out.println("Hvor detaljert vil du printe? (0-2)");
 
 		int detaljLevel = -1;
 		do {
 			detaljLevel = Console.getInt(2, -1);
 			if (detaljLevel == -1) System.out.println(donaldDuckStr);
 		} while (detaljLevel == -1);
+		*/
 
 		switch (printeValg) {
 			case 0:
