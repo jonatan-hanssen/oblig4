@@ -285,9 +285,10 @@ public class Startmeny {
 					Resept resept = db.finnResept(reseptId);
 					if (!resept.bruk()) {
 						System.out.println("Denne resepten er tom");
-						int reseptId = -2;
+						reseptId = -2;
 					}
 				}
+			}
 		}
 	}
 	private void statistikkMeny(){

@@ -435,6 +435,15 @@ class Database implements DatabaseInterface {
 		}
 		return null;
 	}
+	
+	public Resept finnResept(int id) {
+		for (Resept resept : reseptListe) {
+			if (resept.hentId() == id) {
+				return resept;
+			}
+		}
+		return null;
+	}
 
 	public Resept lagResept(String legenavn, int legemiddelId, int pasientId, int reit, String type){
 		Lege lege = finnLege(legenavn);
