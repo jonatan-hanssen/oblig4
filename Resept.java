@@ -7,7 +7,7 @@ abstract class Resept {
 	protected Pasient pasient;
 	protected double pris;
 
-	static String type = "";
+	String type = "";
 
 	public Resept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient, int reit) {
 		this.id = amountOfSelfCreated;
@@ -55,7 +55,7 @@ abstract class Resept {
 		String string = "";
 
 		string += "Resept med id " + id + "\n" 
-				+ "  Type: " + type + "\n"
+				+ "  Type: " + this.type + "\n"
 				+ "  Legemiddel: " + legemiddel.hentNavn() + "\n"
 				+ "  Utskrivende lege: " + utskrivendeLege.hentNavn() + "\n"
 				+ "  Pasient: " + pasient.hentNavn() + "\n"

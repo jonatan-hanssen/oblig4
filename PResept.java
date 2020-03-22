@@ -1,8 +1,7 @@
 class PResept extends Hvit {
-	static String type = "p-resept";
 	public PResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient) {
 		super(legemiddel, utskrivendeLege, pasient, 3);
-
+		this.type = "p-resept";
 		if (legemiddel.hentPris() <= 108) {
 			pris = 0;
 		}
