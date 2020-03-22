@@ -218,7 +218,7 @@ public class Startmeny {
 						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
 					}
 				} catch (TypeNotFoundException e) {
-					System.out.println(donaldDuckStr)
+					System.out.println(donaldDuckStr);
 				}
 				break;
 			case 3:
