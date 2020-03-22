@@ -31,13 +31,11 @@ class Pasient {
 	}
 
     public String hentNavn(){
-        return navn;
+		return navn;
     }
 
     public String toString(){
-        return "Pasient: " + navn + " (id: " + id + ")"
-            + "  Foedselsnummer: " + fnr
-            + "  Antall resepter: " + resepter.stoerrelse();
+        return id + ": Pasient: " + navn + "(" + fnr + ")";
     }
 
 }

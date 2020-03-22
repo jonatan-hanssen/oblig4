@@ -221,7 +221,15 @@ public class Startmeny {
 	}
 	private void reseptMeny(){
 		db.printPasient();
-		System.out.println("Skriv id-en paa pasienten du vil bruke reseptene til");
+		
+		int pasientId = Console.getInt("Bruk tallet til å velge pasienten du vil bruke reseptene til",(db.hentPasienter().stoerrelse()-1),-1);
+		
+		Pasient pasient = db.finnPasient(pasientId);
+		
+		for (Resept resept : pasient.hentResepter()) {
+			System.out.println(resept);
+		}
+		
 	}
 	private void statistikkMeny(){
 		System.out.println("Jeg driver med statistikk.");
