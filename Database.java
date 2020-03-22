@@ -495,6 +495,9 @@ class Database implements DatabaseInterface {
 				System.out.println("Vanlig lege kan ikke skrive ut resept på narkotiske midler");
 			}
 		}
+		else {
+			throw new Exception("Ikke gyldig resept");
+		}
 		return resept;
 	}
 
