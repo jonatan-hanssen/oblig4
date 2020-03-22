@@ -450,7 +450,7 @@ class Database implements DatabaseInterface {
 		Lege lege = finnLege(legenavn);
 		Legemiddel legemiddel = finnLegemiddel(legemiddelId);
 		Pasient pasient = finnPasient(pasientId);
-		lagResept(lege, legemiddel, pasient, reit, type);
+		return lagResept(lege, legemiddel, pasient, reit, type);
 	}
 
 	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
