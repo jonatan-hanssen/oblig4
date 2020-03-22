@@ -463,8 +463,8 @@ class Database implements DatabaseInterface {
 			System.out.println("Resepten maa ha et heltall stoerre enn 0 reit, eller vaere p-resept");
 			gyldig = false;
 		}
-		if (type != "p" && type != "militaer" && type != "militaer" && type != "blaa" && type != "blaa" && type != "hvit") {
-			System.out.println("Militaer, hvit, blaa eller p ble ikke oppgitt som type");
+		if (type != "p" && type != "militær" && type != "militaer" && type != "blå" && type != "blaa" && type != "hvit") {
+			throw new TypeNotFoundException();
 			gyldig = false;
 		}
 
@@ -517,7 +517,7 @@ class Database implements DatabaseInterface {
 			legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
 		} else if (type == "vanedannende") {
 			legemiddel = new Vanedannende(navn, pris, virkestoff, styrke);
-		} else {
+		} else if (type == "vanlig") {
 			legemiddel = new Vanlig(navn, pris, virkestoff);
 		}
 		legemiddelListe.leggTil(legemiddel);
