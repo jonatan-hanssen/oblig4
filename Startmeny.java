@@ -297,7 +297,7 @@ public class Startmeny {
 	private void filskrivingMeny(){
 		String filnavn = Console.getString("Skriv filnavn du vil skrive til, eller 0 for aa gaa tilbake.");
 		try {
-			if (filnavn != "0") db.skrivTilFil(filnavn);
+			if (!filnavn.equals("0")) db.skrivTilFil(filnavn);
 		}
 		catch (IOException e) {
 			Console.clearScreen();
