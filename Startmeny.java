@@ -211,7 +211,7 @@ public class Startmeny {
 				double pris = Console.getDouble("Hva koster legemiddelet?");
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
-				int type = Console.getString("Av hvilken type er legemiddelet?")
+				int type = Console.getString("Av hvilken type er legemiddelet?");
 				db.lagLegemiddel(navn, pris, virkestoff, styrke, type);
 
 				break;
