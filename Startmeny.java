@@ -147,16 +147,12 @@ public class Startmeny {
 			case 0:
 				return;
 			case 1:
-				System.out.println("En kul pasient er kul men har ikke kur.");
 				db.printPasient();
 			case 2: 
-				System.out.println("En kul resept er kul.");
 				db.printResept();
 			case 3:
-				System.out.println("En kul lege er gul.");
 				db.printLege();
 			case 4:
-				System.out.println("Et kult legemiddel er gull.");
 				db.printLegemiddel();
 		}
 
