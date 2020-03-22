@@ -37,12 +37,9 @@ abstract class Legemiddel {
 	public String toString() {
 		String string = "";
 		
-		string += "Dette er et legemiddel \n"
-				+ "Navn: " + navn
-				+ "\nPris: " + Double.toString(pris)
-				+ "\nVirkestoff: " + Double.toString(virkestoff)
-				+ "\nID: " + Integer.toString(id)
-				+ "\n";
+		string += "Legemiddel: " + navn + " (id: " + Integer.toString(id) + ")\n"
+				+ "  Pris: " + Double.toString(pris) + "\n"
+				+ "  Virkestoff: " + Double.toString(virkestoff)
 		
 		return string;
 	}
