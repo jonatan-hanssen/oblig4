@@ -191,28 +191,28 @@ public class Startmeny {
 				
 				break;
 			case 2: 
-				String legenavn = Console.getString("Hva heter legen som skriver ut resepten");
+				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
 				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
 				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
-				String type = Console.getString("Hvilken type resept oensker du aa opprette?");
-				String reit = Console.getInt("Hva er reiten for resepten?");
+				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
+				int reit = Console.getInt("Hva er reiten for resepten?");
 
-				db.lagResept(legenavn, legemiddelId, pasientId, reit, type);
+				db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
 
 				break;
 			case 3:
-				String navn = Console.getString("Hva skal legen hete?");
+				String legenavn = Console.getString("Hva skal legen hete?");
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
-				db.lagLege(navn, kontrollid);
+				db.lagLege(legenavn, kontrollid);
 
 				break;
 			case 4:
-				String navn = Console.getString("Hva heter legemiddelet?");
+				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
 				double pris = Console.getDouble("Hva koster legemiddelet?");
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
-				int type = Console.getString("Av hvilken type er legemiddelet?");
-				db.lagLegemiddel(navn, pris, virkestoff, styrke, type);
+				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+				db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
 
 				break;
 		}
