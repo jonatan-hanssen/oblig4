@@ -51,6 +51,41 @@ public class Console {
 		return getInt(Integer.MAX_VALUE, -1);
 	}
 
+	public static int getInt(String s) {
+		System.out.println(s);
+		return getInt();
+	}
+
+	public static getInt(String s, int maxvalue, int fallback) {
+		System.out.println(s);
+		return getInt(maxvalue, fallback);
+	}
+
+	public static double getDouble(double maxvalue, double fallback) {
+		Scanner scanner = new Scanner(System.in);
+		
+		if (scanner.hasNextInt()){
+			double value = scanner.nextInt();
+			return (value <= maxvalue) ? value : fallback;
+		} else {
+			return fallback;
+		}
+	}
+
+	public static double getDouble() {
+		return getDouble(Double.MAX_VALUE, -1);
+	}
+
+	public static double getDouble(String s) {
+		System.out.print(s);
+		return getDouble();
+	}
+
+	public static getDouble(String s, double maxvalue, double fallback) {
+		System.out.println(s);
+		return getDouble(maxvalue, fallback);
+	}
+
 	public static char getChar() {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.next().charAt(0);
