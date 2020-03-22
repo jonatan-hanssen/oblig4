@@ -530,22 +530,22 @@ class Database implements DatabaseInterface {
 	public Lenkeliste<Pasient> hentPasienter() {
 		return pasientListe;
 	}
-	public void printPasient(int detaljLevel) {
+	public void printPasient() {
 		for (Pasient p: pasientListe) {
 			System.out.println(p.toString());
 		}
 	}
-	public void printResept(int detaljLevel) {
+	public void printResept() {
 		for (Resept r: reseptListe) {
 			System.out.println(r.toString());
 		}
 	}
-	public void printLege(int detaljLevel) {
+	public void printLege() {
 		for (Lege l: legeListe) {
 			System.out.println(l.toString());
 		}
 	}
-	public void printLegemiddel(int detaljLevel) {
+	public void printLegemiddel() {
 		for (Legemiddel lm: legemiddelListe) {
 			System.out.println(lm.toString());
 		}

@@ -14,10 +14,10 @@ interface DatabaseInterface {
 	public Pasient lagPasient(String navn, String fnr);
 	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type);
 
-	public void printPasient(int detaljLevel);
-	public void printResept(int detaljLevel);
-	public void printLege(int detaljLevel);
-	public void printLegemiddel(int detaljLevel);
+	public void printPasient();
+	public void printResept();
+	public void printLege();
+	public void printLegemiddel();
 
 	public SortertLenkeliste<Lege> hentLeger();
 	public Lenkeliste<Legemiddel> hentLegemidler();
