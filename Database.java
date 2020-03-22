@@ -498,34 +498,6 @@ class Database implements DatabaseInterface {
 		return resept;
 	}
 
-	public Lege finnLege(String legenavn) {
-		for (Lege l: legeListe) {
-			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
-				return l;
-			}
-		}
-		return null;
-	}
-
-	public Legemiddel finnLegemiddel(int id) {
-		Legemiddel legemiddel = null;
-		for (Legemiddel lm : legemiddelListe) {
-			if (id == lm.hentId()) {
-				legemiddel = lm;
-			}
-		}
-		return null;
-	}
-
-	public Pasient finnPasient(int id) {
-		for (Pasient p : pasientListe) {
-			if (p.hentId() == id) {
-				return p;
-			}
-		}
-		return null;
-	}
-
 	public void lagLege(String navn, int kontrollid){
 		Lege l;
 		if (kontrollid != 0) {
