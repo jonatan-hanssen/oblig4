@@ -442,7 +442,7 @@ class Database implements DatabaseInterface {
 		return lagResept(lege, legemiddel, pasient, reit, type);
 	}
 
-	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type){
+	public Resept lagResept(Lege lege, Legemiddel legemiddel, Pasient pasient, int reit, String type) {
 		type = type.toLowerCase();
 
 		Boolean gyldig = true;
@@ -485,7 +485,9 @@ class Database implements DatabaseInterface {
 			}
 		}
 		else {
-			throw new Exception("Ikke gyldig resept");
+			//throw new Exception("Ikke gyldig resept");
+			System.out.println("Ugyldig");
+			return null;
 		}
 		return resept;
 	}
