@@ -240,6 +240,12 @@ public class Startmeny {
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+
+				if (egemiddelType != "vanlig" && legemiddelType == "narkotisk" && legemiddelType == "vanedannende") {
+					System.out.println(donaldDuckStr);
+					break;
+				}
+
 				db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
 
 
