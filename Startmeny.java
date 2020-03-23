@@ -41,7 +41,7 @@ public class Startmeny implements StartmenyInterface {
 		this.start();
 	}
 
-	public start() {
+	private void start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
 			/*
 			*	if last selection was to show main menu, don't ask the user for a value
