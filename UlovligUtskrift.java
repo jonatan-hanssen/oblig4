@@ -1,4 +1,4 @@
-package oblig4;
+
 
 public class UlovligUtskrift extends Exception {
     public UlovligUtskrift(Lege lege, Legemiddel legemiddel, int pasientID) {

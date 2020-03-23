@@ -1,4 +1,4 @@
-package oblig4;
+
 
 abstract class Resept {
 	static protected int amountOfSelfCreated = 0;

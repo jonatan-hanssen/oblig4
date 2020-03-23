@@ -1,4 +1,4 @@
-package oblig4;
+
 
 class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
 	

@@ -1,4 +1,4 @@
-package oblig4;
+
 
 class Vanedannende extends Legemiddel {
 	private int vanedannendeStyrke;

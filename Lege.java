@@ -1,4 +1,4 @@
-package oblig4;
+
 
 class Lege implements Comparable<Lege>{
 	protected String navn; // i was here

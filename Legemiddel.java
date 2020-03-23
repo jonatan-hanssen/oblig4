@@ -1,4 +1,4 @@
-package oblig4;
+
 
 public abstract class Legemiddel {
 	static protected int amountOfSelfCreated = 0;

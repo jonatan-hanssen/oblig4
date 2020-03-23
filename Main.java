@@ -1,4 +1,4 @@
-package oblig4;
+
 
 import java.io.FileNotFoundException;
 
