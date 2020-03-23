@@ -93,7 +93,7 @@ public class Startmeny {
 					break;
 
 				case INIT:
-					//Console.clearScreen();
+					Console.clearScreen();
 					System.out.print(velkommenStr + menyEntriesStr);
 					velkommenStr = "Hovedmeny: \n";
 					System.out.println(tutorial);
