@@ -363,7 +363,7 @@ class Database implements DatabaseInterface {
 		printLegemiddel();
 	}
 
-	public int tellResepterAvType(Class<T> legemiddelSubclass){
+	public int tellResepterAvType(Class<?> legemiddelSubclass){
 		int ant = 0;
 		for (Resept r: reseptListe) {
 			if (legemiddelSubclass.isInstance(r.hentLegemiddel())){
@@ -373,12 +373,12 @@ class Database implements DatabaseInterface {
 		return ant;
 	}
 	
-	public void printResepterAvType(Class<T> legemiddelSubclass) {
+	public void printResepterAvType(Class<?> legemiddelSubclass) {
 		System.out.println("Antall resepter:");
 		System.out.println(tellResepterAvType(legemiddelSubclass));
 	}
 
-	public HashMap<String, Integer> tellMisbruk(Class<T> legemiddelSubclass, String personType){
+	public HashMap<String, Integer> tellMisbruk(Class<?> legemiddelSubclass, String personType){
 		HashMap<String, Integer> personer = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
 			if (legemiddelSubclass.isInstance(r.hentLegemiddel())) {
@@ -403,7 +403,7 @@ class Database implements DatabaseInterface {
 		}
 		return personer;
 	}
-	public void printPersonMedMisbruk(Class<T> legemiddelSubclass, String personType) {
+	public void printPersonMedMisbruk(Class<?> legemiddelSubclass, String personType) { // T instead of ? results in "cannot find symbol Class<T>"
 		System.out.println("Her er misbruket");
 		HashMap<String, Integer> personer = tellMisbruk(legemiddelSubclass, personType);
 		for (String person : personer.keySet()) {
