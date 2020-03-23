@@ -292,7 +292,57 @@ public class Startmeny {
 		}
 	}
 	private void statistikkMeny(){
-		System.out.println("Jeg driver med statistikk.");
+		Console.clearScreen();
+
+		System.out.print("Hva vil du printe?\n" + 
+						 "1. Pasienter\n" + 
+						 "2. Resepter\n" + 
+						 "3. Leger\n" + 
+						 "4. Legemidler\n" +
+						 "5. ALT!!!\n" +
+						 "0. Jeg angrer!\n"
+		);
+		int printeValg = -1;
+		do {
+			printeValg = Console.getInt(5, -1);
+			if (printeValg == -1) System.out.println(donaldDuckStr);
+		} while (printeValg == -1);		
+
+		
+		/*System.out.println("Hvor detaljert vil du printe? (0-2)");
+
+		int detaljLevel = -1;
+		do {
+			detaljLevel = Console.getInt(2, -1);
+			if (detaljLevel == -1) System.out.println(donaldDuckStr);
+		} while (detaljLevel == -1);
+		*/
+		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
+
+		switch (printeValg) {
+			case 0:
+				return;
+			case 1:
+				db.printPasient();
+				Console.getString(pressEnterString);
+				break;
+			case 2: 
+				db.printResept();
+				Console.getString(pressEnterString);
+				break;
+			case 3:
+				db.printLege();
+				Console.getString(pressEnterString);
+				break;
+			case 4:
+				db.printLegemiddel();
+				Console.getString(pressEnterString);
+				break;
+			case 5:
+				db.printAlt();
+				Console.getString(pressEnterString);
+				break;
+		}
 	}
 	private void filskrivingMeny(){
 		String filnavn = Console.getString("Skriv filnavn du vil skrive til, eller 0 for aa gaa tilbake.");
