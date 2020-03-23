@@ -1,3 +1,5 @@
+package oblig4;
+
 class Vanedannende extends Legemiddel {
 	private int vanedannendeStyrke;
 	public Vanedannende(String navn, double pris, double virkestoff, int vanedannendeStyrke) {

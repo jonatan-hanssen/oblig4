@@ -1,3 +1,5 @@
+package oblig4;
+
 //exceptions
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,3 +1,5 @@
+package oblig4;
+
 class PResept extends Hvit {
 	public PResept(Legemiddel legemiddel, Lege utskrivendeLege, Pasient pasient) {
 		super(legemiddel, utskrivendeLege, pasient, 3);

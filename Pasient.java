@@ -1,3 +1,5 @@
+package oblig4;
+
 class Pasient {
     private String navn;
     private String fnr;

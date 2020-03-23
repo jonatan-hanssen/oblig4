@@ -1,4 +1,6 @@
-abstract class Legemiddel {
+package oblig4;
+
+public abstract class Legemiddel {
 	static protected int amountOfSelfCreated = 0;
 	protected int id;
 	protected String navn;
