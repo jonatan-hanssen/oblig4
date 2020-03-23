@@ -415,7 +415,7 @@ class Database implements DatabaseInterface {
 
 	public Lege finnLege(String legenavn) {
 		for (Lege l : legeListe) {
-			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
+			if (l.hentNavn().toLowerCase().equals(legenavn.toLowerCase())) {
 				return l;
 			}
 		}
