@@ -42,14 +42,7 @@ class Spesialist extends Lege implements Godkjenningsfritak {
 	
 	@Override
 	public String toString() {
-		String string = "";
-		
-		string += "Dette er en spesialist \n"
-				+ "Navn: " + navn
-				+ "\nKontroll-ID: " + Integer.toString(kontrollID)
-				+ "\n";
-		
-		return string;
+		return "Sp. Doc. " + navn + " (Kontroll-ID: " + kontrollID + ")";
 	}
 	
 }

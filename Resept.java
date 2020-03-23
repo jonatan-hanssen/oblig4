@@ -54,8 +54,7 @@ abstract class Resept {
 	public String toString() {
 		String string = "";
 
-		string += id + ": "+ type
-				+ "  Type: " + this.type + "\n"
+		string += id + ": " + type + "\n"
 				+ "  Legemiddel: " + legemiddel.hentNavn() + "\n"
 				+ "  Utskrivende lege: " + utskrivendeLege.hentNavn() + "\n"
 				+ "  Pasient: " + pasient.hentNavn() + "\n"

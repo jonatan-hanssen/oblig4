@@ -51,12 +51,6 @@ class Lege implements Comparable<Lege>{
 
 	@Override
 	public String toString() {
-		String string = "";
-
-		string += "Dette er en lege \n"
-				+ "Navn: " + navn
-				+ "\n";
-
-		return string;
+		return "Dr. " + navn;
 	}
 }
