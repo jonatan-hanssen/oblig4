@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Startmeny {
-	static boolean consoleLogging = true;
+	static boolean consoleLogging = false;
 
 	static String velkommenStr = "Velkommen til Legesystemet!\n";
 	static String tutorial = "Velg ett av de mulige menyelementene med tallet.";
@@ -12,9 +12,9 @@ public class Startmeny {
 							"4. Jeg vil se statistikk.\n" +
 							"5. Jeg vil skrive til fil.\n" +
 							"6. Jeg vil skrive til databasen fra fil\n" +
-							"0. Jeg vil doe.\n";
+							"0. Jeg vil ut (exit).\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
-	static String donaldDuckStr = "Oopsie! Det smakte daarlig.";
+	static String donaldDuckStr = "Oopsie! Det var visst ugyldig.";
 
 	private Database db;
 
