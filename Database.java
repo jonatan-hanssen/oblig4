@@ -405,14 +405,14 @@ class Database implements DatabaseInterface {
 	}
 	public void printPersonMedMisbruk(Class<?> legemiddelSubclass, String personType) { // T instead of ? results in "cannot find symbol Class<T>"
 		System.out.println("Her er misbruket");
-		HashMap<String, Integer> personer = tellMisbruk(legemiddelSubclass, personType);
+		TreeMap<String, Integer> personer = new TreeMap<String,Integer>(tellMisbruk(legemiddelSubclass, personType));
 		for (String person : personer.keySet()) {
 			System.out.println(person + ": " + personer.get(person));
 		}
 	}
 
 	public Lege finnLege(String legenavn) {
-		for (Lege l: legeListe) {
+		for (Lege l : legeListe) {
 			if (l.hentNavn().toLowerCase() == legenavn.toLowerCase()) {
 				return l;
 			}
