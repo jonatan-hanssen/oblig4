@@ -115,9 +115,9 @@ public class Startmeny {
 
 		System.out.print("Hva vil du printe?\n" + 
 						 "1. Pasienter\n" + 
-						 "2. Resepter\n" + 
 						 "3. Leger\n" + 
 						 "4. Legemidler\n" +
+						 "2. Resepter\n" + 
 						 "5. ALT!!!\n" +
 						 "0. Jeg angrer!\n"
 		);
@@ -145,17 +145,17 @@ public class Startmeny {
 				db.printPasient();
 				Console.getString(pressEnterString);
 				break;
-			case 2: 
-				db.printResept();
-				Console.getString(pressEnterString);
-				break;
-			case 3:
+			case 2:
 				db.printLege();
 				Console.getString(pressEnterString);
 				break;
-			case 4:
+			case 3:
 				db.printLegemiddel();
 				Console.getString(pressEnterString);
+			case 4: 
+				db.printResept();
+				Console.getString(pressEnterString);
+				break;
 				break;
 			case 5:
 				db.printAlt();
@@ -169,9 +169,9 @@ public class Startmeny {
 
 		System.out.print("Hva vil du oprette?\n" + 
 						 "1. Pasient\n" + 
-						 "2. Resept\n" + 
-						 "3. Lege\n" + 
-						 "4. Legemiddel\n" +
+						 "2. Lege\n" + 
+						 "3. Legemiddel\n" +
+						 "4. Resept\n" + 
 						 "0. Jeg angrer!\n"
 		);
 		int opretteValg = -1;
@@ -190,7 +190,33 @@ public class Startmeny {
 				db.lagPasient(navn, personnr);
 				
 				break;
-			case 2: 
+			case 2:
+				String legenavn = Console.getString("Hva skal legen hete?");
+				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
+
+				if (kontrollid  < 0) {
+					System.out.println(donaldDuckStr);
+					break;
+				}
+				db.lagLege(legenavn, kontrollid);
+
+				break;
+			case 3:
+				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
+				double pris = Console.getDouble("Hva koster legemiddelet?");
+				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
+				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
+				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+
+				try {
+					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
+				} catch (TypeNotFoundException e) {
+					System.out.println(donaldDuckStr);
+				}
+
+
+				break;
+			case 4: 
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
 				if (db.finnLege(utskrivendeLegenavn) == null){
 					System.out.println(donaldDuckStr);
@@ -220,32 +246,6 @@ public class Startmeny {
 				} catch (TypeNotFoundException e) {
 					System.out.println(donaldDuckStr);
 				}
-				break;
-			case 3:
-				String legenavn = Console.getString("Hva skal legen hete?");
-				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
-
-				if (kontrollid  < 0) {
-					System.out.println(donaldDuckStr);
-					break;
-				}
-				db.lagLege(legenavn, kontrollid);
-
-				break;
-			case 4:
-				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
-				double pris = Console.getDouble("Hva koster legemiddelet?");
-				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
-				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
-				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
-
-				try {
-					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
-				} catch (TypeNotFoundException e) {
-					System.out.println(donaldDuckStr);
-				}
-
-
 				break;
 		}
 		Console.getString("Trykk Enter for å fortsette.");
