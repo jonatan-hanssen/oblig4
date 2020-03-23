@@ -1,4 +1,4 @@
-package oblig4;
+
 
 class Spesialist extends Lege implements Godkjenningsfritak {
 	private int kontrollID;

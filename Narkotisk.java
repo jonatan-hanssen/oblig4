@@ -1,4 +1,4 @@
-package oblig4;
+
 
 class Narkotisk extends Legemiddel {
 	private int narkotiskStyrke;
