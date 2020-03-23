@@ -374,6 +374,7 @@ class Database implements DatabaseInterface {
 	}
 	
 	public void printResepterAvType(Class<T> legemiddelSubclass) {
+		System.out.println("Antall resepter:");
 		System.out.println(tellResepterAvType(legemiddelSubclass));
 	}
 
@@ -403,6 +404,7 @@ class Database implements DatabaseInterface {
 		return personer;
 	}
 	public void printPersonMedMisbruk(Class<T> legemiddelSubclass, String personType) {
+		System.out.println("Her er misbruket");
 		HashMap<String, Integer> personer = tellMisbruk(legemiddelSubclass, personType);
 		for (String person : personer.keySet()) {
 			System.out.println(person + ": " + personer.get(person));
