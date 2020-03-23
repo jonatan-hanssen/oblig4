@@ -313,17 +313,16 @@ public class Startmeny {
 			case 0:
 				return;
 			case 1:
-				
+				db.printAntallTypeResept(Narkotisk.class);
 				break;
-			case 2: 
-				
+			case 2:
+				db.printAntallTypeResept(Vanedannende.class);
 				break;
 			case 3:
-				;
-				
+				db.printTypeMisbruk(db.antall.class, "lege");	
 				break;
 			case 4:
-				
+				db.printTypeMisbruk(Narkotisk.class, "pasient");
 				break;
 		}
 	}

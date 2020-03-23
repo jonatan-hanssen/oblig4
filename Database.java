@@ -402,11 +402,11 @@ class Database implements DatabaseInterface {
 		}
 		return personer;
 	}
-	public void printPersonMedMisbruk(HashMap<String,Integer> liste) {
-		for (String person : liste.keySet()) {
+	public void printPersonMedMisbruk(Class<?> cls, String type) {
+		HashMap<String, Integer> personer = tellMisbruk(cls, type);
+		for (String person : personer.keySet()) {
 			System.out.println(person + ": " + liste.get(person));
 		}
-		
 	}
 
 	public Lege finnLege(String legenavn) {
