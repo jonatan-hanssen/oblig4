@@ -314,15 +314,19 @@ public class Startmeny {
 				return;
 			case 1:
 				db.printResepterAvType(Narkotisk.class);
+				Console.getString(pressEnterString);
 				break;
 			case 2:
 				db.printResepterAvType(Vanedannende.class);
+				Console.getString(pressEnterString);
 				break;
 			case 3:
-				db.printPersonMedMisbruk(Vanedannende.class, "lege");	
+				db.printPersonMedMisbruk(Vanedannende.class, "lege");
+				Console.getString(pressEnterString);
 				break;
 			case 4:
 				db.printPersonMedMisbruk(Narkotisk.class, "pasient");
+				Console.getString(pressEnterString);
 				break;
 		}
 	}
