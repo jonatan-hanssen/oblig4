@@ -152,10 +152,10 @@ public class Startmeny {
 			case 3:
 				db.printLegemiddel();
 				Console.getString(pressEnterString);
+				break;
 			case 4: 
 				db.printResept();
 				Console.getString(pressEnterString);
-				break;
 				break;
 			case 5:
 				db.printAlt();
