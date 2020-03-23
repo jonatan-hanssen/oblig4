@@ -1,5 +1,5 @@
 
 interface StartmenyInterface {
-	public Startmeny(Database db);
-	public Startmeny();
+	public void Startmeny(Database db);
+	public void Startmeny();
 }

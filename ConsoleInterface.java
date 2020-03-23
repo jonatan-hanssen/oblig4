@@ -1,7 +1,5 @@
 
 public interface ConsoleInterface {
-	public static void main(String[] args) throws Exception;
-
 	public static int getInt(int maxvalue, int fallback);
 	public static int getInt();
 	public static int getInt(String s);
