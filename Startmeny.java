@@ -297,7 +297,7 @@ public class Startmeny {
 						}
 					}
 					else {
-						System.out.println("Denne pasienten har ikke en resept med id " + pasientId + ".");
+						System.out.println("Denne pasienten har ikke en resept med id " + reseptId + ".");
 						reseptId = -2;
 					}
 				}
