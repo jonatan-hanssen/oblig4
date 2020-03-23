@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 
-
 class Database implements DatabaseInterface {
 	public Lenkeliste<Pasient> pasientListe = new Lenkeliste<Pasient>();//nr 0
 	public Lenkeliste<Legemiddel> legemiddelListe = new Lenkeliste<Legemiddel>();//nr 1
@@ -27,8 +26,8 @@ class Database implements DatabaseInterface {
 	public Lenkeliste<Resept> reseptListe = new Lenkeliste<Resept>();//nr 3
 
 	public Database() {}
-	public Database(String filnavn) {
-		
+	public Database(String filnavn) throws FileNotFoundException {
+		lesFraFil(filnavn);
 	}
 
 	public void lesFraFil(String filnavn) throws FileNotFoundException {
