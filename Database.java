@@ -377,12 +377,12 @@ class Database implements DatabaseInterface {
 		System.out.println(tellResepterAvType(cls));
 	}
 
-	public HashMap<String, Integer> tellMisbruk(Class<?> cls, String type){
+	public HashMap<String, Integer> tellMisbruk(Class<?> legemiddelSubclass, String personType){
 		HashMap<String, Integer> personer = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
-			if (cls.isInstance(r.hentLegemiddel())) {
+			if (legemiddelSubclass.isInstance(r.hentLegemiddel())) {
 
-				if (type == "pasient" && r.hentReit()>0) {
+				if (personType == "pasient" && r.hentReit()>0) {
 					if (personer.get(r.hentPasient().hentNavn()) == null) {
 						personer.put(r.hentPasient().hentNavn(), 1);
 					}
@@ -390,7 +390,7 @@ class Database implements DatabaseInterface {
 						personer.put(r.hentPasient().hentNavn(), personer.get(r.hentPasient().hentNavn())+1);
 					}
 				}
-				else{
+				else if (personType == "lege") {
 					if (personer.get(r.hentLege().hentNavn()) == null) {
 						personer.put(r.hentLege().hentNavn(), 1);
 					}
