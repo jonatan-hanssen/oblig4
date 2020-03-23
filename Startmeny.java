@@ -102,7 +102,7 @@ public class Startmeny implements StartmenyInterface {
 					break;
 
 				case INIT:
-					//Console.clearScreen();
+					Console.clearScreen();
 					System.out.print(velkommenStr + menyEntriesStr);
 					velkommenStr = "Hovedmeny: \n";
 					System.out.println(tutorial);
@@ -304,7 +304,7 @@ public class Startmeny implements StartmenyInterface {
 						}
 					}
 					else {
-						System.out.println("Denne pasienten har ikke en resept med id " + pasientId + ".");
+						System.out.println("Denne pasienten har ikke en resept med id " + reseptId + ".");
 						reseptId = -2;
 					}
 				}
