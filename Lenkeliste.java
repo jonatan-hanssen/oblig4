@@ -1,3 +1,5 @@
+package oblig4;
+
 import java.util.Iterator;
 
 class Lenkeliste<T> implements Liste<T> {

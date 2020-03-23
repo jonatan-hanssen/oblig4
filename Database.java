@@ -1,3 +1,5 @@
+package oblig4;
+
 //exceptions
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.io.BufferedWriter;//klasse som lager buffer for aa redusere konverte
 import java.io.FileOutputStream;//klasse som tar outputStream og skriver til fil
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 
 

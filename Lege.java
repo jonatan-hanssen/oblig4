@@ -1,3 +1,5 @@
+package oblig4;
+
 class Lege implements Comparable<Lege>{
 	protected String navn; // i was here
 
@@ -20,14 +22,14 @@ class Lege implements Comparable<Lege>{
 		return utskrevedeResepter;
 	}
 
-	public Hvit skrivHvitResept(Legemiddel legemiddel, Pasient pasient, int reit) throws  UlovligUtskrift {
+	public Hvit skrivHvitResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
 		if (legemiddel instanceof Narkotisk) throw new UlovligUtskrift(this, legemiddel, pasient.hentId());
 		Hvit resept = new Hvit(legemiddel, this, pasient, reit);
 		utskrevedeResepter.leggTil(resept);
 
 		return resept;
 	}
-	public Militaer skrivMilitaerResept(Legemiddel legemiddel, Pasient pasient, int reit) throws  UlovligUtskrift {
+	public Militaer skrivMilitaerResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
 		if (legemiddel instanceof Narkotisk) throw new UlovligUtskrift(this, legemiddel, pasient.hentId());
 		Militaer resept = new Militaer(legemiddel, this, pasient, reit);
 		utskrevedeResepter.leggTil(resept);
@@ -41,7 +43,7 @@ class Lege implements Comparable<Lege>{
 
 		return resept;
 	}
-	public Blaa skrivBlaaResept(Legemiddel legemiddel, Pasient pasient, int reit) throws  UlovligUtskrift {
+	public Blaa skrivBlaaResept(Legemiddel legemiddel, Pasient pasient, int reit) throws UlovligUtskrift {
 		if (legemiddel instanceof Narkotisk) throw new UlovligUtskrift(this, legemiddel, pasient.hentId());
 		Blaa resept = new Blaa(legemiddel, this, pasient, reit);
 		utskrevedeResepter.leggTil(resept);

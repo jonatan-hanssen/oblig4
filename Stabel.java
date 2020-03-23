@@ -1,3 +1,5 @@
+package oblig4;
+
 class Stabel<T> extends Lenkeliste<T> {
 	public void leggPaa(T x) throws UgyldigListeIndeks {
 		//amazing!
