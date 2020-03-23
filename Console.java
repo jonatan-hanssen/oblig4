@@ -109,7 +109,7 @@ public class Console {
 		try {
 			String os = System.getProperty("os.name").toLowerCase();
 			if (os.contains("win")) {
-				Runtime.getRuntime().exec("clear");
+				Runtime.getRuntime().exec("cls");
 			} else {
 				System.out.println();
 				System.out.print("\033[H\033[2J");  
