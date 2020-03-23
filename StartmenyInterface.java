@@ -1,4 +1,4 @@
 
-interface StartmenyInterface {
-	
+abstract interface StartmenyInterface {
+
 }

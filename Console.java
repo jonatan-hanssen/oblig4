@@ -2,7 +2,7 @@
 
 import java.util.Scanner;
 
-public class Console implements ConsoleInterface {
+public class Console {
 	public static void main(String[] args) throws Exception {
 		// easy testing of functions
 		System.out.println(getString("Potet?"));
