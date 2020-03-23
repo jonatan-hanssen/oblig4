@@ -21,8 +21,8 @@ interface DatabaseInterface {
 	public void printAlt();
 
 	// stats
-	public void printResepterAvType(Class<?> cls);
-	public void printPersonMedMisbruk(Class<?> legemiddelSubclass, String personType);
+	public void printResepterAvType(Class<T> cls);
+	public void printPersonMedMisbruk(Class<T> legemiddelSubclass, String personType);
 
 	// data
 	public SortertLenkeliste<Lege> hentLeger();
