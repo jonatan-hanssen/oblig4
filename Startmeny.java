@@ -294,11 +294,11 @@ public class Startmeny {
 	private void statistikkMeny(){
 		Console.clearScreen();
 
-		System.out.print("Hva vil du printe?\n" + 
-						 "1. Pasienter\n" + 
-						 "2. Resepter\n" + 
-						 "3. Leger\n" + 
-						 "4. Legemidler\n" +
+		System.out.print("Hva slags statistikk vil du printe?\n" + 
+						 "1. Antall resepter paa narkotiske legemidler\n" + 
+						 "2. Antall resepter paa vanedannende legemidler\n" + 
+						 "3. Antall narkotiske resepter per lege\n" + 
+						 "4. Antall narkotiske resepter per pasient\n" +
 						 "5. ALT!!!\n" +
 						 "0. Jeg angrer!\n"
 		);
