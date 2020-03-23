@@ -363,7 +363,7 @@ class Database implements DatabaseInterface {
 		printLegemiddel();
 	}
 
-	public int antallTypeResept(Class<?> cls){
+	public int tellResepterAvType(Class<?> cls){
 		int ant = 0;
 		for (Resept r: reseptListe) {
 			if (cls.isInstance(r.hentLegemiddel())){
@@ -373,11 +373,11 @@ class Database implements DatabaseInterface {
 		return ant;
 	}
 	
-	public void printAntallTypeResept(Class<?> cls) {
-		System.out.println(antallTypeResept(cls));
+	public void printResepterAvType(Class<?> cls) {
+		System.out.println(tellResepterAvType(cls));
 	}
 
-	public HashMap<String, Integer> tellAntallTypeMisbruk(Class<?> cls, String type){
+	public HashMap<String, Integer> tellMisbruk(Class<?> cls, String type){
 		HashMap<String, Integer> personer = new HashMap<String, Integer>();
 		for (Resept r: reseptListe) {
 			if (cls.isInstance(r.hentLegemiddel())) {
@@ -402,8 +402,8 @@ class Database implements DatabaseInterface {
 		}
 		return personer;
 	}
-	public void printTypeMisbruk(HashMap<String,Integer> liste) {
-		for (String person: liste.keySet()) {
+	public void printPersonMedMisbruk(HashMap<String,Integer> liste) {
+		for (String person : liste.keySet()) {
 			System.out.println(person + ": " + liste.get(person));
 		}
 		
