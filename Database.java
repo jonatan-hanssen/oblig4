@@ -405,7 +405,7 @@ class Database implements DatabaseInterface {
 	public void printPersonMedMisbruk(Class<?> legemiddelSubclass, String personType) {
 		HashMap<String, Integer> personer = tellMisbruk(legemiddelSubclass, personType);
 		for (String person : personer.keySet()) {
-			System.out.println(person + ": " + liste.get(person));
+			System.out.println(person + ": " + personer.get(person));
 		}
 	}
 
