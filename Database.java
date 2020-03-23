@@ -142,7 +142,7 @@ class Database implements DatabaseInterface {
 
 					//finner pasient
 					Pasient pasient = pasientListe.hent(Integer.parseInt(linjeArray[2]));
-					
+
 					//skal naa lage resepten
 					Resept resept;
 					//reseptlagd vil vaere true med mindre vi kommer til default, hvor den ikke vil bli lagd
@@ -164,10 +164,10 @@ class Database implements DatabaseInterface {
 						default:
 							resept = null;
 							reseptLagd = false;
-						
+
 							System.out.println(
-							"FEIL TYPE RESEPT\nLinje " 
-							+ linjePos 
+							"FEIL TYPE RESEPT\nLinje "
+							+ linjePos
 							+ ": Ingen resepttype ved navn "
 							+ linjeArray[3]
 							+ "\n");
@@ -177,7 +177,7 @@ class Database implements DatabaseInterface {
 						reseptListe.leggTil(resept);
 						pasient.leggTilResept(resept);
 					}
-					
+
 					break;
 				default:
 					System.out.println(
@@ -218,7 +218,7 @@ class Database implements DatabaseInterface {
 				ID = Integer.parseInt(linjeArray[2]);
 				objektType = "pasient";
 			}
-			
+
 			System.out.println(
 			"FEIL ID\nLinje "
 			+ linjePos
@@ -233,22 +233,22 @@ class Database implements DatabaseInterface {
 	public void skrivTilFil(String filnavn) throws IOException {
 		//lager fil
 		File fil = new File(filnavn);
-		
+
 		if (fil.createNewFile()) {
 			System.out.println("Ny fil skapt med navn " + filnavn + "\n");
 		}
 		else {
 			System.out.println("Skriver til fil " + filnavn + "...\n");
 		}
-		
+
 		//lager skriver til fil
 		OutputStream output = new FileOutputStream(fil, false);
 		OutputStreamWriter outputWriter = new OutputStreamWriter(output, "UTF-8");//vi enkoder i UTF-8
 		BufferedWriter skriver = new BufferedWriter(outputWriter);//vi bruker bufferedWriter fordi vi skal ha mange skriveoperasjoner
-		
+
 		//her skjer skrivinga
 		//liste 0
-		
+
 		skriver.write("# Pasienter (navn,fnr)" + "\n");
 		for (Pasient pasient : pasientListe) {
 			skriver.write(
@@ -257,10 +257,10 @@ class Database implements DatabaseInterface {
 						+ pasient.hentFnr()
 						+ "\n");
 		}
-		
+
 		//liste 1
 		skriver.write("# Legemidler (navn,type,pris,virkestoff[,styrke])" + "\n");
-		
+
 		for (Legemiddel legemiddel : legemiddelListe) {
 			if (legemiddel instanceof Vanlig) {
 				skriver.write(
@@ -299,15 +299,15 @@ class Database implements DatabaseInterface {
 							+ "\n");
 			}
 		}
-		
+
 		//liste 2
 		skriver.write("# Leger (navn, kontrollid / 0 hvis vanlig lege)" + "\n");
-		
+
 		for (Lege lege : legeListe) {
 			if (lege instanceof Spesialist) {
 				Spesialist spesialist;
 				spesialist = (Spesialist) lege;
-				
+
 				skriver.write(
 							spesialist.hentNavn()
 							+ ","
@@ -321,12 +321,12 @@ class Database implements DatabaseInterface {
 							+ "0"
 							+ "\n");
 			}
-			
+
 		}
-		
+
 		//liste 3
 		skriver.write("# Resepter (legemiddelNummer,legeNavn,pasientID,type,[reit])" + "\n");
-		
+
 		for (Resept resept : reseptListe) {
 			String type = "";
 			String reit = Integer.toString(resept.hentReit());
@@ -337,7 +337,7 @@ class Database implements DatabaseInterface {
 				type = "p";
 				reit = "";
 			}
-			
+
 			skriver.write(
 						resept.hentLegemiddel().hentId()
 						+ ","
@@ -354,7 +354,7 @@ class Database implements DatabaseInterface {
 		//ferdig
 		skriver.flush();
 		skriver.close();
-		
+
 		System.out.println("Ferdig skrevet!");
 	}
 
@@ -374,7 +374,7 @@ class Database implements DatabaseInterface {
 		}
 		return ant;
 	}
-	
+
 	public void printResepterAvType(Class<?> legemiddelSubclass) {
 		System.out.println("Antall resepter:");
 		System.out.println(tellResepterAvType(legemiddelSubclass));
@@ -385,7 +385,7 @@ class Database implements DatabaseInterface {
 		for (Resept r: reseptListe) {
 			if (legemiddelSubclass.isInstance(r.hentLegemiddel())) {
 
-				if (personType == "pasient" && r.hentReit()>0) {
+				if (personType.equals("pasient") && r.hentReit()>0) {
 					if (personer.get(r.hentPasient().hentNavn()) == null) {
 						personer.put(r.hentPasient().hentNavn(), 1);
 					}
@@ -393,7 +393,7 @@ class Database implements DatabaseInterface {
 						personer.put(r.hentPasient().hentNavn(), personer.get(r.hentPasient().hentNavn())+1);
 					}
 				}
-				else if (personType == "lege") {
+				else if (personType.equals("lege")) {
 					if (personer.get(r.hentLege().hentNavn()) == null) {
 						personer.put(r.hentLege().hentNavn(), 1);
 					}
@@ -439,7 +439,7 @@ class Database implements DatabaseInterface {
 		}
 		return null;
 	}
-	
+
 	public Resept finnResept(int id) {
 		for (Resept resept : reseptListe) {
 			if (resept.hentId() == id) {
@@ -484,13 +484,13 @@ class Database implements DatabaseInterface {
 		Resept resept = null;
 		if (gyldig == true) {
 			try{
-				if (type == "militaer" || type == "militaer") {
+				if (type.equals("militaer")) {
 					resept = lege.skrivMilitaerResept(legemiddel, pasient, reit);
-				} else if (type == "hvit") {
+				} else if (type.equals("hvit")) {
 					resept = lege.skrivHvitResept(legemiddel, pasient, reit);
-				} else if (type == "blaa" || type == "blaa") {
+				} else if (type.equals("blaa")) {
 					resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
-				} else if (type == "p") {
+				} else if (type.equals("p")) {
 					resept = lege.skrivPResept(legemiddel, pasient);
 				}
 				reseptListe.leggTil(resept);
@@ -526,11 +526,11 @@ class Database implements DatabaseInterface {
 	public Legemiddel lagLegemiddel(String navn, double pris, double virkestoff, int styrke, String type) throws TypeNotFoundException {
 		Legemiddel legemiddel;
 		type = type.toLowerCase();
-		if (type == "narkotisk") {
+		if (type.equals("narkotisk")) {
 			legemiddel = new Narkotisk(navn, pris, virkestoff, styrke);
-		} else if (type == "vanedannende") {
+		} else if (type.equals("vanedannende")) {
 			legemiddel = new Vanedannende(navn, pris, virkestoff, styrke);
-		} else if (type == "vanlig") {
+		} else if (type.equals("vanlig")) {
 			legemiddel = new Vanlig(navn, pris, virkestoff);
 		} else {
 			throw new TypeNotFoundException();
@@ -538,7 +538,7 @@ class Database implements DatabaseInterface {
 		legemiddelListe.leggTil(legemiddel);
 		return legemiddel;
 	}
-	
+
 	public SortertLenkeliste<Lege> hentLeger() {
 		return legeListe;
 	}
