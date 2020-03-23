@@ -363,18 +363,18 @@ class Database implements DatabaseInterface {
 		printLegemiddel();
 	}
 
-	public int tellResepterAvType(Class<?> cls){
+	public int tellResepterAvType(Class<?> legemiddelSubclass){
 		int ant = 0;
 		for (Resept r: reseptListe) {
-			if (cls.isInstance(r.hentLegemiddel())){
+			if (legemiddelSubclass.isInstance(r.hentLegemiddel())){
 				ant++;
 			}
 		}
 		return ant;
 	}
 	
-	public void printResepterAvType(Class<?> cls) {
-		System.out.println(tellResepterAvType(cls));
+	public void printResepterAvType(Class<?> legemiddelSubclass) {
+		System.out.println(tellResepterAvType(legemiddelSubclass));
 	}
 
 	public HashMap<String, Integer> tellMisbruk(Class<?> legemiddelSubclass, String personType){
