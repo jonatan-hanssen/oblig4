@@ -3,7 +3,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Startmeny {
+public class Startmeny implements StartmenyInterface {
 	static boolean consoleLogging = false;
 
 	static String velkommenStr = "Velkommen til Legesystemet!\n";
@@ -33,10 +33,17 @@ public class Startmeny {
 	}
 	private MenyValg brukerValg = MenyValg.INIT;
 
+	public Startmeny() {
+		this.db = new Database();
+		this.start();
+	}
+
 	public Startmeny(Database db) {
 		this.db = db;
+		this.start();
+	}
 
-
+	public start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
 			/*
 			*	if last selection was to show main menu, don't ask the user for a value
