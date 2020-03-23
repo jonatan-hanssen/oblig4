@@ -14,7 +14,7 @@ public class Startmeny {
 							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil ut (exit).\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
-	static String donaldDuckStr = "Oopsie! Det var visst ugyldig.";
+	static String feilmelding = "Oopsie! Det var visst ugyldig. Skriv et gyldig tall";
 
 	private Database db;
 
@@ -34,7 +34,6 @@ public class Startmeny {
 	public Startmeny(Database db) {
 		this.db = db;
 
-		Console.clearScreen();
 
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
 			/*
@@ -51,9 +50,8 @@ public class Startmeny {
 			*	complain to the user.
 			*/
 			if (this.brukerValg != MenyValg.INIT) {
-				int brukerTall = Console.getInt(6, -1); // 5 as the maxValue, because of MenyValg, -1 as the fallback value
+				int brukerTall = Console.getInt(6, -1); // 6 as the maxValue, because of MenyValg, -1 as the fallback value
 				if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
-				else if (brukerTall == 420) this.brukerValg = MenyValg.INIT; // never reachable atm
 				else this.brukerValg = MenyValg.values()[brukerTall];
 				
 				if (consoleLogging)
@@ -91,12 +89,13 @@ public class Startmeny {
 					break;
 
 				case FAIL:
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 					break;
 
 				case INIT:
-					Console.clearScreen();
+					//Console.clearScreen();
 					System.out.print(velkommenStr + menyEntriesStr);
+					velkommenStr = "Hovedmeny: \n";
 					System.out.println(tutorial);
 					this.brukerValg = null;
 					break;
@@ -124,19 +123,10 @@ public class Startmeny {
 		int printeValg = -1;
 		do {
 			printeValg = Console.getInt(5, -1);
-			if (printeValg == -1) System.out.println(donaldDuckStr);
+			if (printeValg == -1) System.out.println(feilmelding);
 		} while (printeValg == -1);		
 
-		
-		/*System.out.println("Hvor detaljert vil du printe? (0-2)");
-
-		int detaljLevel = -1;
-		do {
-			detaljLevel = Console.getInt(2, -1);
-			if (detaljLevel == -1) System.out.println(donaldDuckStr);
-		} while (detaljLevel == -1);
-		*/
-		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
+		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til hovedmenyen";
 
 		switch (printeValg) {
 			case 0:
@@ -177,7 +167,7 @@ public class Startmeny {
 		int opretteValg = -1;
 		do {
 			opretteValg = Console.getInt(3, -1);
-			if (opretteValg == -1) System.out.println(donaldDuckStr);
+			if (opretteValg == -1) System.out.println(feilmelding);
 		} while (opretteValg == -1);		
 
 		switch (opretteValg) {
@@ -195,7 +185,7 @@ public class Startmeny {
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
 
 				if (kontrollid  < 0) {
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 					break;
 				}
 				db.lagLege(legenavn, kontrollid);
@@ -211,7 +201,7 @@ public class Startmeny {
 				try {
 					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
 				} catch (TypeNotFoundException e) {
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 				}
 
 
@@ -219,19 +209,19 @@ public class Startmeny {
 			case 4: 
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
 				if (db.finnLege(utskrivendeLegenavn) == null){
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 					break;
 				}
 
 				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
 				if (db.finnLegemiddel(legemiddelId) == null) {
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 					break;
 				}
 
 				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
 				if (db.finnPasient(pasientId) == null) {
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 					break;
 				}
 
@@ -244,7 +234,7 @@ public class Startmeny {
 						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
 					}
 				} catch (TypeNotFoundException e) {
-					System.out.println(donaldDuckStr);
+					System.out.println(feilmelding);
 				}
 				break;
 		}
@@ -252,7 +242,12 @@ public class Startmeny {
 
 	}
 	private void reseptMeny(){
-		db.printPasient();
+		for (Pasient pasient : db.hentPasienter()) {
+			if (pasient.hentResepter().stoerrelse() > 0) {
+				System.out.println(pasient);
+			}
+		}
+		System.out.println("");
 		
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
 									"eller skriv -1 for aa gaa tilbake",(db.hentPasienter().stoerrelse()-1),-2);
@@ -263,15 +258,20 @@ public class Startmeny {
 			System.out.println("Denne pasienten finnes ikke");
 			this.brukerValg = MenyValg.BRUKERESEPT;
 		}
+		else if (db.finnPasient(pasientId).hentResepter().stoerrelse() == 0) {
+			System.out.println("Denne pasienten har ingen resepter");
+			this.brukerValg = MenyValg.BRUKERESEPT;
+		}
 		else {
 			Pasient pasient = db.finnPasient(pasientId);
 		
 			for (Resept resept : pasient.hentResepter()) {
 				System.out.println(resept);
 			}
+			System.out.println("");
 			int reseptId = -2;
 			while (reseptId == -2) {
-				reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller -1 for aa gaa tilbake",(pasient.hentResepter().stoerrelse()-1),-2);
+				reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller -1 for aa gaa tilbake",(db.hentResepter().stoerrelse()-1),-2);
 				if (reseptId == -1) {
 					this.brukerValg = MenyValg.BRUKERESEPT;
 				}
@@ -279,17 +279,29 @@ public class Startmeny {
 					System.out.println("Dette er ikke en gyldig id");
 				}
 				else {
+					boolean gyldigResept = false;
 					Resept resept = db.finnResept(reseptId);
-					if (!resept.bruk()) {
-						System.out.println("Denne resepten er tom");
-						reseptId = -2;
+					for (Resept pasientSinResept : pasient.hentResepter()) {
+						if (resept.equals(pasientSinResept)) gyldigResept = true;
+					}
+					
+					if (gyldigResept) {
+						if (!resept.bruk()) {
+							System.out.println("Denne resepten er tom");
+							reseptId = -2;
+						}
+						else {
+							System.out.println("Brukte resept paa " + resept.hentLegemiddel().hentNavn() + ", " + resept.hentReit() + " bruk igjen.");
+						}
 					}
 					else {
-						System.out.println("Brukte resept paa " + resept.hentLegemiddel().hentNavn() + ", " + resept.hentReit() + " bruk igjen.");
+						System.out.println("Denne pasienten har ikke en resept med id " + pasientId + ".");
+						reseptId = -2;
 					}
 				}
 			}
 		}
+		Console.getString("Trykk enter for aa fortsette");
 	}
 	private void statistikkMeny(){
 		Console.clearScreen();
@@ -304,7 +316,7 @@ public class Startmeny {
 		int printeValg = -1;
 		do {
 			printeValg = Console.getInt(4, -1);
-			if (printeValg == -1) System.out.println(donaldDuckStr);
+			if (printeValg == -1) System.out.println(feilmelding);
 		} while (printeValg == -1);		
 
 		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
@@ -351,5 +363,6 @@ public class Startmeny {
 			System.out.println("Denne filen eksisterer ikke");
 			this.brukerValg = MenyValg.FILLESNING;
 		}
+		Console.waitForEnter();
 	}
 }

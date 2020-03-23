@@ -24,7 +24,7 @@ class Database implements DatabaseInterface {
 	public Lenkeliste<Resept> reseptListe = new Lenkeliste<Resept>();//nr 3
 
 	public Database() {}
-	public Database(String filnavn) {
+	public Database(String filnavn) throws FileNotFoundException {
 		lesFraFil(filnavn);
 	}
 
