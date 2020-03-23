@@ -22,7 +22,7 @@ interface DatabaseInterface {
 
 	// stats
 	public void printAntallTypeResept(Class<?> cls);
-	public void printTypeMisbruk(HashMap<String, Integer> liste);
+	public void printTypeMisbruk(Class<?> legemiddelSubclass, String personType);
 
 	// data
 	public SortertLenkeliste<Lege> hentLeger();

@@ -403,7 +403,7 @@ class Database implements DatabaseInterface {
 		return personer;
 	}
 	public void printPersonMedMisbruk(Class<?> legemiddelSubclass, String personType) {
-		HashMap<String, Integer> personer = tellMisbruk(cls, type);
+		HashMap<String, Integer> personer = tellMisbruk(legemiddelSubclass, personType);
 		for (String person : personer.keySet()) {
 			System.out.println(person + ": " + liste.get(person));
 		}
