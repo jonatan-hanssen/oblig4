@@ -14,7 +14,7 @@ import java.io.BufferedWriter;//klasse som lager buffer for aa redusere konverte
 import java.io.FileOutputStream;//klasse som tar outputStream og skriver til fil
 
 import java.util.HashMap;
-import java.uitl.TreeMap;
+import java.util.TreeMap;
 
 
 class Database implements DatabaseInterface {
@@ -25,7 +25,7 @@ class Database implements DatabaseInterface {
 
 	public Database() {}
 	public Database(String filnavn) {
-		
+		lesFraFil(filnavn);
 	}
 
 	public void lesFraFil(String filnavn) throws FileNotFoundException {
