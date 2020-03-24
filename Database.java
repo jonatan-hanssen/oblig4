@@ -476,7 +476,7 @@ class Database implements DatabaseInterface {
 			System.out.println("Resepten maa ha et heltall stoerre enn 0 reit, eller vaere p-resept");
 			gyldig = false;
 		}
-		if (type != "p" && type != "militær" && type != "militaer" && type != "blå" && type != "blaa" && type != "hvit") {
+		if (!type.equals("p") && !type.equals("militær") && !type.equals("militaer") && !type.equals("blå") && !type.equals("blaa") && !type.equals("hvit")) {
 			gyldig = false;
 			throw new TypeNotFoundException();
 		}
