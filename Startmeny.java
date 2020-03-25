@@ -44,31 +44,6 @@ public class Startmeny implements StartmenyInterface {
 
 	private void start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
-<<<<<<< HEAD
-=======
-			/*
-			*	if last selection was to show main menu, don't ask the user for a value
-			*	and instead show the given settings. showing the main menu resets the
-			*	user option to null, so it doesn't stuck in an infinite loop.
-
-			*	this allows us to precisely choose where to land next from each command.
-			*	the currently implemented functions all return to main menu after being
-			*	done, but it is easy to override what a function goes to, either by the
-			*	return value of a function, or through the current implementation.
-
-			*	currently, if a user fails to provide valid input, the command line will
-			*	complain to the user.
-			*/
-			if (this.brukerValg != MenyValg.INIT) {
-				int brukerTall = Console.getInt(6, -1); // 6 as the maxValue, because of MenyValg, -1 as the fallback value
-				if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
-				else this.brukerValg = MenyValg.values()[brukerTall];
-
-				if (consoleLogging)
-					System.out.println("Du valgte " + this.brukerValg);
-			}
-
->>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 			switch (this.brukerValg) {
 				case ROOT:
 					Console.clearScreen();
@@ -82,13 +57,8 @@ public class Startmeny implements StartmenyInterface {
 				case PRINTE:
 					printeMeny();
 					break;
-<<<<<<< HEAD
 				
 				case OPPRETTE:
-=======
-
-				case OPRETTE:
->>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					opretteMeny();
 					break;
 
@@ -103,40 +73,20 @@ public class Startmeny implements StartmenyInterface {
 				case FILSKRIVING:
 					filskrivingMeny();
 					break;
-<<<<<<< HEAD
+
 				
 				case FILLESNING:
 					fillesningMeny();
 					this.brukerValg = MenyValg.ROOT;
-=======
-
-				case RAGEQUIT:
-					System.out.println(exitStr); // doesn't return to init, so dies
->>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 
 				case FAIL:
 					this.startmelding = "Dette var visst feil, proev paa nytt.\n";
 					this.brukerValg = MenyValg.ROOT;
 					break;
-<<<<<<< HEAD
 					
 				case RAGEQUIT:
 					System.out.println(exitStr); // doesn't return to init, so dies
-=======
-
-				case INIT:
-					Console.clearScreen();
-					System.out.print(velkommenStr + menyEntriesStr);
-					velkommenStr = "Hovedmeny: \n";
-					System.out.println(tutorial);
-					this.brukerValg = null;
-					break;
-
-				case FILLESNING:
-					fillesningMeny();
-					this.brukerValg = MenyValg.INIT;
->>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 			}
 		}
