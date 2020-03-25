@@ -5,6 +5,7 @@ public class Startmeny implements StartmenyInterface {
 	static boolean consoleLogging = false;
 
 	static String velkommenStr = "Velkommen til Legesystemet!\n";
+
 	static String tutorial = "Velg ett av de mulige menyelementene med tallet.";
 	static String menyEntriesStr = "1. Jeg vil printe.\n" +
 							"2. Jeg vil legge til i databasen.\n" +
@@ -13,6 +14,7 @@ public class Startmeny implements StartmenyInterface {
 							"5. Jeg vil skrive til fil.\n" +
 							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil ut (exit).\n"; // av denne karantena
+
 	static String exitStr = "Ha en fin dag!";
 
 
@@ -200,10 +202,23 @@ public class Startmeny implements StartmenyInterface {
 				break;
 			case 3:
 				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
-				double pris = Console.getDouble("Hva koster legemiddelet?");
-				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
+				double pris = Console.getDouble("Hva koster legemiddelet (kr)?");
+				if (pris == -1) {
+					System.out.println("En ikke-positiv pris blir dyrt for selskapet. Bruk et positivt tall.");
+					break;
+				}
+
+				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet (mg)?");
+				if (virkestoff == -1) {
+					System.out.println("Bruk et tall over null.");
+				}
+
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
-				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+				if (styrke == -1) {
+					System.out.println("Styrke er en metrisk verdi.");
+				}
+
+				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
 
 				try {
 					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
@@ -232,8 +247,8 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Ingen pasient med denne ID");
 					break;
 				}
-				System.out.println("blaa\nhvit\nmilitaer\npresept");
-				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
+
+				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette (blaa, hvit, militaer, presept)?");
 				try {
 					if (reseptType != "p" && reseptType != "presept"){
 						int reit = Console.getInt("Hva er reiten for resepten?");
