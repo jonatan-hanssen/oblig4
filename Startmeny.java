@@ -5,14 +5,14 @@ public class Startmeny implements StartmenyInterface {
 	static boolean consoleLogging = false;
 
 	static String velkommenStr = "Velkommen til Legesystemet!\n";
-	static String tutorial = "Velg ett av de mulige menyelementene med tallet.";
-	static String menyEntriesStr = "1. Jeg vil printe.\n" + 
-							"2. Jeg vil legge til i databasen.\n" +
-							"3. Jeg vil bruke en resept.\n" +
-							"4. Jeg vil se statistikk.\n" +
-							"5. Jeg vil skrive til fil.\n" +
-							"6. Jeg vil skrive til databasen fra fil\n" +
-							"0. Jeg vil ut (exit).\n"; // av denne karantena
+	static String tutorial = "Hva vil du gjoere? Velg ett av de mulige menyelementene med tallet.";
+	static String menyEntriesStr = "1. Printe.\n" + 
+							"2. Legge til i databasen.\n" +
+							"3. Bruke en resept.\n" +
+							"4. Se statistikk.\n" +
+							"5. Skrive til fil fra databasen\n" +
+							"6. Skrive til databasen fra fil\n" +
+							"0. Avslutt\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
 
 
