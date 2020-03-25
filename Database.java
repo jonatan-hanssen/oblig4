@@ -53,7 +53,7 @@ class Database implements DatabaseInterface {
 				naavaerendeLinje = scanner.nextLine(); scannerPos++;
 				listeIndeks++;
 			}
-			leggTilIListe(naavaerendeLinje, listeIndeks, scannerPos);
+			leggTilIListe(naavaerendeLinje, listeIndeks, scannerPos, verbose);
 		}
 		if (verbose) System.out.println("***   Naa er databasen ferdig konstruert   ***\n");
 		if (verbose) System.out.println("	Antall pasienter: " + pasientListe.stoerrelse());
@@ -67,6 +67,10 @@ class Database implements DatabaseInterface {
 		lesFraFil(filnavn, true);
 	}
 	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) {
+		leggTilIListe(linje, nummerPaaListe, linjePos, true);
+	}
+
+	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos, boolean verbose) {
 		String[] linjeArray = linje
 			.trim() //fjerner whitespace
 			.replaceAll(",$","") //fjerner komma uten noen string
@@ -117,7 +121,7 @@ class Database implements DatabaseInterface {
 							* spesifiserer at hver parameter skal vaere separert med komma, som gjoer at
 							* disse filene er feil oppgitt.
 							*/
-							System.out.println("FEIL TYPE\nLinje " + linjePos + ":" + linjeArray[1] + " er ikke et type legemiddel.\n");
+							if (verbose) System.out.println("FEIL TYPE\nLinje " + linjePos + ":" + linjeArray[1] + " er ikke et type legemiddel.\n");
 					}
 					break;
 				case 2:
@@ -141,7 +145,7 @@ class Database implements DatabaseInterface {
 						lege = muligLege;
 					}
 					if (lege == null) {
-						System.out.println("FEIL VED NAVN\nLinje " + linjePos + ": Ingen lege ved navn " + linjeArray[1] + "\n");
+						if (verbose) System.out.println("FEIL VED NAVN\nLinje " + linjePos + ": Ingen lege ved navn " + linjeArray[1] + "\n");
 					}
 
 					//finner pasient
@@ -169,12 +173,7 @@ class Database implements DatabaseInterface {
 							resept = null;
 							reseptLagd = false;
 
-							System.out.println(
-							"FEIL TYPE RESEPT\nLinje "
-							+ linjePos
-							+ ": Ingen resepttype ved navn "
-							+ linjeArray[3]
-							+ "\n");
+							if (verbose) System.out.println("FEIL TYPE RESEPT\nLinje " + linjePos + ": Ingen resepttype ved navn " + linjeArray[3] + "\n");
 							break;
 					}
 					if (reseptLagd) {
@@ -184,28 +183,15 @@ class Database implements DatabaseInterface {
 
 					break;
 				default:
-					System.out.println(
-					"UEKSISTERENDE KATEGORI\nLinje "
-					+ linjePos
-					+ ": Det er bare fire kategorier. Denne linjen er i kategori "
-					+ (nummerPaaListe + 1)
-					+ ".\n");
+					if (verbose) System.out.println("UEKSISTERENDE KATEGORI\nLinje " + linjePos + ": Det er bare fire kategorier. Denne linjen er i kategori " + (nummerPaaListe + 1) + ".\n");
 					break;
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(
-			"UGYLDIG ANTALL PARAMETRE\nLinje "
-			+ linjePos + ": For faa parametre for aa lage et "
-			+ objektType
-			+ "-objekt.\n");
+			if (verbose) System.out.println("UGYLDIG ANTALL PARAMETRE\nLinje " + linjePos + ": For faa parametre for aa lage et " + objektType + "-objekt.\n");
 		}
 		catch (NumberFormatException e) {
-			System.out.println(
-			"PARAMETERFEIL\nLinje "
-			+ linjePos
-			+ ": Feil i parameterverdier for objekttype "
-			+ objektType + ".\n");
+			if (verbose) System.out.println("PARAMETERFEIL\nLinje " + linjePos + ": Feil i parameterverdier for objekttype " + objektType + ".\n");
 		}
 		catch (UgyldigListeIndeks e) {
 			//dette skjer bare i case 3, altsaa i den siste kategorien
@@ -223,14 +209,7 @@ class Database implements DatabaseInterface {
 				objektType = "pasient";
 			}
 
-			System.out.println(
-			"FEIL ID\nLinje "
-			+ linjePos
-			+ ": Intet "
-			+ objektType + "objekt med ID "
-			+ ID
-			+ ".\n");
-
+			if (verbose) System.out.println("FEIL ID\nLinje " + linjePos + ": Intet " + objektType + "objekt med ID " + ID + ".\n");
 		}
 	}
 
