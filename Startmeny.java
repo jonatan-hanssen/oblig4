@@ -200,10 +200,23 @@ public class Startmeny implements StartmenyInterface {
 				break;
 			case 3:
 				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
-				double pris = Console.getDouble("Hva koster legemiddelet?");
-				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet?");
+				double pris = Console.getDouble("Hva koster legemiddelet (kr)?");
+				if (pris == -1) {
+					System.out.println("En ikke-positiv pris blir dyrt for selskapet. Bruk et positivt tall.");
+					break;
+				}
+
+				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet (mg)?");
+				if (virkestoff == -1) {
+					System.out.println("Bruk et tall over null.")
+				}
+
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
-				String legemiddelType = Console.getString("Av hvilken type er legemiddelet?");
+				if (styrke == -1) {
+					System.out.println("Styrke er en metrisk verdi.")
+				}
+
+				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
 
 				try {
 					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
@@ -232,8 +245,8 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Ingen pasient med denne ID");
 					break;
 				}
-				System.out.println("blaa\nhvit\nmilitaer\npresept");
-				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
+				
+				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette (blaa, hvit, militaer, presept)?");
 				try {
 					if (reseptType != "p" && reseptType != "presept"){
 						int reit = Console.getInt("Hva er reiten for resepten?");
