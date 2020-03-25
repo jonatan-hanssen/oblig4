@@ -7,6 +7,7 @@ class Lege implements Comparable<Lege>{
 
 	public Lege(String navn) {
 		this.navn = navn;
+		utskrevedeResepter = new Lenkeliste<Resept>();
 	}
 
 	@Override
@@ -53,6 +54,6 @@ class Lege implements Comparable<Lege>{
 
 	@Override
 	public String toString() {
-		return navn + ". (Ingen kontroll-ID)";
+		return navn + " (Ingen kontroll-ID)";
 	}
 }
