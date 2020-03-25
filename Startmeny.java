@@ -358,11 +358,13 @@ public class Startmeny implements StartmenyInterface {
 			System.out.println("Det er ikke mulig aa skrive til denne filen");
 			this.brukerValg = MenyValg.FILSKRIVING;
 		}
+		this.brukerValg = MenyValg.ROOT;
 	}
 	private void fillesningMeny() {
 		String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
 		try {
-			if (filnavn != "0") db.lesFraFil(filnavn);
+			if (!filnavn.equals("0")) db.lesFraFil(filnavn);
+			else System.out.println("Gaar tilbake..");
 		}
 		catch (FileNotFoundException e) {
 			Console.clearScreen();
@@ -370,5 +372,6 @@ public class Startmeny implements StartmenyInterface {
 			this.brukerValg = MenyValg.FILLESNING;
 		}
 		Console.waitForEnter();
+		this.brukerValg = MenyValg.ROOT;
 	}
 }

@@ -64,7 +64,7 @@ class Database implements DatabaseInterface {
 	}
 
 	public void lesFraFil(String filnavn) throws FileNotFoundException {
-		return lesFraFil(filnavn, true);
+		lesFraFil(filnavn, true);
 	}
 	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) {
 		String[] linjeArray = linje
