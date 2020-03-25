@@ -268,6 +268,12 @@ public class Startmeny implements StartmenyInterface {
 				System.out.println(pasient);
 			}
 		}
+		if (db.hentPasienter().stoerrelse() == 0) {
+			System.out.println("Fant ingen pasienter, dermed ingen resepter.");
+			this.brukerValg = MenyValg.ROOT
+			Console.waitForEnter();
+			return;
+		}
 		System.out.println("");
 
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
