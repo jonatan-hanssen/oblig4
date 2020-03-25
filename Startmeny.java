@@ -211,11 +211,13 @@ public class Startmeny implements StartmenyInterface {
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet (mg)?");
 				if (virkestoff == -1) {
 					System.out.println("Bruk et tall over null.");
+					break;
 				}
 
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				if (styrke == -1) {
-					System.out.println("Styrke er en metrisk verdi.");
+					System.out.println("Styrke må være en tallverdi.");
+					break;
 				}
 
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
