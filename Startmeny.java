@@ -194,7 +194,7 @@ public class Startmeny implements StartmenyInterface {
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
 
 				if (kontrollid  < 0) {
-					System.out.println("KontrollID maa vaere et positivt tall eller 0");
+					System.out.println("KontrollID maa vaere et positivt heltall eller 0");
 					break;
 				}
 				db.lagLege(legenavn, kontrollid);
@@ -204,7 +204,7 @@ public class Startmeny implements StartmenyInterface {
 				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
 				double pris = Console.getDouble("Hva koster legemiddelet (kr)?");
 				if (pris == -1) {
-					System.out.println("En ikke-positiv pris blir dyrt for selskapet. Bruk et positivt tall.");
+					System.out.println("Bruk et positivt tall.");
 					break;
 				}
 
@@ -216,7 +216,7 @@ public class Startmeny implements StartmenyInterface {
 
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				if (styrke == -1) {
-					System.out.println("Styrke må være en tallverdi.");
+					System.out.println("Styrke må være en positiv tallverdi.");
 					break;
 				}
 
