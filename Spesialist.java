@@ -5,7 +5,7 @@ class Spesialist extends Lege implements Godkjenningsfritak {
 	
 	public Spesialist(String navn, int kontrollID) {
 		super(navn);
-		//this.utskrevedeResepter = new Lenkeliste<Resept>();
+		this.utskrevedeResepter = new Lenkeliste<Resept>();
 		this.kontrollID = kontrollID;
 	}
 	
