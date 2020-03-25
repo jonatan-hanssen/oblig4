@@ -415,6 +415,8 @@ class Database implements DatabaseInterface {
 		for (String person : personer.keySet()) {
 			System.out.println(person + ": " + personer.get(person));
 		}
+
+		System.out.print("Alle andre har 0");
 	}
 
 	public Lege finnLege(String legenavn) {
@@ -504,7 +506,7 @@ class Database implements DatabaseInterface {
 		}
 		else {
 			//throw new Exception("Ikke gyldig resept");
-			System.out.println("Ugyldig");
+			System.out.println("Resept hadde ugyldige verdier og ble ikke lagd");
 			return null;
 		}
 		return resept;
