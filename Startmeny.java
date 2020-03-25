@@ -44,6 +44,31 @@ public class Startmeny implements StartmenyInterface {
 
 	private void start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
+<<<<<<< HEAD
+=======
+			/*
+			*	if last selection was to show main menu, don't ask the user for a value
+			*	and instead show the given settings. showing the main menu resets the
+			*	user option to null, so it doesn't stuck in an infinite loop.
+
+			*	this allows us to precisely choose where to land next from each command.
+			*	the currently implemented functions all return to main menu after being
+			*	done, but it is easy to override what a function goes to, either by the
+			*	return value of a function, or through the current implementation.
+
+			*	currently, if a user fails to provide valid input, the command line will
+			*	complain to the user.
+			*/
+			if (this.brukerValg != MenyValg.INIT) {
+				int brukerTall = Console.getInt(6, -1); // 6 as the maxValue, because of MenyValg, -1 as the fallback value
+				if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
+				else this.brukerValg = MenyValg.values()[brukerTall];
+
+				if (consoleLogging)
+					System.out.println("Du valgte " + this.brukerValg);
+			}
+
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 			switch (this.brukerValg) {
 				case ROOT:
 					Console.clearScreen();
@@ -57,35 +82,61 @@ public class Startmeny implements StartmenyInterface {
 				case PRINTE:
 					printeMeny();
 					break;
+<<<<<<< HEAD
 				
 				case OPPRETTE:
+=======
+
+				case OPRETTE:
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					opretteMeny();
 					break;
-				
+
 				case BRUKERESEPT:
 					reseptMeny();
 					break;
-				
+
 				case STATISTIKK:
 					statistikkMeny();
 					break;
-				
+
 				case FILSKRIVING:
 					filskrivingMeny();
 					break;
+<<<<<<< HEAD
 				
 				case FILLESNING:
 					fillesningMeny();
 					this.brukerValg = MenyValg.ROOT;
+=======
+
+				case RAGEQUIT:
+					System.out.println(exitStr); // doesn't return to init, so dies
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 
 				case FAIL:
 					this.startmelding = "Dette var visst feil, proev paa nytt.\n";
 					this.brukerValg = MenyValg.ROOT;
 					break;
+<<<<<<< HEAD
 					
 				case RAGEQUIT:
 					System.out.println(exitStr); // doesn't return to init, so dies
+=======
+
+				case INIT:
+					Console.clearScreen();
+					System.out.print(velkommenStr + menyEntriesStr);
+					velkommenStr = "Hovedmeny: \n";
+					System.out.println(tutorial);
+					this.brukerValg = null;
+					break;
+
+				case FILLESNING:
+					fillesningMeny();
+					this.brukerValg = MenyValg.INIT;
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 			}
 		}
@@ -95,11 +146,11 @@ public class Startmeny implements StartmenyInterface {
 	private void printeMeny(){
 		Console.clearScreen();
 
-		System.out.print("Hva vil du printe?\n" + 
-						 "1. Pasienter\n" + 
-						 "2. Leger\n" + 
+		System.out.print("Hva vil du printe?\n" +
+						 "1. Pasienter\n" +
+						 "2. Leger\n" +
 						 "3. Legemidler\n" +
-						 "4. Resepter\n" + 
+						 "4. Resepter\n" +
 						 "5. ALT!!!\n" +
 						 "0. Jeg angrer!\n"
 		);
@@ -107,7 +158,7 @@ public class Startmeny implements StartmenyInterface {
 		do {
 			printeValg = Console.getInt(5, -1);
 			if (printeValg == -1) System.out.println("Dette er ikke gyldig, venligst skriv et gyldig tall");
-		} while (printeValg == -1);		
+		} while (printeValg == -1);
 
 		switch (printeValg) {
 			case 0:
@@ -126,7 +177,7 @@ public class Startmeny implements StartmenyInterface {
 				db.printLegemiddel();
 				Console.waitForEnter();
 				break;
-			case 4: 
+			case 4:
 				db.printResept();
 				Console.waitForEnter();
 				break;
@@ -141,18 +192,18 @@ public class Startmeny implements StartmenyInterface {
 	private void opretteMeny(){
 		Console.clearScreen();
 
-		System.out.print("Hva vil du oprette?\n" + 
-						 "1. Pasient\n" + 
-						 "2. Lege\n" + 
+		System.out.print("Hva vil du oprette?\n" +
+						 "1. Pasient\n" +
+						 "2. Lege\n" +
 						 "3. Legemiddel\n" +
-						 "4. Resept\n" + 
+						 "4. Resept\n" +
 						 "0. Jeg angrer!\n"
 		);
 		int opretteValg = -1;
 		do {
 			opretteValg = Console.getInt(4, -1);
 			if (opretteValg == -1) System.out.println("Dette var ikke gyldig, vennligst skriv et gyldig tall");
-		} while (opretteValg == -1);		
+		} while (opretteValg == -1);
 
 		switch (opretteValg) {
 			case 0:
@@ -163,14 +214,14 @@ public class Startmeny implements StartmenyInterface {
 				String personnr = Console.getString("Hva er person-nummeret til pasienten?");
 
 				db.lagPasient(navn, personnr);
-				
+
 				break;
 			case 2:
 				String legenavn = Console.getString("Hva skal legen hete?");
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
 
 				if (kontrollid  < 0) {
-					System.out.println("KontrollID maa vaere et positivt tall eller 0");
+					System.out.println("KontrollID maa vaere et positivt heltall eller 0");
 					break;
 				}
 				db.lagLege(legenavn, kontrollid);
@@ -180,18 +231,20 @@ public class Startmeny implements StartmenyInterface {
 				String legemiddelNavn = Console.getString("Hva heter legemiddelet?");
 				double pris = Console.getDouble("Hva koster legemiddelet (kr)?");
 				if (pris == -1) {
-					System.out.println("En ikke-positiv pris blir dyrt for selskapet. Bruk et positivt tall.");
+					System.out.println("Bruk et positivt tall.");
 					break;
 				}
 
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet (mg)?");
 				if (virkestoff == -1) {
 					System.out.println("Bruk et tall over null.");
+					break;
 				}
 
 				int styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 				if (styrke == -1) {
-					System.out.println("Styrke er en metrisk verdi.");
+					System.out.println("Styrke må være en positiv tallverdi.");
+					break;
 				}
 
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
@@ -223,7 +276,7 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Ingen pasient med denne ID");
 					break;
 				}
-				
+
 				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette (blaa, hvit, militaer, presept)?");
 				try {
 					if (reseptType != "p" && reseptType != "presept"){
@@ -248,7 +301,7 @@ public class Startmeny implements StartmenyInterface {
 			}
 		}
 		System.out.println("");
-		
+
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
 									"eller skriv \"beklager at jeg valgte feil, jeg vil naa gjerne gaa tilbake om dette er mulig\" for aa gaa tilbake",-1);
 		if (pasientId == -1) {
@@ -265,7 +318,7 @@ public class Startmeny implements StartmenyInterface {
 		}
 		else {
 			Pasient pasient = db.finnPasient(pasientId);
-		
+
 			for (Resept resept : pasient.hentResepter()) {
 				System.out.println(resept);
 			}
@@ -285,7 +338,7 @@ public class Startmeny implements StartmenyInterface {
 					for (Resept pasientSinResept : pasient.hentResepter()) {
 						if (resept.equals(pasientSinResept)) gyldigResept = true;
 					}
-					
+
 					if (gyldigResept) {
 						if (!resept.bruk()) {
 							System.out.println("Denne resepten er tom");
@@ -307,10 +360,10 @@ public class Startmeny implements StartmenyInterface {
 	private void statistikkMeny(){
 		Console.clearScreen();
 
-		System.out.print("Hva slags statistikk vil du printe?\n" + 
-						 "1. Antall resepter paa narkotiske legemidler\n" + 
-						 "2. Antall resepter paa vanedannende legemidler\n" + 
-						 "3. Antall narkotiske resepter per lege\n" + 
+		System.out.print("Hva slags statistikk vil du printe?\n" +
+						 "1. Antall resepter paa narkotiske legemidler\n" +
+						 "2. Antall resepter paa vanedannende legemidler\n" +
+						 "3. Antall narkotiske resepter per lege\n" +
 						 "4. Antall narkotiske resepter per pasient\n" +
 						 "0. Jeg angrer!\n"
 		);
@@ -318,7 +371,7 @@ public class Startmeny implements StartmenyInterface {
 		do {
 			printeValg = Console.getInt(4, -1);
 			if (printeValg == -1) System.out.println("Dette er ikke gyldig, skriv et gyldig tall");
-		} while (printeValg == -1);		
+		} while (printeValg == -1);
 
 		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
 
