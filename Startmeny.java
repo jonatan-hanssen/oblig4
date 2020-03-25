@@ -208,7 +208,7 @@ public class Startmeny implements StartmenyInterface {
 
 				double virkestoff = Console.getDouble("Hvor mye virkestoff har legemiddelet (mg)?");
 				if (virkestoff == -1) {
-					System.out.println("Bruk et tall over null.");
+					System.out.println("Bruk et tall i N.");
 					break;
 				}
 

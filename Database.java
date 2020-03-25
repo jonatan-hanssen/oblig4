@@ -30,7 +30,7 @@ class Database implements DatabaseInterface {
 		lesFraFil(filnavn);
 	}
 
-	public void lesFraFil(String filnavn) throws FileNotFoundException {
+	public void lesFraFil(String filnavn, boolean verbose) throws FileNotFoundException {
 		File fil = new File(filnavn);
 		Scanner scanner = new Scanner(fil);
 
@@ -55,12 +55,16 @@ class Database implements DatabaseInterface {
 			}
 			leggTilIListe(naavaerendeLinje, listeIndeks, scannerPos);
 		}
-		System.out.println("***   Naa er databasen ferdig konstruert   ***\n");
-		System.out.println("	Antall pasienter: " + pasientListe.stoerrelse());
-		System.out.println("	Antall leger: " + legeListe.stoerrelse());
-		System.out.println("	Antall legemidler: " + legemiddelListe.stoerrelse());
-		System.out.println("	Antall resepter: " + reseptListe.stoerrelse());
-		System.out.println("	Linjer gaatt gjennom: " + scannerPos + "\n");
+		if (verbose) System.out.println("***   Naa er databasen ferdig konstruert   ***\n");
+		if (verbose) System.out.println("	Antall pasienter: " + pasientListe.stoerrelse());
+		if (verbose) System.out.println("	Antall leger: " + legeListe.stoerrelse());
+		if (verbose) System.out.println("	Antall legemidler: " + legemiddelListe.stoerrelse());
+		if (verbose) System.out.println("	Antall resepter: " + reseptListe.stoerrelse());
+		if (verbose) System.out.println("	Linjer gaatt gjennom: " + scannerPos + "\n");
+	}
+
+	public void lesFraFil(String filnavn) throws FileNotFoundException {
+		return lesFraFil(filnavn, true);
 	}
 	private void leggTilIListe(String linje, int nummerPaaListe, int linjePos) {
 		String[] linjeArray = linje
