@@ -190,9 +190,9 @@ public class Startmeny implements StartmenyInterface {
 					break;
 				}
 
-				int styrke = null;
+				int styrke = 0;
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
-				if (legemiddelet == "vannedannende" || legemiddelet == "narkotisk") {
+				if (legemiddelType == "vannedannende" || legemiddelType == "narkotisk") {
 					styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 					if (styrke == -1) {
 						System.out.println("Styrke må være en positiv tallverdi.");
@@ -206,7 +206,6 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Type maa vaere vanlig, narkotisk eller vanedannende");
 				}
 
-
 				break;
 			case 4:
 				boolean error = false;
@@ -219,7 +218,7 @@ public class Startmeny implements StartmenyInterface {
 					error = true;
 				}
 				if (db.hentPasienter().stoerrelse() == 0) {
-					System.out.prntln("Fant ingen pasienter. Ikke lek med legemidler.");
+					System.out.println("Fant ingen pasienter. Ikke lek med legemidler.");
 					error = true;
 				}
 				if (error) {
@@ -229,7 +228,7 @@ public class Startmeny implements StartmenyInterface {
 
 				db.printLege();
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
-				if (db.finnLege(utskrivendeLegenavn) == null){
+				if (db.finnLege(utskrivendeLegenavn) == null) {
 					System.out.println("Denne legen finnes ikke");
 					break;
 				}
