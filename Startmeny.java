@@ -14,7 +14,7 @@ public class Startmeny implements StartmenyInterface {
 							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil ut (exit).\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
-	static String feilmelding = "Oopsie! Det var visst ugyldig. Skriv et gyldig tall";
+
 
 	private Database db;
 
@@ -96,7 +96,7 @@ public class Startmeny implements StartmenyInterface {
 					break;
 
 				case FAIL:
-					System.out.println(feilmelding);
+					System.out.println("Dette er ikke gyldig, skriv et gyldig tall");
 					break;
 
 				case INIT:
@@ -121,16 +121,16 @@ public class Startmeny implements StartmenyInterface {
 
 		System.out.print("Hva vil du printe?\n" + 
 						 "1. Pasienter\n" + 
-						 "3. Leger\n" + 
-						 "4. Legemidler\n" +
-						 "2. Resepter\n" + 
+						 "2. Leger\n" + 
+						 "3. Legemidler\n" +
+						 "4. Resepter\n" + 
 						 "5. ALT!!!\n" +
 						 "0. Jeg angrer!\n"
 		);
 		int printeValg = -1;
 		do {
 			printeValg = Console.getInt(5, -1);
-			if (printeValg == -1) System.out.println(feilmelding);
+			if (printeValg == -1) System.out.println("Dette er ikke gyldig, venligst skriv et gyldig tall");
 		} while (printeValg == -1);		
 
 		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til hovedmenyen";
@@ -174,7 +174,7 @@ public class Startmeny implements StartmenyInterface {
 		int opretteValg = -1;
 		do {
 			opretteValg = Console.getInt(4, -1);
-			if (opretteValg == -1) System.out.println(feilmelding);
+			if (opretteValg == -1) System.out.println("Dette var ikke gyldig, vennligst skriv et gyldig tall");
 		} while (opretteValg == -1);		
 
 		switch (opretteValg) {
@@ -192,7 +192,7 @@ public class Startmeny implements StartmenyInterface {
 				int kontrollid = Console.getInt("Hva er kontroll-nummeret til legen? (0 hvis ingen)");
 
 				if (kontrollid  < 0) {
-					System.out.println(feilmelding);
+					System.out.println("KontrollID maa vaere et positivt tall eller 0");
 					break;
 				}
 				db.lagLege(legenavn, kontrollid);
@@ -208,7 +208,7 @@ public class Startmeny implements StartmenyInterface {
 				try {
 					db.lagLegemiddel(legemiddelNavn, pris, virkestoff, styrke, legemiddelType);
 				} catch (TypeNotFoundException e) {
-					System.out.println(feilmelding);
+					System.out.println("Type maa vaere vanlig, narkotisk eller vanedannende");
 				}
 
 
@@ -217,19 +217,19 @@ public class Startmeny implements StartmenyInterface {
 				db.printLege();
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
 				if (db.finnLege(utskrivendeLegenavn) == null){
-					System.out.println(feilmelding);
+					System.out.println("Denne legen finnes ikke");
 					break;
 				}
 				db.printLegemiddel();
 				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
 				if (db.finnLegemiddel(legemiddelId) == null) {
-					System.out.println(feilmelding);
+					System.out.println("Intet legemiddel med denne ID");
 					break;
 				}
 				db.printPasient();
 				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
 				if (db.finnPasient(pasientId) == null) {
-					System.out.println(feilmelding);
+					System.out.println("Ingen pasient med denne ID");
 					break;
 				}
 				System.out.println("blaa\nhvit\nmilitaer\npresept");
@@ -242,8 +242,7 @@ public class Startmeny implements StartmenyInterface {
 						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, 3, reseptType);
 					}
 				} catch (TypeNotFoundException e) {
-					System.out.println(feilmelding);
-					System.out.println(e.getMessage());
+					System.out.println("Resept maa vaere hvit, blaa, presept eller militaer");
 				}
 				break;
 		}
@@ -325,7 +324,7 @@ public class Startmeny implements StartmenyInterface {
 		int printeValg = -1;
 		do {
 			printeValg = Console.getInt(4, -1);
-			if (printeValg == -1) System.out.println(feilmelding);
+			if (printeValg == -1) System.out.println("Dette er ikke gyldig, skriv et gyldig tall");
 		} while (printeValg == -1);		
 
 		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til startmenyen";
