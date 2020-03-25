@@ -10,8 +10,8 @@ public class Startmeny implements StartmenyInterface {
 							"2. Legge til i databasen.\n" +
 							"3. Bruke en resept.\n" +
 							"4. Se statistikk.\n" +
-							"5. Skrive til fil fra databasen\n" +
-							"6. Skrive til databasen fra fil\n" +
+							"5. Skrive til fil\n" +
+							"6. Lese fra fil\n" +
 							"0. Avslutt\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
 
@@ -77,7 +77,6 @@ public class Startmeny implements StartmenyInterface {
 				
 				case FILLESNING:
 					fillesningMeny();
-					this.brukerValg = MenyValg.ROOT;
 					break;
 
 				case FAIL:
@@ -86,10 +85,10 @@ public class Startmeny implements StartmenyInterface {
 					break;
 					
 				case RAGEQUIT:
-					System.out.println(exitStr); // doesn't return to init, so dies
 					break;
 			}
 		}
+		System.out.println(exitStr);
 
 	}
 
@@ -361,17 +360,19 @@ public class Startmeny implements StartmenyInterface {
 		this.brukerValg = MenyValg.ROOT;
 	}
 	private void fillesningMeny() {
-		String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
-		try {
-			if (!filnavn.equals("0")) db.lesFraFil(filnavn);
-			else System.out.println("Gaar tilbake..");
-		}
-		catch (FileNotFoundException e) {
-			Console.clearScreen();
-			System.out.println("Denne filen eksisterer ikke");
-			this.brukerValg = MenyValg.FILLESNING;
-		}
-		Console.waitForEnter();
 		this.brukerValg = MenyValg.ROOT;
+		String filnavn = Console.getString("Skriv filnavn du vil lese fra, eller 0 for aa gaa tilbake.");
+		if (!filnavn.equals("0")) {
+			try {
+				db.lesFraFil(filnavn);
+			}
+			catch (FileNotFoundException e) {
+				Console.clearScreen();
+				System.out.println("Denne filen eksisterer ikke");
+				this.brukerValg = MenyValg.FILLESNING;
+				System.out.println(this.brukerValg);
+			}
+			Console.waitForEnter();
+		}
 	}
 }
