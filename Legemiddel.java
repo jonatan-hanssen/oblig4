@@ -37,12 +37,6 @@ public abstract class Legemiddel {
 	}
 	@Override
 	public String toString() {
-		String string = "";
-		
-		string += "\u2014 " + this.navn + " (id: " + Integer.toString(id) + ")\n"
-				+ "    Pris: " + String.format("%.02f", this.pris) + " kr\n"
-				+ "    Virkestoff: " + String.format("%.02f", this.virkestoff);
-		
-		return string;
+		return id + ": " + navn + ". Pris: " + Double.toString(pris) + ". Virkestoff: " + Double.toString(virkestoff);
 	}
 }

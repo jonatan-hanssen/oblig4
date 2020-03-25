@@ -173,7 +173,7 @@ public class Startmeny implements StartmenyInterface {
 		);
 		int opretteValg = -1;
 		do {
-			opretteValg = Console.getInt(3, -1);
+			opretteValg = Console.getInt(4, -1);
 			if (opretteValg == -1) System.out.println(feilmelding);
 		} while (opretteValg == -1);		
 
@@ -213,25 +213,26 @@ public class Startmeny implements StartmenyInterface {
 
 
 				break;
-			case 4: 
+			case 4:
+				db.printLege();
 				String utskrivendeLegenavn = Console.getString("Hva heter legen som skriver ut resepten");
 				if (db.finnLege(utskrivendeLegenavn) == null){
 					System.out.println(feilmelding);
 					break;
 				}
-
+				db.printLegemiddel();
 				int legemiddelId = Console.getInt("Hva er id-nummeret til legemiddelet?");
 				if (db.finnLegemiddel(legemiddelId) == null) {
 					System.out.println(feilmelding);
 					break;
 				}
-
+				db.printPasient();
 				int pasientId = Console.getInt("Hva er id-nummeret til pasienten?");
 				if (db.finnPasient(pasientId) == null) {
 					System.out.println(feilmelding);
 					break;
 				}
-
+				System.out.println("blaa\nhvit\nmilitaer\npresept");
 				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette?");
 				try {
 					if (reseptType != "p" && reseptType != "presept"){
@@ -242,6 +243,7 @@ public class Startmeny implements StartmenyInterface {
 					}
 				} catch (TypeNotFoundException e) {
 					System.out.println(feilmelding);
+					System.out.println(e.getMessage());
 				}
 				break;
 		}
