@@ -4,17 +4,15 @@ import java.io.IOException;
 public class Startmeny implements StartmenyInterface {
 	static boolean consoleLogging = false;
 
-	static String velkommenStr = "Velkommen til Legesystemet!\n";
-
-	static String tutorial = "Velg ett av de mulige menyelementene med tallet.";
-	static String menyEntriesStr = "1. Jeg vil printe.\n" +
-							"2. Jeg vil legge til i databasen.\n" +
-							"3. Jeg vil bruke en resept.\n" +
-							"4. Jeg vil se statistikk.\n" +
-							"5. Jeg vil skrive til fil.\n" +
-							"6. Jeg vil skrive til databasen fra fil\n" +
-							"0. Jeg vil ut (exit).\n"; // av denne karantena
-
+	static String startmelding = "Velkommen til Legesystemet!\n";
+	static String tutorial = "Hva vil du gjoere? Velg ett av de mulige menyelementene med tallet.";
+	static String menyEntriesStr = "1. Printe.\n" + 
+							"2. Legge til i databasen.\n" +
+							"3. Bruke en resept.\n" +
+							"4. Se statistikk.\n" +
+							"5. Skrive til fil fra databasen\n" +
+							"6. Skrive til databasen fra fil\n" +
+							"0. Avslutt\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
 
 
@@ -23,15 +21,15 @@ public class Startmeny implements StartmenyInterface {
 	enum MenyValg {
 		RAGEQUIT, // 0
 		PRINTE, // 1
-		OPRETTE, // 2
+		OPPRETTE, // 2
 		BRUKERESEPT, // 3
 		STATISTIKK, // 4
 		FILSKRIVING, // 5
 		FILLESNING, //6
-		FAIL, // 7
-		INIT, // 8
+		FAIL, // kan ikke naas
+		ROOT // kan ikke naas
 	}
-	private MenyValg brukerValg = MenyValg.INIT;
+	private MenyValg brukerValg = MenyValg.ROOT;
 
 	public Startmeny() {
 		this.db = new Database();
@@ -40,11 +38,14 @@ public class Startmeny implements StartmenyInterface {
 
 	public Startmeny(Database db) {
 		this.db = db;
+		this.startmelding = "Velkommen til Legesystemet!\nDatabasen har blitt lastet fra fil.\n";
 		this.start();
 	}
 
 	private void start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
+<<<<<<< HEAD
+=======
 			/*
 			*	if last selection was to show main menu, don't ask the user for a value
 			*	and instead show the given settings. showing the main menu resets the
@@ -67,39 +68,62 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Du valgte " + this.brukerValg);
 			}
 
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 			switch (this.brukerValg) {
+				case ROOT:
+					Console.clearScreen();
+					System.out.print(startmelding + "\n" + menyEntriesStr);
+					int brukerTall = Console.getInt(tutorial, 6, -1); // 6 as the maxValue, because of MenyValg, -1 as the fallback value
+					if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
+					else this.brukerValg = MenyValg.values()[brukerTall];
+					this.startmelding = "Hovedmeny:";
+					break;
+				
 				case PRINTE:
 					printeMeny();
-					this.brukerValg = MenyValg.INIT;
 					break;
+<<<<<<< HEAD
+				
+				case OPPRETTE:
+=======
 
 				case OPRETTE:
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					opretteMeny();
-					this.brukerValg = MenyValg.INIT;
 					break;
 
 				case BRUKERESEPT:
 					reseptMeny();
-					this.brukerValg = MenyValg.INIT;
 					break;
 
 				case STATISTIKK:
 					statistikkMeny();
-					this.brukerValg = MenyValg.INIT;
 					break;
 
 				case FILSKRIVING:
 					filskrivingMeny();
-					this.brukerValg = MenyValg.INIT;
 					break;
+<<<<<<< HEAD
+				
+				case FILLESNING:
+					fillesningMeny();
+					this.brukerValg = MenyValg.ROOT;
+=======
 
 				case RAGEQUIT:
 					System.out.println(exitStr); // doesn't return to init, so dies
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 
 				case FAIL:
-					System.out.println("Dette er ikke gyldig, skriv et gyldig tall");
+					this.startmelding = "Dette var visst feil, proev paa nytt.\n";
+					this.brukerValg = MenyValg.ROOT;
 					break;
+<<<<<<< HEAD
+					
+				case RAGEQUIT:
+					System.out.println(exitStr); // doesn't return to init, so dies
+=======
 
 				case INIT:
 					Console.clearScreen();
@@ -112,6 +136,7 @@ public class Startmeny implements StartmenyInterface {
 				case FILLESNING:
 					fillesningMeny();
 					this.brukerValg = MenyValg.INIT;
+>>>>>>> f1d4d2a7d478caaf3d130f2fdc6abf8ca9076738
 					break;
 			}
 		}
@@ -135,32 +160,33 @@ public class Startmeny implements StartmenyInterface {
 			if (printeValg == -1) System.out.println("Dette er ikke gyldig, venligst skriv et gyldig tall");
 		} while (printeValg == -1);
 
-		String pressEnterString = "\n\nFerdig med aa printe, trykk paa enter \nfor aa gaa tilbake til hovedmenyen";
-
 		switch (printeValg) {
 			case 0:
+				this.brukerValg = MenyValg.ROOT;
 				return;
 			case 1:
 				db.printPasient();
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
+				System.out.println("s");
 				break;
 			case 2:
 				db.printLege();
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 3:
 				db.printLegemiddel();
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 4:
 				db.printResept();
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 5:
 				db.printAlt();
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 		}
+		this.brukerValg = MenyValg.PRINTE;
 
 	}
 	private void opretteMeny(){
@@ -181,6 +207,7 @@ public class Startmeny implements StartmenyInterface {
 
 		switch (opretteValg) {
 			case 0:
+				this.brukerValg = MenyValg.ROOT;
 				return;
 			case 1:
 				String navn = Console.getString("Hva skal pasienten hete?");
@@ -263,7 +290,8 @@ public class Startmeny implements StartmenyInterface {
 				}
 				break;
 		}
-		Console.getString("Trykk Enter for å fortsette.");
+		this.brukerValg = MenyValg.OPPRETTE;
+		Console.waitForEnter();
 
 	}
 	private void reseptMeny(){
@@ -275,11 +303,12 @@ public class Startmeny implements StartmenyInterface {
 		System.out.println("");
 
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
-									"eller skriv -1 for aa gaa tilbake",(db.hentPasienter().stoerrelse()-1),-2);
+									"eller skriv \"beklager at jeg valgte feil, jeg vil naa gjerne gaa tilbake om dette er mulig\" for aa gaa tilbake",-1);
 		if (pasientId == -1) {
-			this.brukerValg = MenyValg.INIT;
+			System.out.println("Takk for din oppmerksomhet, vi vil naa gaa tilbake. Paa gjensyn!");
+			this.brukerValg = MenyValg.ROOT;
 		}
-		else if (pasientId == -2) {
+		else if (db.finnPasient(pasientId) == null) {
 			System.out.println("Denne pasienten finnes ikke");
 			this.brukerValg = MenyValg.BRUKERESEPT;
 		}
@@ -326,7 +355,7 @@ public class Startmeny implements StartmenyInterface {
 				}
 			}
 		}
-		Console.getString("Trykk enter for aa fortsette");
+		Console.waitForEnter();
 	}
 	private void statistikkMeny(){
 		Console.clearScreen();
@@ -348,24 +377,26 @@ public class Startmeny implements StartmenyInterface {
 
 		switch (printeValg) {
 			case 0:
+				this.brukerValg = MenyValg.ROOT;
 				return;
 			case 1:
 				db.printResepterAvType(Narkotisk.class);
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 2:
 				db.printResepterAvType(Vanedannende.class);
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 3:
 				db.printPersonMedMisbruk(Vanedannende.class, "lege");
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 			case 4:
 				db.printPersonMedMisbruk(Narkotisk.class, "pasient");
-				Console.getString(pressEnterString);
+				Console.waitForEnter();
 				break;
 		}
+		this.brukerValg = MenyValg.STATISTIKK;
 	}
 	private void filskrivingMeny(){
 		String filnavn = Console.getString("Skriv filnavn du vil skrive til, eller 0 for aa gaa tilbake.");

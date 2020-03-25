@@ -24,6 +24,11 @@ public class Console {
 			return fallback;
 		}
 	}
+	
+	public static int getInt(int fallback) {
+		// same as getInt() but with the optional question to user
+		return getInt(Integer.MAX_VALUE, fallback);
+	}
 
 	public static int getInt() {
 		// easiest way to use the function, allows any positive integer
@@ -42,6 +47,13 @@ public class Console {
 		System.out.println(s);
 		return getInt(maxvalue, fallback);
 	}
+	
+	public static int getInt(String s, int fallback) {
+		// same as getInt() but with the optional question to user
+		System.out.println(s);
+		return getInt(fallback);
+	}
+	
 
 
 	/* 
@@ -123,7 +135,8 @@ public class Console {
 	}
 
 	public static void waitForEnter() {
-		getString("Trykk <Enter> for aa fortsette.");
-		clearScreen();
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Trykk <Enter> for aa fortsette.");
+		scanner.nextLine();
 	}
 }
