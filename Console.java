@@ -64,7 +64,7 @@ public class Console {
 	}
 
 	public static double getDouble(String s) {
-		System.out.print(s);
+		System.out.println(s);
 		return getDouble();
 	}
 
