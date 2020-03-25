@@ -224,6 +224,7 @@ public class Startmeny implements StartmenyInterface {
 				if (error) {
 					this.brukerValg = MenyValg.OPPRETTE;
 					Console.waitForEnter();
+					break;
 				}
 
 				db.printLege();
