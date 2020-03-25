@@ -10,7 +10,7 @@ public class Startmeny implements StartmenyInterface {
 							"2. Jeg vil legge til i databasen.\n" +
 							"3. Jeg vil bruke en resept.\n" +
 							"4. Jeg vil se statistikk.\n" +
-							"5. Jeg vil skrive til fil.\n" +
+							"5. Jeg vil skrive til fil fra databasen\n" +
 							"6. Jeg vil skrive til databasen fra fil\n" +
 							"0. Jeg vil ut (exit).\n"; // av denne karantena
 	static String exitStr = "Ha en fin dag!";
