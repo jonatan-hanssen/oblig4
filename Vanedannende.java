@@ -10,4 +10,9 @@ class Vanedannende extends Legemiddel {
 	public int hentVanedannendeStyrke() {
 		return vanedannendeStyrke;
 	}
+	@Override
+	public String toString() {
+		return id + ": " + navn + " (pris: " + String.format("%.2f kr",pris) + ", virkestoff: " 
+				+ String.format("%.3f mg", virkestoff) + ", vanedannende styrke: " + vanedannendeStyrke + ")";
+	}
 }
