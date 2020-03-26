@@ -21,6 +21,8 @@ abstract class Resept {
 		this.reit = reit;
 		
 		this.pris  = this.legemiddel.hentPris();
+		
+		pasient.leggTilResept(this);
 
 	}
 	public int hentId() {

@@ -192,7 +192,7 @@ public class Startmeny implements StartmenyInterface {
 
 				int styrke = 0;
 				String legemiddelType = Console.getString("Av hvilken type er legemiddelet (vanlig, vannedannende, narkotisk)?");
-				if (legemiddelType == "vannedannende" || legemiddelType == "narkotisk") {
+				if (legemiddelType.equals("vannedannende") || legemiddelType.equals("narkotisk")) {
 					styrke = Console.getInt("Hvor sterkt er legemiddelet?");
 					if (styrke == -1) {
 						System.out.println("Styrke må være en positiv tallverdi.");
@@ -247,7 +247,7 @@ public class Startmeny implements StartmenyInterface {
 
 				String reseptType = Console.getString("Hvilken type resept oensker du aa opprette (blaa, hvit, militaer, presept)?");
 				try {
-					if (reseptType != "p" && reseptType != "presept"){
+					if (!reseptType.equals("p") && !reseptType.equals("presept")){
 						int reit = Console.getInt("Hva er reiten for resepten?");
 						db.lagResept(utskrivendeLegenavn, legemiddelId, pasientId, reit, reseptType);
 					} else {
@@ -263,21 +263,24 @@ public class Startmeny implements StartmenyInterface {
 
 	}
 	private void reseptMeny(){
+		boolean fantPasientMedResept = false;
 		for (Pasient pasient : db.hentPasienter()) {
 			if (pasient.hentResepter().stoerrelse() > 0) {
 				System.out.println(pasient);
+				fantPasientMedResept = true;
 			}
+			
 		}
-		if (db.hentPasienter().stoerrelse() == 0) {
-			System.out.println("Fant ingen pasienter, dermed ingen resepter.");
-			this.brukerValg = MenyValg.ROOT
-			Console.waitForEnter();
+		if (!fantPasientMedResept) {
+			System.out.println("Fant ingen pasienter med resepter.");
+            this.brukerValg = MenyValg.ROOT;
+            Console.waitForEnter();
 			return;
 		}
 		System.out.println("");
 
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
-									"eller skriv \"beklager at jeg valgte feil, jeg vil naa gjerne gaa tilbake om dette er mulig\" for aa gaa tilbake",-1);
+									"eller skriv \"q\" for aa gaa tilbake",-1);
 		if (pasientId == -1) {
 			System.out.println("Takk for din oppmerksomhet, vi vil naa gaa tilbake. Paa gjensyn!");
 			this.brukerValg = MenyValg.ROOT;
@@ -297,35 +300,37 @@ public class Startmeny implements StartmenyInterface {
 				System.out.println(resept);
 			}
 			System.out.println("");
-			int reseptId = -2;
-			while (reseptId == -2) {
-				reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller -1 for aa gaa tilbake",(db.hentResepter().stoerrelse()-1),-2);
-				if (reseptId == -1) {
-					this.brukerValg = MenyValg.BRUKERESEPT;
-				}
-				else if (reseptId == -2) {
-					System.out.println("Dette er ikke en gyldig id");
-				}
-				else {
-					boolean gyldigResept = false;
-					Resept resept = db.finnResept(reseptId);
-					for (Resept pasientSinResept : pasient.hentResepter()) {
-						if (resept.equals(pasientSinResept)) gyldigResept = true;
-					}
+			int reseptId = -1;
 
-					if (gyldigResept) {
-						if (!resept.bruk()) {
-							System.out.println("Denne resepten er tom");
-							reseptId = -2;
-						}
-						else {
-							System.out.println("Brukte resept paa " + resept.hentLegemiddel().hentNavn() + ", " + resept.hentReit() + " bruk igjen.");
-						}
+			reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller \"q\" for aa gaa tilbake",-1);
+			if (reseptId == -1) {
+				this.brukerValg = MenyValg.ROOT;
+				return;
+			}
+			else if (db.finnResept(reseptId) == null) {
+				System.out.println("Dette er en ugyldig ID");
+				this.brukerValg = MenyValg.BRUKERESEPT;
+			}
+			else {
+				boolean gyldigResept = false;
+				Resept resept = db.finnResept(reseptId);
+				for (Resept pasientSinResept : pasient.hentResepter()) {
+					if (resept.equals(pasientSinResept)) gyldigResept = true;
+				}
+
+				if (gyldigResept) {
+					if (!resept.bruk()) {
+						System.out.println("Denne resepten er tom");
+						this.brukerValg = MenyValg.BRUKERESEPT;
 					}
 					else {
-						System.out.println("Denne pasienten har ikke en resept med id " + reseptId + ".");
-						reseptId = -2;
+						System.out.println("Brukte resept paa " + resept.hentLegemiddel().hentNavn() + ", " + resept.hentReit() + " bruk igjen.");
+						this.brukerValg = MenyValg.ROOT;
 					}
+				}
+				else {
+					System.out.println("Denne pasienten har ikke en resept med id " + reseptId + ".");
+					this.brukerValg = MenyValg.BRUKERESEPT;
 				}
 			}
 		}

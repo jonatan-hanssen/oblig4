@@ -178,7 +178,6 @@ class Database implements DatabaseInterface {
 					}
 					if (reseptLagd) {
 						reseptListe.leggTil(resept);
-						pasient.leggTilResept(resept);
 					}
 
 					break;
@@ -457,11 +456,12 @@ class Database implements DatabaseInterface {
 			System.out.println("Det finnes ikke en pasient med id-en som ble oppgitt");
 			gyldig = false;
 		}
-		if (reit <= 0 && type != "p") {
+		if (reit <= 0 && !(type.equals("p") || type.equals("presept"))) {
 			System.out.println("Resepten maa ha et heltall stoerre enn 0 reit, eller vaere p-resept");
 			gyldig = false;
 		}
-		if (!type.equals("p") && !type.equals("militær") && !type.equals("militaer") && !type.equals("blå") && !type.equals("blaa") && !type.equals("hvit")) {
+		if (!type.equals("p") && !type.equals("militær") && !type.equals("militaer") 
+			&& !type.equals("blå") && !type.equals("blaa") && !type.equals("hvit") && !type.equals("presept")) {
 			gyldig = false;
 			throw new TypeNotFoundException();
 		}
@@ -475,7 +475,7 @@ class Database implements DatabaseInterface {
 					resept = lege.skrivHvitResept(legemiddel, pasient, reit);
 				} else if (type.equals("blaa")) {
 					resept = lege.skrivBlaaResept(legemiddel, pasient, reit);
-				} else if (type.equals("p")) {
+				} else if (type.equals("p") || type.equals("presept")) {
 					resept = lege.skrivPResept(legemiddel, pasient);
 				}
 				reseptListe.leggTil(resept);
