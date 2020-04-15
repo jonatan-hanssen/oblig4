@@ -280,9 +280,9 @@ public class Startmeny implements StartmenyInterface {
 		System.out.println("");
 
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
-									"eller skriv \"q\" for aa gaa tilbake",-1);
+									"eller skriv noe annet enn et tall for aa gaa tilbake",-1);
 		if (pasientId == -1) {
-			System.out.println("Takk for din oppmerksomhet, vi vil naa gaa tilbake. Paa gjensyn!");
+			System.out.println("Gaar tilbake...");
 			this.brukerValg = MenyValg.ROOT;
 		}
 		else if (db.finnPasient(pasientId) == null) {
@@ -302,10 +302,10 @@ public class Startmeny implements StartmenyInterface {
 			System.out.println("");
 			int reseptId = -1;
 
-			reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller \"q\" for aa gaa tilbake",-1);
+			reseptId = Console.getInt("Skriv id-en til resepten du vil bruke, eller skriv noe annet enn et tall for aa gaa tilbake",-1);
 			if (reseptId == -1) {
+				System.out.println("Gaar tilbake...");
 				this.brukerValg = MenyValg.ROOT;
-				return;
 			}
 			else if (db.finnResept(reseptId) == null) {
 				System.out.println("Dette er en ugyldig ID");
