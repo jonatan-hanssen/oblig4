@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 public class Startmeny implements StartmenyInterface {
 	static boolean consoleLogging = false;
 
@@ -32,26 +33,33 @@ public class Startmeny implements StartmenyInterface {
 	private MenyValg brukerValg = MenyValg.ROOT;
 
 	public Startmeny() {
-		this.db = new Database();
-		this.start();
+		this.db = new Database(); // creates an empty Database unit and assigns it to self
+		this.start(); // runs the startmeny with the assigned db
 	}
 
 	public Startmeny(Database db) {
 		this.db = db;
-		this.startmelding = "Velkommen til Legesystemet!\nDatabasen har blitt lastet fra fil.\n";
+		this.startmelding = "Velkommen til Legesystemet!\nDatabasen har blitt lastet fra fil.\n"; // we want to inform the user the file has loaded succesfully
 		this.start();
 	}
 
 	private void start() {
 		while (this.brukerValg != MenyValg.RAGEQUIT) {
 			switch (this.brukerValg) {
+				/*
+					Each function inside each case changes the this.brukerValg, so that in the next while-loop it knows where to continue.
+					Ususally, this will be ROOT, as this means we've returned to the main start page.
+
+					Each case is a use-case for the user.
+				*/
+
 				case ROOT:
 					Console.clearScreen();
 					System.out.print(startmelding + "\n" + menyEntriesStr);
 					int brukerTall = Console.getInt(tutorial, 6, -1); // 6 as the maxValue, because of MenyValg, -1 as the fallback value
 					if (brukerTall == -1) this.brukerValg = MenyValg.FAIL;
 					else this.brukerValg = MenyValg.values()[brukerTall];
-					this.startmelding = "Hovedmeny:";
+					this.startmelding = "Hovedmeny:";  // override startmelding in the first run of this function.
 					break;
 				
 				case PRINTE:
@@ -81,7 +89,7 @@ public class Startmeny implements StartmenyInterface {
 
 				case FAIL:
 					this.startmelding = "Dette var visst feil, proev paa nytt.\n";
-					this.brukerValg = MenyValg.ROOT;
+					this.brukerValg = MenyValg.ROOT; // error message and back to start
 					break;
 					
 				case RAGEQUIT:
@@ -93,7 +101,7 @@ public class Startmeny implements StartmenyInterface {
 	}
 
 	private void printeMeny(){
-		Console.clearScreen();
+		Console.clearScreen(); // we simulate a new page
 
 		System.out.print("Hva vil du printe?\n" +
 						 "1. Pasienter\n" +
@@ -139,7 +147,7 @@ public class Startmeny implements StartmenyInterface {
 
 	}
 	private void opretteMeny(){
-		Console.clearScreen();
+		Console.clearScreen(); // we simulate a new page
 
 		System.out.print("Hva vil du oprette?\n" +
 						 "1. Pasient\n" +
@@ -208,7 +216,7 @@ public class Startmeny implements StartmenyInterface {
 
 				break;
 			case 4:
-				boolean error = false;
+				boolean error = false; // we assume there is no error, but check for each, printing error messages on the way for each possible requirement
 				if (db.hentLeger().stoerrelse() == 0) {
 					System.out.println("Fant ingen leger. Legg til en doktor for aa lage en resept.");
 					error = true;
@@ -221,7 +229,7 @@ public class Startmeny implements StartmenyInterface {
 					System.out.println("Fant ingen pasienter. Ikke lek med legemidler.");
 					error = true;
 				}
-				if (error) {
+				if (error) { // if an error is found user will not be able to create a Resept
 					this.brukerValg = MenyValg.OPPRETTE;
 					break;
 				}
@@ -280,7 +288,7 @@ public class Startmeny implements StartmenyInterface {
 		System.out.println("");
 
 		int pasientId = Console.getInt("Bruk tallet til aa velge pasienten du vil bruke reseptene til,\n" +
-									"eller skriv \"q\" for aa gaa tilbake",-1);
+									"eller skriv \"q\" for aa gaa tilbake",-1); // any string works because Console returns -1 on error
 		if (pasientId == -1) {
 			System.out.println("Takk for din oppmerksomhet, vi vil naa gaa tilbake. Paa gjensyn!");
 			this.brukerValg = MenyValg.ROOT;
