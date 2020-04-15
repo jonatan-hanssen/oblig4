@@ -65,7 +65,7 @@ public class Console {
 		
 		if (scanner.hasNextInt()){
 			double value = scanner.nextInt();
-			return (value <= maxvalue) ? value : fallback;
+			return (value >= 0) ? value : fallback;
 		} else {
 			return fallback;
 		}
